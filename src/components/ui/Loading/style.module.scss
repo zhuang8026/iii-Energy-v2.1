@@ -1,0 +1,21 @@
+// svg
+// @import '@/assets/scss/_svg-icon';
+
+.loading {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+
+    @include svg_color();
+}
+
+.loader {
+    margin: 0 auto;
+    // height: 100px;
+    // width: 20%;
+    // text-align: center;
+    // padding: 1em;
+    /* margin: 0 auto 1em; */
+    /* display: inline-block; */
+    // vertical-align: top;
+}

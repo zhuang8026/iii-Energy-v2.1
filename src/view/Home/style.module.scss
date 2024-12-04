@@ -1,0 +1,100 @@
+// @import '@/assets/scss/_variables';
+
+// svg
+// @import '@/assets/scss/_svg-icon';
+
+.home {
+    width: calc(100%);
+    border-radius: $fs-12;
+    margin: 24px auto;
+    h3 {
+        font-weight: bold;
+        margin-top: 24px;
+    }
+
+    .block {
+        padding: 10px;
+        display: grid;
+        grid-gap: $fs-16;
+        gap: $fs-16;
+        grid-template-columns: repeat(4, 1fr);
+
+        .target-box {
+            position: relative;
+            background: $card_white;
+            border-radius: $fs-12;
+            padding: 18px;
+
+            .target {
+                // width: 100%;
+                height: auto;
+                margin: 10px 0;
+                display: flex;
+                justify-content: space-between;
+                span {
+                    font-size: $fs-48;
+                    line-height: $fs-48;
+                    font-weight: 900;
+                }
+            }
+            span {
+                font-size: $fs-14;
+            }
+            button {
+                position: absolute;
+                top: 18px;
+                right: 18px;
+                height: 24px;
+                padding: 0px;
+                border-radius: 5px;
+                background-color: transparent;
+                cursor: pointer;
+
+                @include svg_color();
+            }
+
+            .icon {
+                // position: absolute;
+                // bottom: 0px;
+                // right: 18px;
+                width: 100px;
+                // max-width: 60px;
+                background: $green; // #1c908e
+                border-radius: $fs-12 0 0 $fs-12;
+                padding: 18px;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            .inner {
+                width: calc(100% - 100px);
+                padding: 18px;
+                display: flex;
+                flex-direction: column;
+
+                // button {
+                //     position: unset;
+                //     padding: 0;
+                //     background-color: transparent;
+                //     text-align: right;
+                //     cursor: pointer;
+
+                //     @include svg_color();
+                // }
+            }
+        }
+
+        .machine_card {
+            display: flex;
+            padding: 0px;
+        }
+    }
+}
+
+// #lineChart {
+//     width: 100%;
+//     height: 100%;
+//     margin: auto;
+// }

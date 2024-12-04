@@ -1,0 +1,40 @@
+{
+    "kwh": "度",
+    "title": {
+        "default": "居家能源管理服務平台"
+    },
+    "menu": {
+        "menu": "菜單",
+        "overall": "用電總覽",
+        "daily_usage_tracking": "日常用電追蹤",
+        "energy_report": "家庭能源報告",
+        "energy_mangement": "管理用電",
+        "bind_device": "綁定電器",
+        "member_management": "會員管理",
+        "data_modification": "資料修改",
+        "password_change": "密碼變更",
+        "user_logout": "登出"
+    },
+    "home": {
+        "power_usage_tracking": "用電追蹤",
+        "set_goals": "設定目標",
+        "recent_electricity": "近期用電趨勢",
+        "public_electricity_desc": "不含社區公共用電",
+        "electricity_consumption_accumulation": "用電累積",
+        "month_electricity": "本月累積",
+        "yesterday_electricity": "昨日用電量",
+        "before_yesterday_electricity": "前天用電量",
+        "all_month_electricity": "本月用電量",
+        "household_electricity_consumption_direction": "本月家庭用電流向",
+        "comparison_more": "較去年同月多 {{value}} 度",
+        "comparison_last": "較去年同月少 {{value}} 度",
+        "exceeded_target_by_degrees": "超出目標設定 {{value}} 度"
+    },
+    "machine": {
+        "television": "電視"
+    },
+    "energyReport": {
+        "year_select": "年份",
+        "year": "年"
+    }
+}

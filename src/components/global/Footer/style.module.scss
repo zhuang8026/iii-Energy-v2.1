@@ -1,0 +1,20 @@
+.footer {
+    width: calc(100%);
+    color: #6a6b81;
+    background-color: #fff;
+    border-radius: 0.75rem;
+    margin-top: 16px;
+    padding: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 0.75rem;
+    letter-spacing: 0.1rem;
+    line-height: 2;
+
+    .right {
+        text-align: right;
+    }
+}

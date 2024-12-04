@@ -1,0 +1,51 @@
+// @import 'assets/scss/_variables';
+
+.ant-picker {
+    width: 250px;
+    background: transparent;
+    border: 1px solid $iii_color;
+    input::-webkit-input-placeholder {
+        color: $iii_color;
+    }
+
+    input:-moz-placeholder {
+        color: $iii_color;
+    }
+
+    input::-moz-placeholder {
+        color: $iii_color;
+    }
+
+    input:-ms-input-placeholder {
+        color: $iii_color;
+    }
+}
+
+.ant-table-wrapper {
+    width: 100%;
+}
+
+.ant-checkbox-wrapper {
+    span {
+        color: #fff;
+    }
+}
+.ant-checkbox-checked .ant-checkbox-inner {
+    background-color: $card_color;
+    border-color: $card_color;
+}
+
+.ant-checkbox-inner {
+    border-radius: 50% !important;
+    border: 1px solid $iii_color;
+}
+
+// Device ID 表格欄位內容
+th.ant-table-row-expand-icon-cell::after {
+    content: 'ID';
+    font-weight: bold;
+}
+
+.ant-notification {
+    cursor: pointer;
+}

@@ -1,0 +1,33 @@
+// @import '@/assets/scss/_variables';
+
+.month-card {
+    position: relative;
+    background: $card_white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px;
+    border-radius: $fs-12;
+    padding: 18px;
+    transition: 0.1s ease-in;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 6px;
+        transform: translateY(-5px);
+    }
+
+    .report {
+        width: 100%;
+        height: auto;
+        margin: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        .report-item-number {
+            margin: 0 auto;
+            font-size: $fs-24;
+            font-weight: 900;
+            span {
+                font-size: $fs-48;
+                line-height: $fs-48;
+            }
+        }
+    }
+}

@@ -1,0 +1,106 @@
+// @import '@/assets/scss/_variables';
+
+// svg
+// @import '@/assets/scss/_svg-icon';
+
+.header {
+    position: sticky;
+    z-index: 2;
+    left: auto;
+    right: 0px;
+    top: 0.75rem;
+
+    width: 100%;
+    min-height: 4.6875rem;
+    height: 10%;
+
+    padding: 15px;
+    // margin-bottom: 16px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // flex-direction: column;
+    // flex-shrink: 0;
+
+    box-sizing: border-box;
+    border-radius: 0.75rem;
+
+    transition: 0.3s ease-in;
+    // background: #fff;
+    // box-shadow: rgba(255, 255, 255, 0.9) 0rem 0rem 0.0625rem 0.0625rem inset,
+    // rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;
+    // backdrop-filter: saturate(200%) blur(1.875rem);
+
+    .title {
+        font-weight: bold;
+        p {
+            display: flex;
+            align-items: self-end;
+            font-size: $fs-14;
+            font-weight: normal;
+            color: $text_opacity;
+        }
+    }
+
+    .setting {
+        display: flex;
+        justify-content: center;
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 8px;
+
+            @include svg_color();
+        }
+        .language {
+            position: relative;
+            width: 42px;
+            img {
+                width: 100%;
+                height: 20px;
+                border-radius: 5px;
+                overflow: hidden;
+                cursor: pointer;
+            }
+
+            .language_list {
+                position: absolute;
+                top: 0px;
+                left: -133px;
+                min-width: 16px;
+                min-height: 16px;
+                background: #f7f7f7;
+                padding: 4px;
+                border-radius: 10px;
+                overflow: inherit;
+                box-shadow: rgba(255, 255, 255, 0.9) 0rem 0rem 0.0625rem 0.0625rem inset,
+                    rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;
+                li {
+                    width: 160px;
+                    display: flex;
+                    padding: 6px 8px;
+                    border-radius: 5px;
+                    gap: 10px;
+                    font-size: $fs-14;
+                    cursor: pointer;
+                    &:hover {
+                        background: $lang_list_hover;
+                    }
+                    img {
+                        width: 25px;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.scrolled {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: rgba(255, 255, 255, 0.3) 0rem 0rem 0.0625rem 0.0625rem inset,
+        rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;
+    backdrop-filter: saturate(200%) blur(1.875rem);
+}

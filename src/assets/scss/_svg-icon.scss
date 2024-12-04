@@ -1,0 +1,17 @@
+// _svg-icon.scss
+// svg path,
+// svg rect {
+//     fill: $svg_icon;
+// }
+
+// @import '@/assets/scss/_variables';
+
+@mixin svg_color($svg_icon: $svg_icon) {
+    // svg path,
+    // svg rect {
+    //     fill: $svg_icon;
+    // }
+    svg {
+        fill: $svg_icon;
+    }
+}

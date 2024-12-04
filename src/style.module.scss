@@ -1,0 +1,41 @@
+#app {
+    // background-color: rgb(240, 242, 245);
+    background-color: #f0f1f3;
+}
+
+.main {
+    width: calc(100% - 260px);
+    height: 100%;
+    min-height: 100vh;
+    margin-left: 260px;
+    flex-grow: 1;
+    background-color: transparent;
+    padding: 16px 24px;
+}
+
+.full {
+    width: 100%;
+    margin: 0px auto;
+}
+
+.page-enter {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.page-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.page-exit {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.page-exit-active {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 300ms, transform 300ms;
+}

@@ -1,0 +1,84 @@
+// @import '@/assets/scss/_variables';
+
+// svg
+// @import '@/assets/scss/_svg-icon';
+
+.energy_mangement {
+    width: calc(100%);
+    border-radius: $fs-12;
+
+    h3 {
+        font-weight: bold;
+        margin-top: 24px;
+    }
+    .energy_control {
+        display: grid;
+        grid-gap: $fs-16;
+        gap: $fs-16;
+        grid-template-columns: repeat(3, 1fr);
+        .block {
+            padding: 10px 0;
+            .target_title {
+                text-align: center;
+                // display: flex;
+                // justify-content: center;
+                // justify-content: space-between;
+                // align-items: flex-end;
+                .type_name {
+                    font-weight: bold;
+                    font-size: $fs-36;
+                }
+                .type_number {
+                    font-size: $fs-18;
+                }
+                img {
+                    width: 80px;
+                }
+            }
+            .target_box {
+                background: $card_white;
+                padding: 16px;
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px;
+                display: flex;
+                justify-content: space-between;
+                .info_box {
+                    margin-bottom: 16px;
+                }
+                .icon {
+                    width: 50%;
+                    padding-left: 16px;
+                    border-left: 1px solid $--greyLight-2;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+            .target_info {
+                border-radius: $fs-12 $fs-12 0 0;
+                border-bottom: 1px solid $--greyLight-2;
+                margin-top: 10px;
+                .status {
+                    display: flex;
+                    margin-bottom: 10px;
+                    p {
+                        margin-left: 10px;
+                    }
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+            .target_control {
+                border-radius: 0 0 $fs-12 $fs-12;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .disable {
+                cursor: not-allowed;
+                opacity: 0.4;
+            }
+        }
+    }
+}
