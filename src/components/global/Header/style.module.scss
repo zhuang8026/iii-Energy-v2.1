@@ -39,7 +39,7 @@
             align-items: self-end;
             font-size: $fs-14;
             font-weight: normal;
-            color: $text_opacity;
+            color: $text;
         }
     }
 
@@ -86,7 +86,7 @@
                     font-size: $fs-14;
                     cursor: pointer;
                     &:hover {
-                        background: $lang_list_hover;
+                        // background: $lang_list_hover;
                     }
                     img {
                         width: 25px;

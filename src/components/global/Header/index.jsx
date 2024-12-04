@@ -11,8 +11,8 @@ import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import { COOKIE_NAME } from '@/assets/enum/enum';
 import { getCookie, setCookie } from '@/utils/cookie';
 
-import taiwan from '@/assets/images/taiwan.svg';
-import english from '@/assets/images/english.svg';
+import taiwan from '@/assets/images/icon-taiwan.svg';
+import english from '@/assets/images/icon-english.svg';
 // config
 import routes from '@/router/routes';
 
