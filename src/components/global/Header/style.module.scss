@@ -1,7 +1,4 @@
-// @import '@/assets/scss/_variables';
 
-// svg
-// @import '@/assets/scss/_svg-icon';
 
 .header {
     position: sticky;
@@ -37,9 +34,9 @@
         p {
             display: flex;
             align-items: self-end;
-            font-size: $fs-14;
+            font-size: var.$fs-14;
             font-weight: normal;
-            color: $text;
+            color: var.$text;
         }
     }
 
@@ -52,7 +49,7 @@
             align-items: center;
             padding: 0 8px;
 
-            @include svg_color();
+            // @include svg_color();
         }
         .language {
             position: relative;
@@ -83,7 +80,7 @@
                     padding: 6px 8px;
                     border-radius: 5px;
                     gap: 10px;
-                    font-size: $fs-14;
+                    font-size: var.$fs-14;
                     cursor: pointer;
                     &:hover {
                         // background: $lang_list_hover;

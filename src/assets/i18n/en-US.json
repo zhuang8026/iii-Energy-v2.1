@@ -8,6 +8,7 @@
     },
     "menu": {
         "menu": "Menu",
+        "login": "Login",
         "overall": "Electricity usage overview",
         "daily_usage_tracking": "Daily Electricity Consumption Monitoring",
         "energy_report": "Household Energy Report",

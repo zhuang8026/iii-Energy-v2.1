@@ -25,8 +25,6 @@ import Footer from '@/components/global/Footer';
 // global
 import { FullWindowAnimateProvider, FullPopWindow, useFullWindowAnimate } from '@/components/global/FullWindow';
 
-import '@/assets/scss/_all.scss';
-
 // css
 import classes from './style.module.scss';
 import classNames from 'classnames/bind';
@@ -122,8 +120,7 @@ function App() {
 
     useEffect(() => {
         // 查找当前路径的路由
-        const currentRoute = routes.find(route => route.path === pathname) || {};
-        // console.log(currentRoute);
+        const currentRoute = routes.find(route => route.path === pathname) || globalRoutes.find(route => route.path === pathname);
         // 如果当前路径的路由有 `title` 属性，设置为页面标题
         if (currentRoute.title) {
             document.title = t(`menu.${currentRoute.title}`);

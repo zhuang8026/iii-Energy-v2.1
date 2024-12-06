@@ -1,24 +1,22 @@
-// @import '@/assets/scss/_variables.scss';
-
 ::-moz-selection {
-    background: $na2;
-    color: white;
+    background: var.$na2;
+    color: var.$white;
 }
 ::selection {
-    background: $na;
-    color: white;
+    background: var.$na;
+    color: var.$white;
 }
 ::-webkit-scrollbar {
-    background: #fafaf7; // srcoll bar background
+    background: var.$white; // srcoll bar background
     width: 10px;
     height: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 5px;
-    background-color: $na2;
+    background-color: var.$na2;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: $na;
+    background-color: var.$na;
 }

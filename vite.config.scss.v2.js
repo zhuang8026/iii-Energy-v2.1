@@ -1,3 +1,7 @@
+/**
+ * 注意：此配置文件已停用，並正式轉入 v3
+ * **/
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
@@ -14,11 +18,11 @@ export default defineConfig({
     css: {
         preprocessorOptions: {
             scss: {
-                api: 'modern-compiler', // or "modern"
                 additionalData: `
-                    @use "@/assets/scss/variables" as var;
-                    @use "@/assets/scss/svgIcon"as svgIcon;
-                `
+                    @import "@/assets/scss/_variables.scss";
+                    @import "@/assets/scss/_svgIcon.scss";
+                `,
+                api: 'modern-compiler' // or "modern"
             }
         }
     }

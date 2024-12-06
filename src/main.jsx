@@ -5,6 +5,9 @@ import AppWrapper from './App.jsx';
 import store from '@/store/store.js';
 import '@/plugins/i18n'; // 引入 i18n 配置
 
+import '@/assets/scss/_reset.scss';
+import '@/assets/scss/_window.scss';
+
 createRoot(document.getElementById('root')).render(
     <StrictMode>
         <Provider store={store}>

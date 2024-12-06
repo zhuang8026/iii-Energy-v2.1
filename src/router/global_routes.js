@@ -7,7 +7,7 @@ const routes = [
     {
         main: '',
         path: '/login',
-        title: 'Login',
+        title: 'login',
         component: Login,
         exact: true,
         authRequired: false,

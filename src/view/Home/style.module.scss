@@ -1,8 +1,3 @@
-// @import '@/assets/scss/_variables';
-
-// svg
-// @import '@/assets/scss/_svg-icon';
-
 .home {
     width: calc(100%);
     border-radius: $fs-12;
@@ -50,7 +45,7 @@
                 background-color: transparent;
                 cursor: pointer;
 
-                @include svg_color();
+                // @include svg_color();
             }
 
             .icon {

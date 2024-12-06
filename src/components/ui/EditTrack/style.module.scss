@@ -1,4 +1,4 @@
-// @import '@/assets/scss/_variables';
+
 
 .edit-popUp {
     max-width: 50%;
@@ -7,7 +7,7 @@
     min-height: 200px;
     background-color: $table_color;
     border-radius: 0.75rem;
-    padding: $popup-padding;
+    padding: var.$popup-padding;
 
     display: flex;
     flex-direction: column;

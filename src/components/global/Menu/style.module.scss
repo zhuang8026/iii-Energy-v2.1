@@ -1,7 +1,4 @@
-// @import '@/assets/scss/_variables';
 
-// svg
-// @import '@/assets/scss/_svg-icon';
 
 .nav-menu {
     width: 260px;
@@ -100,10 +97,10 @@
                         padding: 12px;
                     }
 
-                    @include svg_color();
+                    // @include svg_color();
 
                     &:hover {
-                        background: $iii_color;
+                        background: var.$iii_color;
                     }
                 }
                 .menu_active {
@@ -142,7 +139,7 @@
                     -webkit-box-orient: vertical;
                 }
                 .account {
-                    font-size: $fs-10;
+                    font-size: var.$fs-10;
                 }
                 .logout {
                     cursor: pointer;

@@ -1,0 +1,9 @@
+@mixin svg_color($color: #9ee9e2) {
+    // svg path,
+    // svg rect {
+    //     fill: $svg_icon;
+    // }
+    svg {
+        fill: $color;
+    }
+}

@@ -1,7 +1,4 @@
-// @import '@/assets/scss/_variables';
 
-// svg
-// @import '@/assets/scss/_svg-icon';
 
 .lineChart-windows {
     position: relative;
@@ -9,9 +6,9 @@
     min-width: 300px;
     height: 50%;
     min-height: 200px;
-    background-color: $table_color;
+    background-color: var.$table_color;
     border-radius: 0.75rem;
-    padding: $popup-padding;
+    padding: var.$popup-padding;
 
     display: flex;
     flex-direction: column;
