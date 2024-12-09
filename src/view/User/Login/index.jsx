@@ -12,10 +12,14 @@ import RemoveRedEyeTwoToneIcon from '@mui/icons-material/RemoveRedEyeTwoTone';
 import Button from '@mui/material/Button';
 
 // utils
-import { getCookie, setCookie } from '@/utils/cookie';
+// import { getCookie, setCookie } from '@/utils/cookie';
 
 // icon
 import Logo from '@/assets/images/icon-logo.svg';
+
+// redux
+import { useDispatch } from 'react-redux';
+import { login } from '@/store/userSlice';
 
 // css
 import classes from './style.module.scss';
@@ -23,6 +27,7 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(classes);
 
 const Login = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate(); // Properly define navigate here
     const location = useLocation(); // This gives the current location
     const { openLoading, closeLoading } = Loading();
@@ -58,12 +63,12 @@ const Login = () => {
         }, 3000);
     };
 
-    const login = () => {
+    const handleLogin = () => {
         console.log('login:', userInfo);
         openLoading('login...');
 
         // call API
-        setCookie('token', '1234567890');
+        dispatch(login({ name: 'Admin', role: 'Administrator' })); // 傳入用戶資料
         setTimeout(() => {
             navigate({
                 ...location,
@@ -141,7 +146,7 @@ const Login = () => {
                             marginTop: '20px'
                         }}
                         disabled={!canClick}
-                        onClick={() => canClick && login()}
+                        onClick={() => canClick && handleLogin()}
                     >
                         登入
                     </Button>

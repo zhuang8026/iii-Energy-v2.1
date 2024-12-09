@@ -4,11 +4,18 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 // utils
-// import { getCookie, setCookie } from '@/utils/cookie';
+import { getCookie, setCookie, eraseCookie } from '@/utils/cookie';
 
-// icon
+// @mui - icon
 // import logo from '@/assets/images/icon-logo.png';
 import ExitToAppTwoToneIcon from '@mui/icons-material/ExitToAppTwoTone';
+
+// components
+import Loading from '@/components/ui/Loading';
+
+// redux
+import { useDispatch } from 'react-redux';
+import { logout } from '@/store/userSlice';
 
 // css
 import classes from './style.module.scss';
@@ -16,12 +23,14 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(classes);
 
 const Menu = ({ menuList, openMenu, setOpenMenu }) => {
+    const dispatch = useDispatch();
     const cardRef = useRef(null); // 用來綁定卡片 DOM 節點
     const { t, i18n } = useTranslation();
     const navigate = useNavigate(); // Properly define navigate here
     const location = useLocation(); // This gives the current location
 
     const [currentPath, setCurrentPath] = useState('/main');
+    const { openLoading, closeLoading } = Loading();
 
     /**
      * Handles the click event of a menu item.
@@ -42,6 +51,16 @@ const Menu = ({ menuList, openMenu, setOpenMenu }) => {
         if (cardRef.current && !cardRef.current.contains(event.target)) {
             setOpenMenu(false); // 點擊外部時隱藏卡片
         }
+    };
+
+    const handleLogout = () => {
+        openLoading('logout...');
+
+        setTimeout(() => {
+            dispatch(logout()); // 觸發登出動作
+            closeLoading();
+            navigate('/login');
+        }, 1000);
     };
 
     useEffect(() => {
@@ -75,7 +94,6 @@ const Menu = ({ menuList, openMenu, setOpenMenu }) => {
                         {menuList.map((item, index) => (
                             <li key={index}>
                                 <p className={cx('menu-name')}>{t(item.main)}</p>
-                                {console.log(currentPath)}
                                 {item.children.map((item, idx) => (
                                     <div
                                         className={cx('menu-link', currentPath === item.path && 'menu_active')}
@@ -89,7 +107,7 @@ const Menu = ({ menuList, openMenu, setOpenMenu }) => {
                             </li>
                         ))}
                         <li>
-                            <div className={cx('menu-link')} onClick={() => navigate('/login')}>
+                            <div className={cx('menu-link')} onClick={() => handleLogout()}>
                                 <ExitToAppTwoToneIcon />
                                 <span>登出</span>
                             </div>

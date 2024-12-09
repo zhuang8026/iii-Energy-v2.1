@@ -1,10 +1,11 @@
 // src/store.js
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './counterSlice';
+import userReducer from '@/store/userSlice'; // user auth & login status
 
 const store = configureStore({
     reducer: {
-        counter: counterReducer
+        // counter: counterReducer,
+        user: userReducer
     }
 });
 

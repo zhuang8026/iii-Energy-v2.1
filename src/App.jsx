@@ -38,7 +38,7 @@ function App() {
     // i18n: 翻譯管理，可轉換語系
 
     const [layouts, setLayouts] = useState([]);
-    const [auth, setAuth] = useState(true);
+    const [auth, setAuth] = useState(false);
     const [openMenu, setOpenMenu] = useState(false);
     const [menuList, setMenuList] = useState([
         {
@@ -106,7 +106,8 @@ function App() {
     };
 
     useEffect(() => {
-        let token = getCookie('token');
+        let token = getCookie('iii_token');
+        setAuth(!!token);
         if (!token) {
             navigate({
                 ...location,
@@ -117,7 +118,7 @@ function App() {
 
     useEffect(() => {
         getLayouts();
-    }, [pathname]); // pathname 变化时也调用 getLayouts
+    }, [pathname, auth]); // pathname 变化时也调用 getLayouts
 
     useEffect(() => {
         // 查找当前路径的路由
@@ -155,21 +156,27 @@ function App() {
                 <Suspense fallback={<></>}>
                     <Routes location={location}>
                         {/* <Navigate> 不能直接放置在 <Routes> 的頂層下，它必須作為一個 <Route> 的 element 來使用。 */}
-                        <Route path="/" element={<Navigate to="/main" replace />} />
-
-                        {/* global routes */}
-                        {globalRoutes.map((route, key) => {
-                            return (
-                                <Route
-                                    key={`route_${key}`}
-                                    exact={route.exact}
-                                    path={route.path}
-                                    element={<route.component routeData={route} />}
-                                    sensitive
-                                />
-                            );
-                        })}
-
+                        {auth ? (
+                            <>
+                                <Route path="*" element={<Navigate to="/main" replace />} />
+                            </>
+                        ) : (
+                            <>
+                                <Route path="*" element={<Navigate to="/login" replace />} />
+                                {/* global routes */}
+                                {globalRoutes.map((route, key) => {
+                                    return (
+                                        <Route
+                                            key={`route_${key}`}
+                                            exact={route.exact}
+                                            path={route.path}
+                                            element={<route.component routeData={route} />}
+                                            sensitive
+                                        />
+                                    );
+                                })}
+                            </>
+                        )}
                         {/* private routes */}
                         {routes.map((route, key) => {
                             return (
@@ -182,6 +189,7 @@ function App() {
                                 />
                             );
                         })}
+
                         <Route path="*" element={<NoMatch />} />
                     </Routes>
                 </Suspense>

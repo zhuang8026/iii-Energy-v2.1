@@ -41,7 +41,7 @@
         height: 100%;
         overflow-x: hidden;
         box-shadow: none;
-        border-radius: 12px;
+        border-radius: var.$radius-40;
         // border-right: 1px solid rgb(240, 240, 240);
         // transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1);
 
@@ -107,11 +107,11 @@
                     // @include svg_color();
 
                     &:hover {
-                        background: var.$iii_color;
+                        background: var.$btn_hover;
                     }
                 }
                 .menu_active {
-                    background: var.$btn-active;
+                    background: var.$btn_active;
                 }
             }
         }
