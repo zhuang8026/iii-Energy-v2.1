@@ -1,21 +1,13 @@
-import React, { useRef, useState, Suspense, useEffect } from 'react';
+import React, { useState, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-
-import * as echarts from 'echarts';
 
 //翻譯
 import { useTranslation } from 'react-i18next';
 
-// mui
+// @mui
 import WarningTwoToneIcon from '@mui/icons-material/WarningTwoTone';
 import BorderColorTwoToneIcon from '@mui/icons-material/BorderColorTwoTone';
 import ErrorOutlineTwoToneIcon from '@mui/icons-material/ErrorOutlineTwoTone';
-
-// components
-// import Loading from '@/components/ui/Loading';
-
-import IconTV from '@/assets/images/icon-tv.svg';
-// import IconElectricPot from '@/assets/images/icon-electric_pot.svg';
 
 // components
 import DoughnutChart from '@/components/ui/DoughnutChart';
@@ -24,12 +16,16 @@ import LineChartWindows from '@/components/ui/LineChartWindows';
 import PopUp from '@/components/global/PopUp';
 import EditTrack from '@/components/ui/EditTrack';
 
+// images
+import IconTV from '@/assets/images/icon-tv.svg';
+import IconElectricPot from '@/assets/images/icon-electric_pot.svg';
+
 // css
 import classes from './style.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(classes);
 
-const Home = () => {
+const Home = ({}) => {
     const { t, i18n } = useTranslation();
     const { openPopUp, closePopUp } = PopUp();
 
@@ -45,19 +41,22 @@ const Home = () => {
         <div className={cx('home')}>
             <h3>{t('home.power_usage_tracking')}</h3>
             <div className={cx('block')}>
-                <div className={cx('target-box')}>
+                {/* 設定目標 */}
+                <div className={cx('target-box', 'green')}>
                     {t('home.set_goals')}
                     <div className={cx('target')}>
                         <div className={cx('target-item-number')}>
-                            <span>9,999</span> {t('kwh')}
+                            <span>1,000</span> {t('kwh')}
                             {/* 1KWH = 1000W = 1度電 */}
                         </div>
                     </div>
                     <span>* {t('home.public_electricity_desc')} *</span>
                     <button type="button" onClick={() => openEditPopUp()}>
-                        <BorderColorTwoToneIcon />
+                        <BorderColorTwoToneIcon sx={{ fill: '#fff' }} />
                     </button>
                 </div>
+
+                {/* 本月累積 */}
                 <div className={cx('target-box')} onClick={() => openLineChartPopUp()}>
                     {t('home.recent_electricity')}
                     <LineChart />
@@ -130,10 +129,10 @@ const Home = () => {
 
             <h3>{t('home.household_electricity_consumption_direction')}</h3>
             <div className={cx('block')}>
-                {[999, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((item, index) => (
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((item, index) => (
                     <div className={cx('target-box', 'machine_card')} key={index}>
                         <div className={cx('icon')}>
-                            <img src={IconTV} alt="television" />
+                            <img src={ index % 2 === 0 ? IconElectricPot : IconTV} alt="television" />
                         </div>
                         <div className={cx('inner')}>
                             <button type="button">

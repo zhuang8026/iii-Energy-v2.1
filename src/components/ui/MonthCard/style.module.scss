@@ -2,9 +2,9 @@
 
 .month-card {
     position: relative;
-    background: $card_white;
+    background: var.$white;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px;
-    border-radius: $fs-12;
+    border-radius: var.$fs-12;
     padding: 18px;
     transition: 0.1s ease-in;
     cursor: pointer;
@@ -22,11 +22,11 @@
         justify-content: space-between;
         .report-item-number {
             margin: 0 auto;
-            font-size: $fs-24;
+            font-size: var.$fs-24;
             font-weight: 900;
             span {
-                font-size: $fs-48;
-                line-height: $fs-48;
+                font-size: var.$fs-48;
+                line-height: var.$fs-48;
             }
         }
     }

@@ -1,8 +1,6 @@
-
-
 .energy_mangement {
     width: calc(100%);
-    border-radius: $fs-12;
+    border-radius: var.$fs-12;
 
     h3 {
         font-weight: bold;
@@ -10,8 +8,8 @@
     }
     .energy_control {
         display: grid;
-        grid-gap: $fs-16;
-        gap: $fs-16;
+        grid-gap: var.$fs-16;
+        gap: var.$fs-16;
         grid-template-columns: repeat(3, 1fr);
         .block {
             padding: 10px 0;
@@ -23,17 +21,17 @@
                 // align-items: flex-end;
                 .type_name {
                     font-weight: bold;
-                    font-size: $fs-36;
+                    font-size: var.$fs-36;
                 }
                 .type_number {
-                    font-size: $fs-18;
+                    font-size: var.$fs-18;
                 }
                 img {
                     width: 80px;
                 }
             }
             .target_box {
-                background: $card_white;
+                background: var.$white;
                 padding: 16px;
                 box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px;
                 display: flex;
@@ -44,15 +42,15 @@
                 .icon {
                     width: 50%;
                     padding-left: 16px;
-                    border-left: 1px solid $--greyLight-2;
+                    // border-left: 1px solid $--greyLight-2;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                 }
             }
             .target_info {
-                border-radius: $fs-12 $fs-12 0 0;
-                border-bottom: 1px solid $--greyLight-2;
+                border-radius: var.$fs-12 var.$fs-12 0 0;
+                // border-bottom: 1px solid $--greyLight-2;
                 margin-top: 10px;
                 .status {
                     display: flex;
@@ -67,7 +65,7 @@
                 }
             }
             .target_control {
-                border-radius: 0 0 $fs-12 $fs-12;
+                border-radius: 0 0 var.$fs-12 var.$fs-12;
                 display: flex;
                 justify-content: space-between;
             }

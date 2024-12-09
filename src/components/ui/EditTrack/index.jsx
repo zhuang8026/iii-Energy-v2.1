@@ -38,18 +38,19 @@ const EditTrack = ({ closePopUp }) => {
 
             <div className={cx('edit-btn')}>
                 <Button
-                    variant="contained"
-                    sx={{ width: '47%', backgroundColor: '#20a2a0' }}
-                    onClick={() => closePopUp()}
-                >
-                    確定
-                </Button>
-                <Button
                     variant="outlined"
-                    sx={{ width: '47%', borderColor: '#20a2a0', color: '#20a2a0' }}
+                    sx={{ width: '50%', borderColor: '#20a2a0', color: '#20a2a0', borderRadius: '100px' }}
                     onClick={() => closePopUp()}
                 >
                     取消
+                </Button>
+
+                <Button
+                    variant="contained"
+                    sx={{ width: '50%', backgroundColor: '#20a2a0', borderRadius: '100px' }}
+                    onClick={() => closePopUp()}
+                >
+                    確定
                 </Button>
             </div>
         </div>

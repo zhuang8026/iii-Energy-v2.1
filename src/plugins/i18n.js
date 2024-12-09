@@ -7,7 +7,7 @@ import en from '@/assets/i18n/en-US.json';
 import { COOKIE_NAME } from '@/assets/enum/enum';
 import { getCookie, setCookie } from '@/utils/cookie';
 
-const LANG = getCookie(COOKIE_NAME.LANG) || 'en-US'; // 默認語言
+const LANG = getCookie(COOKIE_NAME.LANG) || 'zh-TW'; // 默認語言
 
 i18n.use(initReactI18next) // 使用 react-i18next 的初始化插件
     .init({
@@ -16,7 +16,7 @@ i18n.use(initReactI18next) // 使用 react-i18next 的初始化插件
             'en-US': { translation: en }
         },
         lng: LANG, // 預設語言
-        fallbackLng: 'en-US', // 回退語言 (默認語言)
+        fallbackLng: 'zh-TW', // 回退語言 (默認語言)
         interpolation: {
             escapeValue: false // React 已經處理 XSS
         }

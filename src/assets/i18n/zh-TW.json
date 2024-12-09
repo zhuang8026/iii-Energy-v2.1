@@ -5,6 +5,7 @@
     },
     "menu": {
         "menu": "菜單",
+        "login": "用戶登入",
         "overall": "用電總覽",
         "daily_usage_tracking": "日常用電追蹤",
         "energy_report": "家庭能源報告",

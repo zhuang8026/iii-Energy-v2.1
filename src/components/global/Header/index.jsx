@@ -11,10 +11,16 @@ import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import { COOKIE_NAME } from '@/assets/enum/enum';
 import { getCookie, setCookie } from '@/utils/cookie';
 
+// images
+import logo from '@/assets/images/icon-logo.svg';
 import taiwan from '@/assets/images/icon-taiwan.svg';
 import english from '@/assets/images/icon-english.svg';
+
 // config
 import routes from '@/router/routes';
+
+// components
+// import Menu from '@/components/global/Menu';
 
 // css
 import classes from './style.module.scss';
@@ -39,7 +45,7 @@ const LANG_LIST = [
     }
 ];
 
-const Header = () => {
+const Header = ({ setOpenMenu }) => {
     const { t, i18n } = useTranslation();
     const { pathname } = useLocation(); // Move useLocation here
 
@@ -94,10 +100,11 @@ const Header = () => {
     return (
         <div className={cx('header', isScrolled && 'scrolled')}>
             <div className={cx('title')}>
+                <img alt="" src={logo} />
                 <p>
                     <HomeTwoToneIcon fontSize="small" /> / {t(head.main)} / {t(head.child)}
                 </p>
-                {t(head.child)}
+                {/* {t(head.child)} */}
             </div>
             <div className={cx('setting')}>
                 {/* 顯示語言選單 */}
@@ -114,12 +121,12 @@ const Header = () => {
                         </ul>
                     )}
                 </div>
-                <div className={cx('button')}>
+                <div className={cx('button')} onClick={() => setOpenMenu(true)}>
                     <AccountCircleTwoToneIcon />
                 </div>
-                <div className={cx('button')}>
+                {/* <div className={cx('button')}>
                     <CircleNotificationsTwoToneIcon />
-                </div>
+                </div> */}
             </div>
         </div>
     );

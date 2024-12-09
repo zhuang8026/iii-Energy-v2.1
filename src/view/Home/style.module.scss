@@ -1,24 +1,32 @@
 .home {
     width: calc(100%);
-    border-radius: $fs-12;
-    margin: 24px auto;
+    border-radius: var.$fs-12;
+    margin: var.$fs-24 auto;
+
     h3 {
         font-weight: bold;
-        margin-top: 24px;
+        font-size: var.$fs-20;
+        margin-top:  var.$fs-20;
     }
 
     .block {
         padding: 10px;
         display: grid;
-        grid-gap: $fs-16;
-        gap: $fs-16;
+        grid-gap: var.$fs-16;
+        gap: var.$fs-16;
         grid-template-columns: repeat(4, 1fr);
 
         .target-box {
             position: relative;
-            background: $card_white;
-            border-radius: $fs-12;
+            background: var.$white;
+            border-radius: var.$fs-12;
             padding: 18px;
+
+            // border-top: 2px solid rgba(255, 255, 255, 0.3451);
+            // border-left: 2px solid rgba(255, 255, 255, 0.3451);
+            // border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+            // border-right: 2px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
 
             .target {
                 // width: 100%;
@@ -27,13 +35,13 @@
                 display: flex;
                 justify-content: space-between;
                 span {
-                    font-size: $fs-48;
-                    line-height: $fs-48;
+                    font-size: var.$fs-48;
+                    line-height: var.$fs-48;
                     font-weight: 900;
                 }
             }
             span {
-                font-size: $fs-14;
+                font-size: var.$fs-14;
             }
             button {
                 position: absolute;
@@ -54,8 +62,8 @@
                 // right: 18px;
                 width: 100px;
                 // max-width: 60px;
-                background: $green; // #1c908e
-                border-radius: $fs-12 0 0 $fs-12;
+                background: var.$bg_color; // #1c908e
+                border-radius: var.$fs-12 0 0 var.$fs-12;
                 padding: 18px;
 
                 img {
@@ -81,10 +89,18 @@
             }
         }
 
+        .green {
+            background: var.$green;
+            color: var.$white;
+        }
         .machine_card {
             display: flex;
             padding: 0px;
         }
+
+        @media screen and (max-width: 1365px){
+            grid-template-columns: repeat(2, 1fr);
+        }/* iphone */
     }
 }
 

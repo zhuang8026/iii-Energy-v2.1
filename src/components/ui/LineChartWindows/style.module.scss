@@ -6,7 +6,7 @@
     min-width: 300px;
     height: 50%;
     min-height: 200px;
-    background-color: var.$table_color;
+    background-color: var.$white;
     border-radius: 0.75rem;
     padding: var.$popup-padding;
 
@@ -16,7 +16,7 @@
     // justify-content: center;
 
     h3 {
-        font-size: $fs-24;
+        font-size: var.$fs-24;
         font-weight: bold;
     }
 

@@ -39,6 +39,7 @@ function App() {
 
     const [layouts, setLayouts] = useState([]);
     const [auth, setAuth] = useState(true);
+    const [openMenu, setOpenMenu] = useState(false);
     const [menuList, setMenuList] = useState([
         {
             main: 'menu.overall',
@@ -120,9 +121,11 @@ function App() {
 
     useEffect(() => {
         // 查找当前路径的路由
-        const currentRoute = routes.find(route => route.path === pathname) || globalRoutes.find(route => route.path === pathname);
+        const currentRoute =
+            routes.find(route => route.path === pathname) || globalRoutes.find(route => route.path === pathname);
         // 如果当前路径的路由有 `title` 属性，设置为页面标题
-        if (currentRoute.title) {
+        console.log('currentRoute:', currentRoute);
+        if (currentRoute?.title) {
             document.title = t(`menu.${currentRoute.title}`);
         } else {
             document.title = t('title.default'); // 设置默认标题
@@ -134,14 +137,17 @@ function App() {
             {/* menu */}
             {layouts.indexOf('menu') >= 0 && (
                 <Suspense fallback={<></>}>
-                    <Menu menuList={menuList} />
+                    <Menu menuList={menuList} openMenu={openMenu} setOpenMenu={setOpenMenu} />
                 </Suspense>
             )}
-            <div className={cx(layouts.indexOf('menu') >= 0 ? 'main' : 'full')}>
+            <div
+                // className={cx('main', 'full')}
+                className={cx('full', layouts.indexOf('menu') >= 0 ? 'main' : '')}
+            >
                 {/* header */}
                 {layouts.indexOf('header') >= 0 ? (
                     <Suspense fallback={<></>}>
-                        <Header />
+                        <Header setOpenMenu={setOpenMenu} />
                     </Suspense>
                 ) : null}
 

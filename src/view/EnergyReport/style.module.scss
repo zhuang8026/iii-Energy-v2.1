@@ -2,12 +2,13 @@
 
 .report {
     width: calc(100%);
-    border-radius: $fs-12;
+    border-radius: var.$fs-12;
     margin: 24px auto;
 
     h3 {
         font-weight: bold;
-        margin-top: 20px;
+        font-size: var.$fs-20;
+        margin-top:  var.$fs-20;
     }
 
     .year_control {
@@ -23,20 +24,20 @@
     .block {
         padding: 10px;
         display: grid;
-        grid-gap: $fs-16;
-        gap: $fs-16;
+        grid-gap: var.$fs-16;
+        gap: var.$fs-16;
         grid-template-columns: repeat(4, 1fr);
 
         .weekend_chart {
             display: flex;
             flex-direction: column;
             .user_comparison {
-                background-color: $card_white;
+                background-color: var.$white;
                 width: 100%;
                 // height: 48%;
                 padding: 20px;
                 margin-bottom: 20px;
-                border-radius: $fs-12;
+                border-radius: var.$fs-12;
                 .user_comparison_title {
                     display: flex;
                     justify-content: space-between;
@@ -45,11 +46,11 @@
                 }
             }
             .power_comparison {
-                background-color: $card_white;
+                background-color: var.$white;
                 width: 100%;
                 // height: 48%;
                 padding: 20px;
-                border-radius: $fs-12;
+                border-radius: var.$fs-12;
                 .power_comparison_title {
                     display: flex;
                     justify-content: space-between;
