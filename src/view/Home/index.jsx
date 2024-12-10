@@ -18,25 +18,25 @@ import EditTrack from '@/components/ui/EditTrack';
 
 // images
 import IconTV from '@/assets/images/icon-television.svg';
-import BgTV from '@/assets/images/icon_bg/tv.svg';
+import BgTV from '@/assets/images/icon_bg/tv.svg'; // no use
 import IconRefrigerator from '@/assets/images/icon-refrigerator.svg';
-import BgRefrigerator from '@/assets/images/icon_bg/dehumidifier.svg';
+import BgRefrigerator from '@/assets/images/icon_bg/dehumidifier.svg'; // no use
 import IconAirConditioner from '@/assets/images/icon-airConditioner.svg';
-import BgAC from '@/assets/images/icon_bg/ac.svg';
+import BgAC from '@/assets/images/icon_bg/ac.svg'; // no use
 import IconDrinkMachine from '@/assets/images/icon-drinkMachine.svg';
-import BgDrinkMachine from '@/assets/images/icon_bg/drinkMachine.svg';
+import BgDrinkMachine from '@/assets/images/icon_bg/drinkMachine.svg'; // no use
 import IconWashMachine from '@/assets/images/icon-washMachine.svg';
-import BgWashMachine from '@/assets/images/icon_bg/washMachine.svg';
+import BgWashMachine from '@/assets/images/icon_bg/washMachine.svg'; // no use
 import IconFan from '@/assets/images/icon-fan.svg';
-import BgFan from '@/assets/images/icon_bg/Fan.svg';
+import BgFan from '@/assets/images/icon_bg/Fan.svg'; // no use
 import IconComputer from '@/assets/images/icon-computer.svg';
-import BgPC from '@/assets/images/icon_bg/computer.svg';
+import BgPC from '@/assets/images/icon_bg/computer.svg'; // no use
 import IconPot from '@/assets/images/icon-electricPot.svg';
-import BgPot from '@/assets/images/icon_bg/electricPot.svg';
+import BgPot from '@/assets/images/icon_bg/electricPot.svg'; // no use
 import IconDehumidifier from '@/assets/images/icon-dehumidifier.svg';
-import BgDehumidifier from '@/assets/images/icon_bg/dehumidifier.svg';
+import BgDehumidifier from '@/assets/images/icon_bg/dehumidifier.svg'; // no use
 import IconOther from '@/assets/images/icon-other.svg';
-import BgOther from '@/assets/images/icon_bg/other.svg';
+import BgOther from '@/assets/images/icon_bg/other.svg'; // no use
 
 // css
 import classes from './style.module.scss';
@@ -61,61 +61,61 @@ const Home = ({}) => {
             {
                 name: 'television',
                 icon: IconTV,
-                background: BgTV,
+                background: BgTV, // no use
                 value: 61
             },
             {
                 name: 'refrigerator',
                 icon: IconRefrigerator,
-                background: BgRefrigerator,
+                background: BgRefrigerator, // no use
                 value: 19
             },
             {
                 name: 'airConditioner',
                 icon: IconAirConditioner,
-                background: BgAC,
+                background: BgAC, // no use
                 value: 78
             },
             {
                 name: 'drinkMachine',
                 icon: IconDrinkMachine,
-                background: BgDrinkMachine,
+                background: BgDrinkMachine, // no use
                 value: 97
             },
             {
                 name: 'washMachine',
                 icon: IconWashMachine,
-                background: BgWashMachine,
+                background: BgWashMachine, // no use
                 value: 34
             },
             {
                 name: 'fan',
                 icon: IconFan,
-                background: BgFan,
+                background: BgFan, // no use
                 value: 76
             },
             {
                 name: 'computer',
                 icon: IconComputer,
-                background: BgPC,
+                background: BgPC, // no use
                 value: 83
             },
             {
                 name: 'electricPot',
                 icon: IconPot,
-                background: BgPot,
+                background: BgPot, // no use
                 value: 5
             },
             {
                 name: 'dehumidifier',
                 icon: IconDehumidifier,
-                background: BgDehumidifier,
+                background: BgDehumidifier, // no use
                 value: 82
             },
             {
                 name: 'otherMachine',
                 icon: IconOther,
-                background: BgOther,
+                background: BgOther, // no use
                 value: 99
             }
         ];
