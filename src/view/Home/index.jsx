@@ -17,8 +17,26 @@ import PopUp from '@/components/global/PopUp';
 import EditTrack from '@/components/ui/EditTrack';
 
 // images
-import IconTV from '@/assets/images/icon-tv.svg';
-import IconElectricPot from '@/assets/images/icon-electric_pot.svg';
+import IconTV from '@/assets/images/icon-television.svg';
+import BgTV from '@/assets/images/icon_bg/tv.svg';
+import IconRefrigerator from '@/assets/images/icon-refrigerator.svg';
+import BgRefrigerator from '@/assets/images/icon_bg/dehumidifier.svg';
+import IconAirConditioner from '@/assets/images/icon-airConditioner.svg';
+import BgAC from '@/assets/images/icon_bg/ac.svg';
+import IconDrinkMachine from '@/assets/images/icon-drinkMachine.svg';
+import BgDrinkMachine from '@/assets/images/icon_bg/drinkMachine.svg';
+import IconWashMachine from '@/assets/images/icon-washMachine.svg';
+import BgWashMachine from '@/assets/images/icon_bg/washMachine.svg';
+import IconFan from '@/assets/images/icon-fan.svg';
+import BgFan from '@/assets/images/icon_bg/Fan.svg';
+import IconComputer from '@/assets/images/icon-computer.svg';
+import BgPC from '@/assets/images/icon_bg/computer.svg';
+import IconPot from '@/assets/images/icon-electricPot.svg';
+import BgPot from '@/assets/images/icon_bg/electricPot.svg';
+import IconDehumidifier from '@/assets/images/icon-dehumidifier.svg';
+import BgDehumidifier from '@/assets/images/icon_bg/dehumidifier.svg';
+import IconOther from '@/assets/images/icon-other.svg';
+import BgOther from '@/assets/images/icon_bg/other.svg';
 
 // css
 import classes from './style.module.scss';
@@ -28,6 +46,7 @@ const cx = classNames.bind(classes);
 const Home = ({}) => {
     const { t, i18n } = useTranslation();
     const { openPopUp, closePopUp } = PopUp();
+    const [electricItems, setElectricItems] = useState([]);
 
     const openEditPopUp = () => {
         openPopUp({ component: <EditTrack closePopUp={closePopUp} /> });
@@ -37,43 +56,113 @@ const Home = ({}) => {
         openPopUp({ component: <LineChartWindows closePopUp={closePopUp} /> });
     };
 
+    const getElectricItemsAPI = () => {
+        let res = [
+            {
+                name: 'television',
+                icon: IconTV,
+                background: BgTV,
+                value: 61
+            },
+            {
+                name: 'refrigerator',
+                icon: IconRefrigerator,
+                background: BgRefrigerator,
+                value: 19
+            },
+            {
+                name: 'airConditioner',
+                icon: IconAirConditioner,
+                background: BgAC,
+                value: 78
+            },
+            {
+                name: 'drinkMachine',
+                icon: IconDrinkMachine,
+                background: BgDrinkMachine,
+                value: 97
+            },
+            {
+                name: 'washMachine',
+                icon: IconWashMachine,
+                background: BgWashMachine,
+                value: 34
+            },
+            {
+                name: 'fan',
+                icon: IconFan,
+                background: BgFan,
+                value: 76
+            },
+            {
+                name: 'computer',
+                icon: IconComputer,
+                background: BgPC,
+                value: 83
+            },
+            {
+                name: 'electricPot',
+                icon: IconPot,
+                background: BgPot,
+                value: 5
+            },
+            {
+                name: 'dehumidifier',
+                icon: IconDehumidifier,
+                background: BgDehumidifier,
+                value: 82
+            },
+            {
+                name: 'otherMachine',
+                icon: IconOther,
+                background: BgOther,
+                value: 99
+            }
+        ];
+        setElectricItems([...res]);
+    };
+
+    useEffect(() => {
+        getElectricItemsAPI();
+    }, []);
     return (
         <div className={cx('home')}>
             <h3>{t('home.power_usage_tracking')}</h3>
             <div className={cx('block')}>
-                {/* 設定目標 */}
-                <div className={cx('target-box', 'green')}>
-                    {t('home.set_goals')}
-                    <div className={cx('target')}>
-                        <div className={cx('target-item-number')}>
-                            <span>1,000</span> {t('kwh')}
-                            {/* 1KWH = 1000W = 1度電 */}
+                {/* 目標 */}
+                <div className={cx('target-left')}>
+                    {/* 設定目標 */}
+                    <div className={cx('target-box', 'green')}>
+                        {t('home.set_goals')}
+                        <div className={cx('target')}>
+                            <div className={cx('target-item-number')}>
+                                <span>1,000</span> {t('kwh')}
+                                {/* 1KWH = 1000W = 1度電 */}
+                            </div>
                         </div>
+                        <span>* {t('home.public_electricity_desc')} *</span>
+                        <button type="button" onClick={() => openEditPopUp()}>
+                            <BorderColorTwoToneIcon sx={{ fill: '#fff' }} />
+                        </button>
                     </div>
-                    <span>* {t('home.public_electricity_desc')} *</span>
-                    <button type="button" onClick={() => openEditPopUp()}>
-                        <BorderColorTwoToneIcon sx={{ fill: '#fff' }} />
-                    </button>
+
+                    {/* 近期用電趨勢 */}
+                    <div className={cx('target-box')}>
+                        {t('home.recent_electricity')}
+                        <LineChart />
+                        <button type="button" onClick={() => openLineChartPopUp()}>
+                            <WarningTwoToneIcon />
+                        </button>
+                    </div>
                 </div>
 
-                {/* 本月累積 */}
-                <div className={cx('target-box')} onClick={() => openLineChartPopUp()}>
-                    {t('home.recent_electricity')}
-                    <LineChart />
-                    <button type="button">
-                        <WarningTwoToneIcon />
-                    </button>
-                </div>
-            </div>
-
-            <h3>{t('home.electricity_consumption_accumulation')}</h3>
-            <div className={cx('block')}>
-                {/* 本月累積 */}
+                {/* 本月用電量 */}
                 <div className={cx('target-box')}>
                     {t('home.month_electricity')}
                     <div className={cx('target')}>
                         <DoughnutChart
-                            value={350.0} // 用電數度
+                            type="month"
+                            value={419.0} // 用電數度
                             total={340.0} // 總用電數度
                             compareValue={-2.0} // 比較數度
                         />
@@ -82,71 +171,83 @@ const Home = ({}) => {
                         <ErrorOutlineTwoToneIcon />
                     </button>
                 </div>
-
-                {/* 本月用電量 */}
+                {/* 用電量累計 */}
                 <div className={cx('target-box')}>
-                    {t('home.all_month_electricity')}
-                    <div className={cx('target')}>
-                        <DoughnutChart
-                            type="month"
-                            value={419.0} // 用電數度
-                            total={340.0} // 總用電數度
-                        />
-                    </div>
-                    <button type="button">
-                        <ErrorOutlineTwoToneIcon />
-                    </button>
-                </div>
-
-                {/* 前天用電量 */}
-                <div className={cx('target-box')}>
-                    {t('home.before_yesterday_electricity')}
-                    <div className={cx('target')}>
-                        <DoughnutChart
-                            value={50.0} // 用電數度
-                            total={340.0} // 總用電數度
-                        />
-                    </div>
-                    <button type="button">
-                        <ErrorOutlineTwoToneIcon />
-                    </button>
-                </div>
-
-                {/* 昨日用電量 */}
-                <div className={cx('target-box')}>
-                    {t('home.yesterday_electricity')}
-                    <div className={cx('target')}>
-                        <DoughnutChart
-                            value={5.0} // 用電數度
-                            total={340.0} // 總用電數度
-                        />
-                    </div>
-                    <button type="button">
-                        <ErrorOutlineTwoToneIcon />
-                    </button>
+                    {t('home.electricity_records')}
+                    <>
+                        <div className={cx('target')}>
+                            {t('home.yesterday_electricity')}
+                            <div className={cx('progress-number')}>15 度</div>
+                        </div>
+                        <div className={cx('progress')}>
+                            <div className={cx('progress-bar')}>
+                                <div className={cx('bar-mian')}>
+                                    <div className={cx('bar-current')} style={{ width: '10%' }} />
+                                    <div className={cx('bar-number')}>10%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                    <>
+                        <div className={cx('target')}>
+                            {t('home.before_yesterday_electricity')}
+                            <div className={cx('progress-number')}>22 度</div>
+                        </div>
+                        <div className={cx('progress')}>
+                            <div className={cx('progress-bar')}>
+                                <div className={cx('bar-mian')}>
+                                    <div className={cx('bar-current')} style={{ width: '15%' }} />
+                                    <div className={cx('bar-number')}>15%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                    <>
+                        <div className={cx('target')}>
+                            {t('home.all_month_electricity')}
+                            <div className={cx('progress-number')}>479 度</div>
+                        </div>
+                        <div className={cx('progress')}>
+                            <div className={cx('progress-bar')}>
+                                <div className={cx('bar-mian')}>
+                                    <div className={cx('bar-current')} style={{ width: '100%' }} />
+                                    <div className={cx('bar-number')}>100%</div>
+                                </div>
+                                <div className={cx('bar-mian')}>
+                                    <div className={cx('bar-current', 'warning')} style={{ width: '20%' }} />
+                                    <div className={cx('bar-number')}>20%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </>
                 </div>
             </div>
 
             <h3>{t('home.household_electricity_consumption_direction')}</h3>
             <div className={cx('block')}>
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((item, index) => (
-                    <div className={cx('target-box', 'machine_card')} key={index}>
+                {electricItems.map((item, index) => (
+                    <div
+                        className={cx('target-box', 'machine_card', { machine_card_useless: index % 2 === 0 })}
+                        key={index}
+                    >
                         <div className={cx('icon')}>
-                            <img src={ index % 2 === 0 ? IconElectricPot : IconTV} alt="television" />
+                            <img src={item.icon} alt="icon" />
                         </div>
                         <div className={cx('inner')}>
                             <button type="button">
                                 <ErrorOutlineTwoToneIcon />
                             </button>
                             <>
-                                {t('machine.television')}
-                                <div className={cx('target')}>
-                                    <div className={cx('target-item-number')}>
-                                        <span>{item}</span>
-                                        {t('kwh')}
-                                        {/* 1KWH = 1000W = 1度電 */}
+                                {t(`machine.${item.name}`)}
+                                {index % 2 !== 0 && (
+                                    <div className={cx('target')}>
+                                        <div className={cx('target-item-number')}>
+                                            <span>{item.value}</span>
+                                            {t('kwh')}
+                                            {/* 1KWH = 1000W = 1度電 */}
+                                        </div>
                                     </div>
-                                </div>
+                                )}
                             </>
                         </div>
                     </div>

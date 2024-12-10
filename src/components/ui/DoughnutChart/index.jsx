@@ -40,6 +40,21 @@ const DoughnutChart = ({ type = '', value = 100.0, total = 200.0, compareValue =
         const option = {
             // animation: false, // 關閉整體動畫
             // selectedMode: false,
+            tooltip: {
+                trigger: 'item', // 确保触发 tooltip
+                // formatter: '{b}: {c}度 ({d}%)', // 显示项名称、值和百分比
+                formatter: params => {
+                    // 动态设置 tooltip 的背景色
+                    const tooltipDom = document.querySelector('.echarts-tooltip');
+                    if (tooltipDom) {
+                        tooltipDom.style.backgroundColor = params.color;
+                    }
+                    return `${params.name}: ${params.value}度 (${params.percent}%)`;
+                },
+                textStyle: {
+                    fontSize: 16
+                }
+            },
             series: [
                 // 外圈 - 未過100%的部分
                 {
@@ -49,7 +64,7 @@ const DoughnutChart = ({ type = '', value = 100.0, total = 200.0, compareValue =
                         // ...seriesData,
                         {
                             value: value >= total ? total : value,
-                            name: 'usedValue',
+                            name: '本月用電量',
                             itemStyle: {
                                 color: Health, // 有參數則為 20A2A0，沒參數則為 #EBEEFA
                                 borderRadius: 20,
@@ -59,7 +74,7 @@ const DoughnutChart = ({ type = '', value = 100.0, total = 200.0, compareValue =
                         },
                         {
                             value: value >= total * 1.2 ? total * 0.2 : value - total,
-                            name: 'warningValue',
+                            name: '超出用電量',
                             itemStyle: {
                                 color: Warning, // 有參數則為 20A2A0，沒參數則為 #EBEEFA
                                 borderRadius: 20,
@@ -69,7 +84,7 @@ const DoughnutChart = ({ type = '', value = 100.0, total = 200.0, compareValue =
                         },
                         {
                             value: emptyValue(), // 未使用用電量
-                            name: 'empty',
+                            name: '未使用電量',
                             itemStyle: {
                                 color: '#EBEEFA',
                                 borderRadius: 20,
@@ -87,7 +102,7 @@ const DoughnutChart = ({ type = '', value = 100.0, total = 200.0, compareValue =
                         // borderWidth: 1
                     },
                     emphasis: {
-                        scale: false,
+                        scale: false, // hover 時會放大效果
                         itemStyle: {
                             color: 'inherit', // 繼承原色，防止變色
                             shadowBlur: 0, // 去掉陰影模糊
@@ -106,7 +121,7 @@ const DoughnutChart = ({ type = '', value = 100.0, total = 200.0, compareValue =
                     data: [
                         {
                             value: value - total * (120 / 100),
-                            name: 'usedValue',
+                            name: '超出用電量',
                             itemStyle: {
                                 color: Danger, // 有參數則為 20A2A0，沒參數則為 #EBEEFA
                                 borderRadius: 20,
@@ -116,7 +131,7 @@ const DoughnutChart = ({ type = '', value = 100.0, total = 200.0, compareValue =
                         },
                         {
                             value: emptyDangerValue(), // 未使用用電量
-                            name: 'empty',
+                            name: '未使用電量',
                             itemStyle: {
                                 color: '#EBEEFA',
                                 borderWidth: 0
@@ -155,30 +170,30 @@ const DoughnutChart = ({ type = '', value = 100.0, total = 200.0, compareValue =
     }, []);
 
     return (
-        <div className={cx('chartBox')}>
-            {/* 圓餅圖 */}
-            <div id={cx('doughnutChart')} ref={chartDOM} />
-            {/* 100%關鍵點 */}
-            <div className={cx('chartDot')} />
-            {/* 目標度數 */}
-            <div className={cx('chartDesc')}>
-                <div className={cx('chartNumber')}>
-                    <span>{value}</span>
-                    {t('kwh')}
+        <div className={cx('chart')}>
+            <div className={cx('chartBox')}>
+                {/* 圓餅圖 */}
+                <div id={cx('doughnutChart')} ref={chartDOM} />
+                {/* 100%關鍵點 */}
+                <div className={cx('chartDot')} />
+                {/* 目標度數 */}
+                <div className={cx('chartDesc')}>
+                    <div className={cx('chartNumber')}>
+                        <span>{value}</span>
+                        {t('kwh')}
+                    </div>
                 </div>
-                {compareValue > 0 ? (
-                    <div className={cx('result')}>{t('home.comparison_more', { value: compareValue })}</div>
-                ) : (
-                    compareValue !== 0 && (
-                        <div className={cx('result')}>
-                            {t('home.comparison_last', { value: Math.abs(compareValue) })}
-                        </div>
-                    )
-                )}
-                {type === 'month' && value - total > 0 && (
-                    <div className={cx('result')}>{t('home.exceeded_target_by_degrees', { value: value - total })}</div>
-                )}
             </div>
+            {compareValue > 0 ? (
+                <div className={cx('result')}>* {t('home.comparison_more', { value: compareValue })}</div>
+            ) : (
+                compareValue !== 0 && (
+                    <div className={cx('result')}>* {t('home.comparison_last', { value: Math.abs(compareValue) })}</div>
+                )
+            )}
+            {type === 'month' && value - total > 0 && (
+                <div className={cx('result')}>* {t('home.exceeded_target_by_degrees', { value: value - total })}</div>
+            )}
         </div>
     );
 };

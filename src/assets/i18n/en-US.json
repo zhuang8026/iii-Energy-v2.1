@@ -24,10 +24,10 @@
         "set_goals": "Set goals",
         "recent_electricity": "Recent electricity usage trends",
         "public_electricity_desc": "Does not include community public electricity",
-        "electricity_consumption_accumulation": "Electricity consumption accumulation",
+        "electricity_records": "Electricity Records",
         "month_electricity": "Cumulative electricity consumption this month",
         "yesterday_electricity": "Yesterday's electricity consumption",
-        "before_yesterday_electricity": "Electricity consumption the day before yesterday",
+        "before_yesterday_electricity": "Electricity consumption two days ago",
         "all_month_electricity": "Electricity consumption this month",
         "household_electricity_consumption_direction": "Household electricity consumption direction this month",
         "comparison_more": "{{value}} degrees more than the same month last year",
@@ -35,7 +35,16 @@
         "exceeded_target_by_degrees": "Exceeded target setting by {{value}} degrees"
     },
     "machine": {
-        "television": "Television"
+        "television": "Television",
+        "refrigerator": "Refrigerator",
+        "airConditioner": "Air Conditioner",
+        "drinkMachine": "Drink Machine",
+        "washMachine": "Wash Machine",
+        "fan": "Electric Fan",
+        "computer": "Computer",
+        "electricPot": "electric Pot",
+        "dehumidifier": "Dehumidifier",
+        "otherMachine": "Other"
     },
     "energyReport": {
         "year_select": "Year",

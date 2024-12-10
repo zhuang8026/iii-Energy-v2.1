@@ -6,16 +6,24 @@
     h3 {
         font-weight: bold;
         font-size: var.$fs-20;
-        margin-top:  var.$fs-20;
+        margin-top: var.$fs-20;
     }
 
     .block {
+        // min-height: 300px;
+        // height: 300px;
         padding: 10px;
         display: grid;
         grid-gap: var.$fs-16;
         gap: var.$fs-16;
         grid-template-columns: repeat(4, 1fr);
 
+        .target-left {
+            display: grid;
+            grid-template-rows: repeat(2, 1fr);
+            grid-gap: var.$fs-16;
+            gap: var.$fs-16;
+        }
         .target-box {
             position: relative;
             background: var.$white;
@@ -33,7 +41,6 @@
                 height: auto;
                 margin: 10px 0;
                 display: flex;
-                justify-content: space-between;
                 span {
                     font-size: var.$fs-48;
                     line-height: var.$fs-48;
@@ -73,6 +80,7 @@
 
             .inner {
                 width: calc(100% - 100px);
+                border-radius: 0 0.75rem 0.75rem 0;
                 padding: 18px;
                 display: flex;
                 flex-direction: column;
@@ -89,6 +97,50 @@
             }
         }
 
+        .progress-number {
+            margin-left: var.$fs-4;
+            text-align: right;
+        }
+
+        .progress {
+            position: relative;
+            width: 100%;
+            margin-bottom: var.$fs-22;
+
+            .progress-bar {
+                width: 100%;
+                border-radius: var.$radius-40;
+                .bar-mian {
+                    position: relative;
+                    z-index: 1;
+                    width: 85%;
+                    height: var.$fs-18;
+                    border-radius: var.$radius-40;
+                    background-color: var.$gay;
+                    margin-bottom: var.$fs-8;
+                    .bar-current {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        z-index: 2;
+                        width: 40%;
+                        height: var.$fs-18;
+                        background: var.$green;
+                        border-radius: var.$radius-40;
+                        transition: all 0.5s ease;
+                    }
+                    .warning {
+                        background: var.$warning;
+                    }
+                    .bar-number {
+                        position: absolute;
+                        right: -18%;
+                        bottom: -2px;
+                    }
+                }
+            }
+        }
+
         .green {
             background: var.$green;
             color: var.$white;
@@ -98,9 +150,27 @@
             padding: 0px;
         }
 
-        @media screen and (max-width: 1365px){
+        .machine_card_useless {
+            box-shadow: 0 0 0 0 transparent;
+            .icon {
+                background-image: none !important;
+                background: var.$na2;
+                img {
+                    filter: grayscale(100%);
+                }
+            }
+            .inner {
+                background-image: none !important;
+                background: var.$select_bg;
+            }
+        }
+
+        @media screen and (max-width: 1365px) {
             grid-template-columns: repeat(2, 1fr);
-        }/* iphone */
+        } /* iPad */
+        @media screen and (max-width: 767px) {
+            grid-template-columns: repeat(1, 1fr);
+        } /* iPad mini & iphone */
     }
 }
 

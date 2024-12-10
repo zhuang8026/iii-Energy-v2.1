@@ -21,7 +21,7 @@
         "set_goals": "設定目標",
         "recent_electricity": "近期用電趨勢",
         "public_electricity_desc": "不含社區公共用電",
-        "electricity_consumption_accumulation": "用電累積",
+        "electricity_records": "用電記錄",
         "month_electricity": "本月累積",
         "yesterday_electricity": "昨日用電量",
         "before_yesterday_electricity": "前天用電量",
@@ -32,7 +32,16 @@
         "exceeded_target_by_degrees": "超出目標設定 {{value}} 度"
     },
     "machine": {
-        "television": "電視"
+        "television": "電視",
+        "refrigerator": "冰箱",
+        "airConditioner": "冷氣",
+        "drinkMachine": "開飲機",
+        "washMachine": "洗衣機",
+        "fan": "電扇",
+        "computer": "電腦",
+        "electricPot": "電鍋",
+        "dehumidifier": "除濕機",
+        "otherMachine": "其他"
     },
     "energyReport": {
         "year_select": "年份",

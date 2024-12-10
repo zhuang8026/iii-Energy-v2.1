@@ -60,7 +60,7 @@ const Login = () => {
         openLoading('login...');
         setTimeout(() => {
             closeLoading();
-        }, 3000);
+        }, 1000);
     };
 
     const handleLogin = () => {
@@ -75,7 +75,7 @@ const Login = () => {
                 pathname: `/main`
             });
             closeLoading();
-        }, 3000);
+        }, 1000);
     };
 
     useEffect(() => {
