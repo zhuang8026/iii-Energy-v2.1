@@ -7,14 +7,18 @@ import { useTranslation } from 'react-i18next';
 // @mui
 import WarningTwoToneIcon from '@mui/icons-material/WarningTwoTone';
 import BorderColorTwoToneIcon from '@mui/icons-material/BorderColorTwoTone';
-import ErrorOutlineTwoToneIcon from '@mui/icons-material/ErrorOutlineTwoTone';
+import ErrorOutlineTwoToneIcon from '@mui/icons-material/ErrorOutlineTwoTone'; // 提示
+import GppGoodTwoToneIcon from '@mui/icons-material/GppGoodTwoTone';
+import LinkOffTwoToneIcon from '@mui/icons-material/LinkOffTwoTone';
 
 // components
+import Loading from '@/components/ui/Loading';
 import DoughnutChart from '@/components/ui/DoughnutChart';
 import LineChart from '@/components/ui/LineChart';
 import LineChartWindows from '@/components/ui/LineChartWindows';
 import PopUp from '@/components/global/PopUp';
 import EditTrack from '@/components/ui/EditTrack';
+import NormalPrompt from '@/components/ui/NormalPrompt';
 
 // images
 import IconTV from '@/assets/images/icon-television.svg';
@@ -46,6 +50,7 @@ const cx = classNames.bind(classes);
 const Home = ({}) => {
     const { t, i18n } = useTranslation();
     const { openPopUp, closePopUp } = PopUp();
+    const { openLoading, closeLoading } = Loading();
     const [electricItems, setElectricItems] = useState([]);
 
     const openEditPopUp = () => {
@@ -56,6 +61,33 @@ const Home = ({}) => {
         openPopUp({ component: <LineChartWindows closePopUp={closePopUp} /> });
     };
 
+    const openMondayPrompt = (title, constent) => {
+        openPopUp({
+            component: (
+                <NormalPrompt
+                    title="節電建議"
+                    constent={[
+                        '1. 非常棒!您上週比低耗能用戶少用了54% 的電量，請繼續保持。',
+                        '2. 冰箱背面、左右兩側離牆至少10公分以上距離，頂部須留有30 公分以上，以保持良好通風散熱。'
+                    ]}
+                />
+            )
+        });
+    };
+
+    const openElectricPrompt = (title, constent) => {
+        openPopUp({
+            component: (
+                <NormalPrompt
+                    title="用電提醒"
+                    subtitle="電視昨天用電較過往高"
+                    constent={['節電小秘訣', '電視不使用時拔除插頭，完全關閉電源，減少待機電力消耗。']}
+                />
+            )
+        });
+    };
+
+    // api block
     const getElectricItemsAPI = () => {
         let res = [
             {
@@ -124,7 +156,13 @@ const Home = ({}) => {
 
     useEffect(() => {
         getElectricItemsAPI();
+        openLoading('loading...');
+        setTimeout(() => {
+            closeLoading();
+            openMondayPrompt();
+        }, 3000);
     }, []);
+
     return (
         <div className={cx('home')}>
             <h3>{t('home.power_usage_tracking')}</h3>
@@ -227,19 +265,31 @@ const Home = ({}) => {
             <div className={cx('block')}>
                 {electricItems.map((item, index) => (
                     <div
-                        className={cx('target-box', 'machine_card', { machine_card_useless: index % 2 === 0 })}
+                        className={cx('target-box', 'machine_card', { machine_card_useless: index % 2 !== 0 })}
                         key={index}
                     >
                         <div className={cx('icon')}>
                             <img src={item.icon} alt="icon" />
                         </div>
                         <div className={cx('inner')}>
-                            <button type="button">
-                                <ErrorOutlineTwoToneIcon />
-                            </button>
                             <>
                                 {t(`machine.${item.name}`)}
-                                {index % 2 !== 0 && (
+                                <>
+                                    <button type="button">
+                                        {index % 2 !== 0 ? (
+                                            // 未連結
+                                            <LinkOffTwoToneIcon style={{ fill: '#a5a5a5' }} />
+                                        ) : index === 0 ? (
+                                            // 有異常
+                                            <ErrorOutlineTwoToneIcon
+                                                style={{ fill: '#ff6700' }}
+                                                onClick={() => openElectricPrompt()}
+                                            />
+                                        ) : (
+                                            // 健康
+                                            <GppGoodTwoToneIcon style={{ fill: '#20a2a0' }} />
+                                        )}
+                                    </button>
                                     <div className={cx('target')}>
                                         <div className={cx('target-item-number')}>
                                             <span>{item.value}</span>
@@ -247,7 +297,7 @@ const Home = ({}) => {
                                             {/* 1KWH = 1000W = 1度電 */}
                                         </div>
                                     </div>
-                                )}
+                                </>
                             </>
                         </div>
                     </div>

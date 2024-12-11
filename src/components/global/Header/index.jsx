@@ -50,7 +50,7 @@ const Header = ({ setOpenMenu }) => {
     const { pathname } = useLocation(); // Move useLocation here
 
     const [visible, setVisible] = useState(false);
-    const [languageIcon, setLanguageIcon] = useState(english);
+    const [languageIcon, setLanguageIcon] = useState(taiwan); // 默認為 繁體中文(一)
     const [head, setHead] = useState({
         main: '',
         child: ''
@@ -84,10 +84,9 @@ const Header = ({ setOpenMenu }) => {
 
     useEffect(() => {
         // 設定語言
-        let langIconName = getCookie(COOKIE_NAME.LANG) || 'en-US';
+        let langIconName = getCookie(COOKIE_NAME.LANG) || 'zh-TW'; // 默認為 繁體中文(一)
         setLanguageIcon(LANG_ICON[langIconName]);
 
-        console.log('pathname', pathname);
         if (!pathname.includes('login')) {
             const pathObj = routes.find(item => item.path === pathname);
             setHead({

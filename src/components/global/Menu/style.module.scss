@@ -19,10 +19,11 @@
         background: -webkit-radial-gradient(
                 0% 100%,
                 ellipse cover,
-                rgba(104, 128, 138, 0.4) 10%,
-                rgba(138, 114, 76, 0) 40%
+                rgba(75, 170, 153, 0.4) 10%,
+                #69c8be00 40%,
+                rgba(26, 200, 191, 0.309) 90%,
             ),
-            linear-gradient(to bottom, rgba(57, 143, 219, 0.25) 0%, rgba(42, 85, 87, 0.4) 100%),
+            linear-gradient(to bottom, rgba(57, 100, 219, 0.25) 0%, rgba(14, 88, 199, 0.4) 100%),
             linear-gradient(135deg, #365899 0%, #365899 100%);
         color: #fff;
         box-shadow: none;

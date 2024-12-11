@@ -16,7 +16,7 @@ import { getCookie, setCookie } from '@/utils/cookie';
 import routes from '@/router/routes';
 import globalRoutes from '@/router/global_routes';
 
-// components
+// main components
 import NoMatch from '@/components/global/NoMatch';
 import Menu from '@/components/global/Menu';
 import Header from '@/components/global/Header';
@@ -125,7 +125,6 @@ function App() {
         const currentRoute =
             routes.find(route => route.path === pathname) || globalRoutes.find(route => route.path === pathname);
         // 如果当前路径的路由有 `title` 属性，设置为页面标题
-        console.log('currentRoute:', currentRoute);
         if (currentRoute?.title) {
             document.title = t(`menu.${currentRoute.title}`);
         } else {
@@ -159,6 +158,18 @@ function App() {
                         {auth ? (
                             <>
                                 <Route path="*" element={<Navigate to="/main" replace />} />
+                                {/* private routes */}
+                                {routes.map((route, key) => {
+                                    return (
+                                        <Route
+                                            key={`route_${key}`}
+                                            exact={route.exact}
+                                            path={route.path}
+                                            element={<route.component routeData={route} />}
+                                            sensitive
+                                        />
+                                    );
+                                })}
                             </>
                         ) : (
                             <>
@@ -177,18 +188,6 @@ function App() {
                                 })}
                             </>
                         )}
-                        {/* private routes */}
-                        {routes.map((route, key) => {
-                            return (
-                                <Route
-                                    key={`route_${key}`}
-                                    exact={route.exact}
-                                    path={route.path}
-                                    element={<route.component routeData={route} />}
-                                    sensitive
-                                />
-                            );
-                        })}
 
                         <Route path="*" element={<NoMatch />} />
                     </Routes>

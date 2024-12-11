@@ -77,5 +77,9 @@
                 color: var.$green;
             }
         }
+
+        @media screen and (max-width: 767px) {
+            width: 90%;
+        } /* iPad mini & iphone */
     }
 }

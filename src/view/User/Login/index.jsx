@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-ro
 // components
 import Loading from '@/components/ui/Loading';
 import PopUp from '@/components/global/PopUp';
-import NormalPrompt from '@/components/ui/NormalPrompt';
+import InputPrompt from '@/components/ui/InputPrompt';
 import UIInput from '@/components/ui/UIInput';
 
 // @mui
@@ -43,9 +43,9 @@ const Login = () => {
     const openForgetPopUp = () => {
         openPopUp({
             component: (
-                <NormalPrompt
+                <InputPrompt
                     title="忘記密碼"
-                    constent="請輸入註冊時使用的電子信箱，稍後您將會收到密碼重設信件。"
+                    constent={['請輸入註冊時使用的電子信箱，稍後您將會收到密碼重設信件。']}
                     value={email}
                     component={<UIInput type="email" name="email" id="email" placeholder="電子信箱" required />}
                     onClick={val => resetPassword(val)}

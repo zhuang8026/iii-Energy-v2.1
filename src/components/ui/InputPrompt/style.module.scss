@@ -1,11 +1,11 @@
 .windows {
     position: relative;
-    width: 600px;
+    width: auto;
     min-width: 250px;
     // height: 50%;
     // min-height: 200px;
     background-color: var.$white;
-    border-radius: var.$fs-12;
+    border-radius: 0.75rem;
     padding: var.$popup-padding;
 
     display: flex;
@@ -28,21 +28,8 @@
         font-weight: bold;
     }
 
-    h4 {
-        font-size: var.$fs-18;
-        font-weight: bold;
-        margin-top: var.$fs-10;
-    }
-
-    .windows-prompt {
-        width: 100%;
-        background: var.$select_bg;
-        border-radius: var.$fs-12;
-        padding: var.$fs-8 var.$fs-16;
-        margin-top: var.$fs-20;
-        .windows-content {
-            margin: 10px 0;
-        }
+    .windows-content {
+        margin: 10px 0;
     }
 
     .windows-btn {
