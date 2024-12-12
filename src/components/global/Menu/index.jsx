@@ -22,15 +22,15 @@ import classes from './style.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(classes);
 
-const Menu = ({ menuList, openMenu, setOpenMenu }) => {
+const Menu = ({ menuList, openMenu, onToggleMenu }) => {
     const dispatch = useDispatch();
     const cardRef = useRef(null); // 用來綁定卡片 DOM 節點
     const { t, i18n } = useTranslation();
     const navigate = useNavigate(); // Properly define navigate here
     const location = useLocation(); // This gives the current location
+    const { openLoading, closeLoading } = Loading();
 
     const [currentPath, setCurrentPath] = useState('/main');
-    const { openLoading, closeLoading } = Loading();
 
     /**
      * Handles the click event of a menu item.
@@ -49,7 +49,7 @@ const Menu = ({ menuList, openMenu, setOpenMenu }) => {
     // 點擊外部區域的處理函數
     const handleClickOutside = event => {
         if (cardRef.current && !cardRef.current.contains(event.target)) {
-            setOpenMenu(false); // 點擊外部時隱藏卡片
+            onToggleMenu(false); // 點擊外部時隱藏卡片
         }
     };
 
@@ -74,6 +74,7 @@ const Menu = ({ menuList, openMenu, setOpenMenu }) => {
 
     useEffect(() => {
         setCurrentPath(location.pathname);
+        onToggleMenu(false); // 點擊外部時隱藏卡片
     }, [location]);
 
     return (

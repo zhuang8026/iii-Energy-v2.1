@@ -17,10 +17,10 @@ import routes from '@/router/routes';
 import globalRoutes from '@/router/global_routes';
 
 // main components
-import NoMatch from '@/components/global/NoMatch';
 import Menu from '@/components/global/Menu';
 import Header from '@/components/global/Header';
 import Footer from '@/components/global/Footer';
+import NoMatch from '@/components/global/NoMatch';
 
 // global
 import { FullWindowAnimateProvider, FullPopWindow, useFullWindowAnimate } from '@/components/global/FullWindow';
@@ -38,7 +38,8 @@ function App() {
     // i18n: 翻譯管理，可轉換語系
 
     const [layouts, setLayouts] = useState([]);
-    const [auth, setAuth] = useState(false);
+    const [auth, setAuth] = useState(false); // token status
+    const [authInitialized, setAuthInitialized] = useState(false); // token 保護性路由元件
     const [openMenu, setOpenMenu] = useState(false);
     const [menuList, setMenuList] = useState([
         {
@@ -105,22 +106,36 @@ function App() {
         }
     };
 
+    // 生成路由
+    const GenerateRoutes = routes => {
+        return routes.map((route, key) => (
+            <Route
+                key={`route_${key}`}
+                path={route.path}
+                exact={route.exact}
+                element={<route.component routeData={route} />}
+                sensitive
+            />
+        ));
+    };
+
     useEffect(() => {
-        let token = getCookie('iii_token');
-        setAuth(!!token);
-        if (!token) {
-            navigate({
-                ...location,
-                pathname: `/login`
-            });
+        if (auth) {
+            getLayouts();
+        } else {
+            setLayouts([]);
         }
-    }, [pathname]);
+    }, [auth, pathname]); // 合并更新 layouts 的逻辑
 
     useEffect(() => {
-        getLayouts();
-    }, [pathname, auth]); // pathname 变化时也调用 getLayouts
+        const token = getCookie('iii_token');
+        const isAuthenticated = !!token;
+        setAuth(isAuthenticated);
+        setAuthInitialized(true); // 初始化完成
+        if (!isAuthenticated) {
+            navigate('/login', { replace: true });
+        }
 
-    useEffect(() => {
         // 查找当前路径的路由
         const currentRoute =
             routes.find(route => route.path === pathname) || globalRoutes.find(route => route.path === pathname);
@@ -132,17 +147,22 @@ function App() {
         }
     }, [pathname, t]);
 
+    // 保護性路由
+    if (!authInitialized) {
+        return <div>loading...</div>; // 或其他載入提示
+    }
+
     return (
         <div id={cx('app')}>
             {/* menu */}
-            {layouts.indexOf('menu') >= 0 && (
+            {layouts.includes('menu') && (
                 <Suspense fallback={<></>}>
-                    <Menu menuList={menuList} openMenu={openMenu} setOpenMenu={setOpenMenu} />
+                    <Menu menuList={menuList} openMenu={openMenu} onToggleMenu={isOpen => setOpenMenu(isOpen)} />
                 </Suspense>
             )}
             <div
                 // className={cx('main', 'full')}
-                className={cx('full', layouts.indexOf('menu') >= 0 ? 'main' : '')}
+                className={cx('full', layouts.includes('menu') ? 'main' : '')}
             >
                 {/* header */}
                 {layouts.indexOf('header') >= 0 ? (
@@ -153,39 +173,18 @@ function App() {
 
                 {/* main */}
                 <Suspense fallback={<></>}>
-                    <Routes location={location}>
-                        {/* <Navigate> 不能直接放置在 <Routes> 的頂層下，它必須作為一個 <Route> 的 element 來使用。 */}
+                    <Routes>
                         {auth ? (
                             <>
-                                <Route path="*" element={<Navigate to="/main" replace />} />
                                 {/* private routes */}
-                                {routes.map((route, key) => {
-                                    return (
-                                        <Route
-                                            key={`route_${key}`}
-                                            exact={route.exact}
-                                            path={route.path}
-                                            element={<route.component routeData={route} />}
-                                            sensitive
-                                        />
-                                    );
-                                })}
+                                {GenerateRoutes(routes)}
+                                <Route path="*" element={<Navigate to="/main" replace />} />
                             </>
                         ) : (
                             <>
-                                <Route path="*" element={<Navigate to="/login" replace />} />
                                 {/* global routes */}
-                                {globalRoutes.map((route, key) => {
-                                    return (
-                                        <Route
-                                            key={`route_${key}`}
-                                            exact={route.exact}
-                                            path={route.path}
-                                            element={<route.component routeData={route} />}
-                                            sensitive
-                                        />
-                                    );
-                                })}
+                                {GenerateRoutes(globalRoutes)}
+                                <Route path="*" element={<Navigate to="/login" replace />} />
                             </>
                         )}
 

@@ -1,14 +1,13 @@
-
-
 .report {
     width: calc(100%);
     border-radius: var.$fs-12;
     margin: 24px auto;
+    display: flex;
 
     h3 {
         font-weight: bold;
         font-size: var.$fs-20;
-        margin-top:  var.$fs-20;
+        margin-top: var.$fs-20;
     }
 
     .year_control {

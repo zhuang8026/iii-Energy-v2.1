@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
-import CircleNotificationsTwoToneIcon from '@mui/icons-material/CircleNotificationsTwoTone';
+import CheckCircleTwoToneIcon from '@mui/icons-material/CheckCircleTwoTone';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 
 // enum 映射
@@ -115,6 +115,10 @@ const Header = ({ setOpenMenu }) => {
                                 <li key={index} onClick={() => changeLanguage(item.type)}>
                                     <img alt="" src={item.icon} />
                                     {item.name}
+                                    <CheckCircleTwoToneIcon
+                                        fontSize="small"
+                                        style={{ fill: item.type !== i18n.language && 'transparent' }} //
+                                    />
                                 </li>
                             ))}
                         </ul>
