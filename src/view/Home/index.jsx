@@ -160,7 +160,7 @@ const Home = ({}) => {
         setTimeout(() => {
             closeLoading();
             openMondayPrompt();
-        }, 3000);
+        }, 1500);
     }, []);
 
     return (

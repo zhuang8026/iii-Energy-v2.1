@@ -112,7 +112,7 @@ const Header = ({ setOpenMenu }) => {
                     {visible && (
                         <ul className={cx('language_list')}>
                             {LANG_LIST.map((item, index) => (
-                                <li key={index} onClick={() => changeLanguage(item.type)}>
+                                <li key={index} className={cx(item.type === i18n.language && 'active')} onClick={() => changeLanguage(item.type)}>
                                     <img alt="" src={item.icon} />
                                     {item.name}
                                     <CheckCircleTwoToneIcon

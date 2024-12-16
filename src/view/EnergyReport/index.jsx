@@ -15,6 +15,8 @@ import Button from '@mui/material/Button';
 import RemoveRedEyeTwoToneIcon from '@mui/icons-material/RemoveRedEyeTwoTone';
 
 // components
+import Loading from '@/components/ui/Loading';
+import PopUp from '@/components/global/PopUp';
 import WeekPicker from '@/components/ui/WeekPicker';
 import PieChart from '@/components/ui/PieChart';
 import BorderLinearProgress from '@/components/ui/BorderLinearProgress';
@@ -27,6 +29,15 @@ const cx = classNames.bind(classes);
 
 const EnergyReport = () => {
     const { t, i18n } = useTranslation();
+    const { openPopUp, closePopUp } = PopUp();
+    const { openLoading, closeLoading } = Loading();
+
+    useEffect(() => {
+        openLoading('loading...');
+        setTimeout(() => {
+            closeLoading();
+        }, 1500);
+    }, []);
 
     return (
         <div className={cx('report')}>
@@ -86,7 +97,7 @@ const EnergyReport = () => {
                         <WeekPicker />
                     </div>
 
-                    <div className={cx('weekend_chart')}>
+                    {/* <div className={cx('weekend_chart')}>
                         <div className={cx('user_comparison')}>
                             <div className={cx('user_comparison_title')}>
                                 <h4>同儕用電比較</h4>
@@ -135,7 +146,7 @@ const EnergyReport = () => {
                                 total={340.0} // 總用電數度
                             />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
