@@ -16,11 +16,16 @@ import RemoveRedEyeTwoToneIcon from '@mui/icons-material/RemoveRedEyeTwoTone';
 
 // components
 import Loading from '@/components/ui/Loading';
-import PopUp from '@/components/global/PopUp';
+// import PopUp from '@/components/global/PopUp';
 import WeekPicker from '@/components/ui/WeekPicker';
-import PieChart from '@/components/ui/PieChart';
-import BorderLinearProgress from '@/components/ui/BorderLinearProgress';
+// import PieChart from '@/components/ui/PieChart';
+// import BorderLinearProgress from '@/components/ui/BorderLinearProgress';
 import MonthCard from '@/components/ui/MonthCard';
+import NewsReport from '@/components/ui/NewsReport';
+
+// page
+import Monthly from '@/view/News/Monthly';
+import Weekly from '@/view/News/Weekly';
 
 // css
 import classes from './style.module.scss';
@@ -29,21 +34,28 @@ const cx = classNames.bind(classes);
 
 const EnergyReport = () => {
     const { t, i18n } = useTranslation();
-    const { openPopUp, closePopUp } = PopUp();
+    // const { openPopUp, closePopUp } = PopUp();
     const { openLoading, closeLoading } = Loading();
+    const { openNewsReport } = NewsReport();
 
-    useEffect(() => {
-        openLoading('loading...');
-        setTimeout(() => {
-            closeLoading();
-        }, 1500);
-    }, []);
+    // 開啟月報
+    const openWeeklyReport = month => {
+        openNewsReport({ component: <Monthly /> });
+        document.body.style.overflow = 'hidden'; // 禁用捲動
+    };
+
+    // useEffect(() => {
+    //     openLoading('loading...');
+    //     setTimeout(() => {
+    //         closeLoading();
+    //     }, 1500);
+    // }, []);
 
     return (
         <div className={cx('report')}>
             <div>
                 <div className={cx('year_control')}>
-                    <h3>月報</h3>
+                    <h3>{t('energyReport.month_report')}</h3>
 
                     <FormControl sx={{ m: 1, minWidth: 120 }}>
                         <InputLabel
@@ -85,13 +97,13 @@ const EnergyReport = () => {
                 </div>
                 <div className={cx('block')}>
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item, index) => (
-                        <MonthCard data={item} key={index} />
+                        <MonthCard data={item} key={index} onClick={month => openWeeklyReport(month)} />
                     ))}
                 </div>
             </div>
 
             <div>
-                <h3>週報</h3>
+                <h3>{t('energyReport.week_report')}</h3>
                 <div className={cx('block', 'block_repeat')}>
                     <div className={cx('weekend_datePicker')}>
                         <WeekPicker />

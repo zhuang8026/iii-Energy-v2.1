@@ -9,15 +9,19 @@ import classes from './style.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(classes);
 
-const MonthCard = ({ data }) => {
+const MonthCard = ({ data, onClick = () => {} }) => {
     const { t } = useTranslation();
 
+    const clickMonthCard = () => {
+        onClick(data);
+    };
+
     return (
-        <div className={cx('month-card')}>
+        <div className={cx('month-card')} onClick={() => clickMonthCard()}>
             2024 {t('energyReport.year')}
             <div className={cx('report')}>
                 <div className={cx('report-item-number')}>
-                    <span>{data}</span> 月
+                    <span>{t(`energyReport.${data}`)}</span>
                 </div>
             </div>
         </div>

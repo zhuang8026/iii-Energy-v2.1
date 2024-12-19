@@ -1,0 +1,54 @@
+.target {
+    // width: 100%;
+    height: auto;
+    margin: 10px 0;
+    display: flex;
+    span {
+        font-size: var.$fs-48;
+        line-height: var.$fs-48;
+        font-weight: 900;
+    }
+    .progress-number {
+        margin-left: var.$fs-4;
+        text-align: right;
+    }
+}
+
+.progress {
+    position: relative;
+    width: 100%;
+    margin-bottom: var.$fs-22;
+
+    .progress-bar {
+        width: 100%;
+        border-radius: var.$radius-40;
+        .bar-mian {
+            position: relative;
+            z-index: 1;
+            width: calc(100% - 50px);
+            height: var.$fs-18;
+            border-radius: var.$radius-40;
+            background-color: var.$gay;
+            margin-bottom: var.$fs-8;
+            .bar-current {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 2;
+                width: 40%;
+                height: var.$fs-18;
+                background: var.$green;
+                border-radius: var.$radius-40;
+                transition: all 0.5s ease;
+            }
+            .warning {
+                background: var.$warning;
+            }
+            .bar-number {
+                position: absolute;
+                right: -50px;
+                bottom: -2px;
+            }
+        }
+    }
+}

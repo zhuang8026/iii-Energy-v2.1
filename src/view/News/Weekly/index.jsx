@@ -3,12 +3,12 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 import './style_module.scss';
 
-const BindDevice = () => {
+const Weekly = () => {
     return (
         <div className="home1">
-            <h1>BindDevice Page</h1>
+            <h1>Weekly Page</h1>
         </div>
     );
 };
 
-export default BindDevice;
+export default Weekly;

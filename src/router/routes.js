@@ -21,7 +21,7 @@ const routes = [
     },
     {
         main: 'overall',
-        path: '/main/energy_report',
+        path: '/main/news',
         title: 'energy_report',
         component: lazy(() => import('@/view/EnergyReport')),
         exact: true,

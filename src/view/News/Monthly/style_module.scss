@@ -1,0 +1,147 @@
+.monthly {
+    width: calc(100%);
+    height: 85%;
+    overflow-y: auto;
+    padding: var.$fs-20;
+    // background-color: #fff;
+    // border-radius: 0.75rem;
+    // margin-top: 24px;
+
+    h2 {
+        font-weight: bold;
+        font-size: var.$fs-28;
+    }
+
+    h3 {
+        font-weight: bold;
+        font-size: var.$fs-20;
+    }
+
+    h4 {
+        font-weight: bold;
+        font-size: var.$fs-18;
+    }
+
+    h5 {
+        font-weight: bold;
+        font-size: var.$fs-18;
+    }
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var.$fs-8;
+        .title {
+            display: flex;
+            align-items: flex-end;
+        }
+        .cancel {
+            cursor: pointer;
+            width: var.$fs-40;
+            height: var.$fs-40;
+            border-radius: 50%;
+            line-height: var.$fs-50;
+            text-align: center;
+            background: var.$iii_color;
+            transition: 0.1s ease-in;
+            @include svgIcon.svg_color(var.$white);
+
+            &:hover {
+                background: var.$bg_color;
+            }
+            &:active {
+                transform: scale(0.9);
+            }
+        }
+    }
+    .tag {
+        display: flex;
+        grid-template-columns: repeat(2, 1fr);
+        margin-bottom: var.$fs-20;
+        .tag_item {
+            // width: var.$fs-128;
+            padding: var.$fs-4 var.$fs-14;
+            border-radius: var.$fs-32;
+            background: var.$iii_color;
+            color: var.$white;
+            text-align: center;
+            margin-right: var.$fs-8;
+        }
+    }
+
+    .content {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: var.$fs-16;
+        gap: var.$fs-16;
+        grid-template-areas:
+            'A A B'
+            'A A B';
+    }
+    .left {
+        grid-area: A;
+        .block {
+            border-radius: var.$fs-16;
+            background: var.$bg_dialog;
+            box-shadow: rgba(255, 255, 255, 1) 0rem 0rem 0.06rem 0.03rem inset,
+                rgba(0, 0, 0, 0.05) 0rem 1.2rem 1.2rem 0rem;
+            -webkit-backdrop-filter: saturate(200%) blur(1.875rem);
+            backdrop-filter: saturate(200%) blur(1.875rem);
+            padding: var.$fs-20;
+            margin-bottom: var.$fs-16;
+        }
+
+        .chart {
+            width: 100%;
+            height: 420px;
+            padding-bottom: var.$fs-40;
+        }
+    }
+    .right {
+        grid-area: B;
+        .block {
+            border-radius: var.$fs-16;
+            color: var.$white;
+            background: var.$green_opacity;
+            box-shadow: rgba(255, 255, 255, 1) 0rem 0rem 0.06rem 0.03rem inset,
+                rgba(0, 0, 0, 0.05) 0rem 1.2rem 1.2rem 0rem;
+            -webkit-backdrop-filter: saturate(200%) blur(1.875rem);
+            backdrop-filter: saturate(200%) blur(1.875rem);
+            padding: var.$fs-20;
+            margin-bottom: var.$fs-16;
+
+            .electric_total {
+                // display: grid;
+                // grid-template-columns: repeat(2, 1fr);
+                // grid-gap: var.$fs-16;
+                // gap: var.$fs-16;
+
+                .electric_item {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    grid-gap: var.$fs-16;
+                    gap: var.$fs-16;
+                    .electric_icon {
+                        font-size: var.$fs-80;
+                        text-align: center;
+                        span {
+                            font-size: var.$fs-30;
+                        }
+                    }
+                }
+                .electric_value {
+                    font-size: var.$fs-24;
+                    .electric_number {
+                        display: flex;
+                        align-items: flex-end;
+                        p {
+                            font-size: var.$fs-50;
+                            font-weight: bold;
+                            margin-bottom: -11px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

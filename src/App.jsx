@@ -24,6 +24,11 @@ import NoMatch from '@/components/global/NoMatch';
 
 // global
 import { FullWindowAnimateProvider, FullPopWindow, useFullWindowAnimate } from '@/components/global/FullWindow';
+import {
+    SlideUpWindowAnimateProvider,
+    SlideUpWindow,
+    useSlideUpWindowAnimate
+} from '@/components/global/SlideUp';
 
 // css
 import classes from './style.module.scss';
@@ -52,7 +57,7 @@ function App() {
                 },
                 {
                     name: 'menu.energy_report',
-                    path: '/main/energy_report',
+                    path: '/main/news',
                     icon: <LeaderboardTwoToneIcon />
                 },
                 {
@@ -207,8 +212,11 @@ function AppWrapper() {
     return (
         <BrowserRouter>
             <FullWindowAnimateProvider>
-                <App />
-                <FullPopWindow />
+                <SlideUpWindowAnimateProvider>
+                    <App />
+                    <SlideUpWindow />
+                    <FullPopWindow />
+                </SlideUpWindowAnimateProvider>
             </FullWindowAnimateProvider>
         </BrowserRouter>
     );

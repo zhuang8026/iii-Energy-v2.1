@@ -59,8 +59,7 @@
                 border-radius: 5px;
                 background-color: transparent;
                 cursor: pointer;
-
-                // @include svg_color();
+                // @include svgIcon.svg_color(var.$white);
             }
 
             .icon {
@@ -162,6 +161,7 @@
             .inner {
                 background-image: none !important;
                 background: var.$select_bg;
+                color: var.$na;
             }
         }
 

@@ -19,6 +19,7 @@ import LineChartWindows from '@/components/ui/LineChartWindows';
 import PopUp from '@/components/global/PopUp';
 import EditTrack from '@/components/ui/EditTrack';
 import NormalPrompt from '@/components/ui/NormalPrompt';
+import Progress from '@/components/ui/Progress';
 
 // images
 import IconTV from '@/assets/images/icon-television.svg';
@@ -180,7 +181,7 @@ const Home = ({}) => {
                         </div>
                         <span>* {t('home.public_electricity_desc')} *</span>
                         <button type="button" onClick={() => openEditPopUp()}>
-                            <BorderColorTwoToneIcon sx={{ fill: '#fff' }} />
+                            <BorderColorTwoToneIcon style={{ fill: '#fff' }} />
                         </button>
                     </div>
 
@@ -212,52 +213,24 @@ const Home = ({}) => {
                 {/* 用電量累計 */}
                 <div className={cx('target-box')}>
                     {t('home.electricity_records')}
-                    <>
-                        <div className={cx('target')}>
-                            {t('home.yesterday_electricity')}
-                            <div className={cx('progress-number')}>15 度</div>
-                        </div>
-                        <div className={cx('progress')}>
-                            <div className={cx('progress-bar')}>
-                                <div className={cx('bar-mian')}>
-                                    <div className={cx('bar-current')} style={{ width: '10%' }} />
-                                    <div className={cx('bar-number')}>10%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </>
-                    <>
-                        <div className={cx('target')}>
-                            {t('home.before_yesterday_electricity')}
-                            <div className={cx('progress-number')}>22 度</div>
-                        </div>
-                        <div className={cx('progress')}>
-                            <div className={cx('progress-bar')}>
-                                <div className={cx('bar-mian')}>
-                                    <div className={cx('bar-current')} style={{ width: '15%' }} />
-                                    <div className={cx('bar-number')}>15%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </>
-                    <>
-                        <div className={cx('target')}>
-                            {t('home.all_month_electricity')}
-                            <div className={cx('progress-number')}>479 度</div>
-                        </div>
-                        <div className={cx('progress')}>
-                            <div className={cx('progress-bar')}>
-                                <div className={cx('bar-mian')}>
-                                    <div className={cx('bar-current')} style={{ width: '100%' }} />
-                                    <div className={cx('bar-number')}>100%</div>
-                                </div>
-                                <div className={cx('bar-mian')}>
-                                    <div className={cx('bar-current', 'warning')} style={{ width: '20%' }} />
-                                    <div className={cx('bar-number')}>20%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </>
+                    <Progress
+                        title={t('home.yesterday_electricity')}
+                        kwh={15} //
+                        percent={10}
+                        overPercent={0}
+                    />
+                    <Progress
+                        title={t('home.before_yesterday_electricity')}
+                        kwh={22} //
+                        percent={15}
+                        overPercent={0}
+                    />
+                    <Progress
+                        title={t('home.all_month_electricity')}
+                        kwh={479} //
+                        percent={100}
+                        overPercent={20}
+                    />
                 </div>
             </div>
 

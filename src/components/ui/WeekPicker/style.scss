@@ -1,0 +1,127 @@
+/* 外層容器 */
+.weekPicker {
+    display: flex;
+    width: 100%; /* 滿版寬度 */
+    height: 100%; /* 讓高度佔滿整個畫面高度 */
+    justify-content: center; /* 內容水平置中 */
+    align-items: center; /* 內容垂直置中 */
+}
+
+/* Calendar 樣式 */
+.react-calendar {
+    width: 100%; /* 寬度滿版 */
+    height: 100%; /* 高度滿版 */
+    display: flex;
+    flex-direction: column;
+    font-size: var.$fs-22; /* 調整字體大小以適應外層 */
+    border: none;
+    @media screen and (max-width: 767px) {
+        font-size: var.$fs-18; /* 調整字體大小以適應外層 */
+    } /* iPad mini & iphone */
+}
+
+/* 日期格子樣式 */
+.react-calendar__tile {
+    flex: 1; /* 每個日期格子自適應大小 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease-in-out;
+    line-height: var.$fs-48;
+    &:hover {
+        background-color: var.$bg_color !important;
+        color: white;
+        cursor: pointer;
+    }
+    @media screen and (max-width: 767px) {
+        padding: 0px;
+    } /* iPad mini & iphone */
+}
+
+/* 日期標題樣式 */
+.react-calendar__month-view__weekdays__weekday {
+    abbr {
+        text-decoration: none;
+    }
+}
+/* 今天的樣式 */
+.react-calendar__tile--now {
+    // background: transparent !important;
+    transform: scale(0.8);
+}
+
+/* 選中的樣式 */
+.react-calendar__tile--active {
+    background: var.$green !important;
+}
+
+/* 周末的樣式 */
+.react-calendar__month-view__days__day--weekend {
+    color: var.$green;
+}
+
+/* 左右按鈕樣式 */
+.react-calendar__navigation__arrow {
+    background-color: var.$iii_color !important;
+    color: white !important;
+    border-radius: 50%;
+    cursor: pointer;
+    // 大小修改
+    width: var.$fs-44;
+    height: var.$fs-44;
+    font-size: var.$fs-30;
+    transition: 0.1s ease-in-out;
+    &:hover {
+        background-color: var.$btn_hover !important;
+    }
+    &:active {
+        transform: scale(0.9);
+    }
+}
+
+/* 年份按鈕文字樣式 */
+.react-calendar__navigation__label {
+    border-radius: var.$radius-40;
+    transition: 0.1s ease-in-out;
+    margin: 0 var.$fs-10 !important;
+    &:hover {
+        color: white !important;
+        background-color: var.$iii_color !important;
+    }
+}
+
+/* 上一周按鈕樣式 */
+.react-calendar__navigation__prev2-button {
+    display: none;
+}
+
+/* 下一周按鈕樣式 */
+.react-calendar__navigation__next2-button {
+    display: none;
+}
+
+/* 高亮 hover 周的樣式 */
+.highlight-hover {
+    background-color: #c78281; /* hover 顏色 */
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* 高亮選中周的樣式 */
+.highlighted-week {
+    background-color: var.$green !important;
+    color: white;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.15), 6px 6px 6px rgba(0, 0, 0, 0.15);
+    transform: scale(1);
+}
+
+/* 一周的第一天樣式 */
+.first-day {
+    border-radius: 50px 0 0 50px;
+}
+
+/* 一周的最後一天樣式 */
+.last-day {
+    border-radius: 0 50px 50px 0;
+}

@@ -1,6 +1,7 @@
 // base color
 $bg: #f0f1f3;
 $bg_color: #69c8be;
+$bg_dialog: #ffffffa3;
 $bg_color_top: #21a1a0;
 $iii_color: #365899;
 $btn_active: #284b8c;
@@ -17,8 +18,8 @@ $gay: #ebeefa;
 $gay_active: #d2d9f3;
 $svg_icon: #9ee9e2;
 
-
 $green: #20a2a0;
+$green_opacity: #284b8cc3;
 $green_light: #30c0be81;
 
 $danger: #fc3a3a;
@@ -61,7 +62,11 @@ $fs-30: 1.875rem;
 $fs-32: 2rem;
 $fs-36: 2.25rem;
 $fs-40: 2.5rem;
+$fs-44: 2.75rem;
 $fs-48: 3rem;
+$fs-50: 3.125rem;
+$fs-52: 3.25rem;
+$fs-54: 3.375rem;
 $fs-56: 3.5rem;
 $fs-64: 4rem;
 $fs-72: 4.5rem;
@@ -69,6 +74,18 @@ $fs-80: 5rem;
 $fs-88: 5.5rem;
 $fs-96: 6rem;
 $fs-104: 6.5rem;
+$fs-112: 7rem;
+$fs-120: 7.5rem;
+$fs-128: 8rem;
+$fs-136: 8.5rem;
+$fs-144: 9rem;
+$fs-152: 9.5rem;
+$fs-160: 10rem;
+$fs-168: 10.5rem;
+$fs-176: 11rem;
+$fs-184: 11.5rem;
+$fs-192: 12rem;
+$fs-200: 12.5rem;
 
 $popup-padding: $fs-40;
 

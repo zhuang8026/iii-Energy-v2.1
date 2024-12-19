@@ -1,0 +1,32 @@
+.silderUpContainer {
+    position: fixed;
+
+    background: rgba(238, 244, 255, 0.3);
+    box-shadow: rgba(255, 255, 255, 1) 0rem 0rem 0.0625rem 0.0625rem inset,
+        rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;
+    -webkit-backdrop-filter: saturate(200%) blur(1.875rem);
+    backdrop-filter: saturate(200%) blur(1.875rem);
+
+    width: 100vw;
+    height: 100vh;
+    height: -webkit-fill-available;
+    border-radius: 20px 20px 0px 0px;
+    padding: var.$fs-10;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    // -webkit-animation: fadeIn 0.5s;
+    // animation: fadeIn 0.5s;
+
+    /* 初始狀態：從底部滑出 */
+    transform: translateY(100%);
+    transition: transform 0.5s ease-in-out; /* 平滑滑動動畫 */
+}
+//
+/* 當 visible 類存在時，讓內容向上滑入 */
+.slide_up_window {
+    transform: translateY(15%);
+}
