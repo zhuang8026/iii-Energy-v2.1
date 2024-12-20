@@ -15,7 +15,7 @@ const Footer = () => {
             </div>
             <div className={cx('right')}>
                 <p>隱私權及資訊宣告</p>
-                <p>v3.0.1</p>
+                <p>beta-v3.0.2</p>
             </div>
         </div>
     );
