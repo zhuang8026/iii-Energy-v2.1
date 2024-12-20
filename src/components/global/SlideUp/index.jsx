@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, { createContext, useState, useRef, useEffect, useContext } from 'react';
 // css
 import classes from './style.module.scss';
 import classNames from 'classnames/bind';
@@ -45,7 +45,25 @@ export const useSlideUpWindowAnimate = () => {
 
 // Pop Window Component
 export const SlideUpWindow = () => {
+    const windowRef = useRef(null); // 用來綁定 DOM 節點
     const { animateObj, closeSlideUp } = useSlideUpWindowAnimate();
+
+    // 點擊外部區域的處理函數
+    const handleClickOutside = event => {
+        if (windowRef.current && !windowRef.current.contains(event.target)) {
+            closeSlideUp(); // 关闭对话框
+        }
+    };
+
+    // 點擊外部區域的處理函數
+    useEffect(() => {
+        // 監聽 document 的點擊事件
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            // 清理事件監聽器
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     // 添加键盘事件监听
     useEffect(() => {
@@ -65,7 +83,14 @@ export const SlideUpWindow = () => {
         };
     }, [animateObj]);
 
-    return <div className={cx('silderUpContainer', animateObj && 'slide_up_window')}>{animateObj?.component}</div>;
+    return (
+        <div
+            ref={windowRef} // 綁定 DOM 節點
+            className={cx('silderUpContainer', animateObj && 'slide_up_window')}
+        >
+            {animateObj?.component}
+        </div>
+    );
 
     // return null;
 };

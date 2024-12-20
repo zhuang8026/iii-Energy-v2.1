@@ -47,7 +47,7 @@
             @include svgIcon.svg_color(var.$white);
 
             &:hover {
-                background: var.$bg_color;
+                background: var.$btn_hover;
             }
             &:active {
                 transform: scale(0.9);
@@ -77,6 +77,15 @@
         grid-template-areas:
             'A A B'
             'A A B';
+
+        @media screen and (max-width: 1365px) {
+            grid-template-columns: repeat(1, 1fr);
+            grid-template-areas: 'A' 'B';
+        } /* iPad */
+        @media screen and (max-width: 767px) {
+            grid-template-columns: repeat(1, 1fr);
+            grid-template-areas: 'A' 'B';
+        } /* iPad mini & iphone */
     }
     .left {
         grid-area: A;
@@ -111,10 +120,7 @@
             margin-bottom: var.$fs-16;
 
             .electric_total {
-                // display: grid;
-                // grid-template-columns: repeat(2, 1fr);
-                // grid-gap: var.$fs-16;
-                // gap: var.$fs-16;
+                margin-top: var.$fs-4;
 
                 .electric_item {
                     display: grid;
@@ -130,7 +136,7 @@
                     }
                 }
                 .electric_value {
-                    font-size: var.$fs-24;
+                    font-size: var.$fs-18;
                     .electric_number {
                         display: flex;
                         align-items: flex-end;
@@ -139,6 +145,27 @@
                             font-weight: bold;
                             margin-bottom: -11px;
                         }
+                    }
+                }
+            }
+
+            ul {
+                margin-top: var.$fs-16;
+                font-size: var.$fs-18;
+                li {
+                    margin-bottom: var.$fs-16;
+                }
+                .btn {
+                    cursor: pointer;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    grid-gap: var.$fs-10;
+                    gap: var.$fs-10;
+                    margin-top: var.$fs-16;
+                    button {
+                        border-color: var.$btn_hover;
+                        border-radius: var.$fs-104;
+                        font-size: var.$fs-18;
                     }
                 }
             }

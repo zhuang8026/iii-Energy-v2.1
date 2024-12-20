@@ -62,7 +62,7 @@
 
 /* 左右按鈕樣式 */
 .react-calendar__navigation__arrow {
-    background-color: var.$iii_color !important;
+    background-color: var.$green !important;
     color: white !important;
     border-radius: 50%;
     cursor: pointer;
@@ -86,7 +86,7 @@
     margin: 0 var.$fs-10 !important;
     &:hover {
         color: white !important;
-        background-color: var.$iii_color !important;
+        background-color: var.$green !important;
     }
 }
 
