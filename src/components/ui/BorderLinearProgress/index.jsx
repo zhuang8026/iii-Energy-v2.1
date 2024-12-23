@@ -30,7 +30,7 @@ const BorderLinearProgress = ({ name, value, color = '#20A2A0' }) => {
 
     return (
         <div className={cx('borderLinearProgressUI')}>
-            <h5>{name}</h5>
+            <h6>{name}</h6>
             <BorderLinearProgressUI variant="determinate" value={value} />
         </div>
     );

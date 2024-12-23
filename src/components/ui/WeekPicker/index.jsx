@@ -13,7 +13,7 @@ import './style.scss';
  * npm install react-calendar
  *
  */
-function MyApp() {
+function WeekPicker({ onClick = () => {} }) {
     const { t, i18n } = useTranslation();
     const [weekRange, setWeekRange] = useState([]); // 存儲當前選中的周範圍
 
@@ -29,12 +29,14 @@ function MyApp() {
     const handleDayClick = date => {
         const range = getWeekRange(date);
         setWeekRange([...range]);
+        onClick(range);
     };
 
     // 設置默認值：當前週
     useEffect(() => {
         const currentDate = new Date();
-        handleDayClick(currentDate);
+        const range = getWeekRange(currentDate);
+        setWeekRange([...range]);
     }, []);
 
     return (
@@ -65,4 +67,4 @@ function MyApp() {
     );
 }
 
-export default MyApp;
+export default WeekPicker;

@@ -157,11 +157,17 @@ const Home = ({}) => {
 
     useEffect(() => {
         getElectricItemsAPI();
-        openLoading('loading...');
-        setTimeout(() => {
-            closeLoading();
-            openMondayPrompt();
-        }, 1500);
+        // openLoading('loading...');
+        // setTimeout(() => {
+            // closeLoading();
+            // openMondayPrompt();
+        // }, 1500);
+
+        // 添加 passive 事件監聽器
+        document.addEventListener('mousewheel', function(event) {
+            // 你的事件處理器代碼
+        }, { passive: true });
+        
     }, []);
 
     return (

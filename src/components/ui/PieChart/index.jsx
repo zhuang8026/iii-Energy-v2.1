@@ -9,15 +9,31 @@ import * as echarts from 'echarts';
 
 // components
 import BorderLinearProgress from '@/components/ui/BorderLinearProgress';
+import Progress from '@/components/ui/Progress';
+
+// untils
+import { generateGradientColors } from '@/utils/generateGradientColors';
 
 // css
 import classes from './style.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(classes);
 
-const PieChart = ({ type = '', value = 100.0, total = 200.0, compareValue = 0 }) => {
+const PieChart = ({ type = '', value = 1000.0, total = 200.0, compareValue = 0 }) => {
     const { t, i18n } = useTranslation();
     const chartDOM = useRef();
+    const [list, setList] = useState([
+        { electricName: '電視', value: 10 },
+        { electricName: '冰箱', value: 20 },
+        { electricName: '冷氣', value: 30 },
+        { electricName: '開飲機', value: 40 },
+        { electricName: '洗衣機', value: 50 },
+        { electricName: '電風扇', value: 60 },
+        { electricName: '電腦', value: 80 },
+        { electricName: '電鍋', value: 90 },
+        { electricName: '除濕機', value: 60 },
+        { electricName: '其他', value: 40 }
+    ]);
 
     const initChart = () => {
         const Health = '#20A2A0'; // 未超標顏色
@@ -40,6 +56,17 @@ const PieChart = ({ type = '', value = 100.0, total = 200.0, compareValue = 0 })
             return total - dangerVal; // 目標的120% - 累積用電量
         };
 
+        const seriesData = list.map(item => {
+            return {
+                value: item.value,
+                name: item.electricName,
+                itemStyle: {
+                    color: item.color,
+                    borderRadius: 0,
+                    borderWidth: 0
+                }
+            };
+        });
         const option = {
             // animation: false, // 關閉整體動畫
             // selectedMode: false,
@@ -48,37 +75,7 @@ const PieChart = ({ type = '', value = 100.0, total = 200.0, compareValue = 0 })
                 {
                     type: 'pie',
                     radius: ['98%', '78%'], // 外圈的半徑範圍
-                    data: [
-                        // ...seriesData,
-                        {
-                            value: 10,
-                            name: 'usedValue',
-                            itemStyle: {
-                                color: Health, // 有參數則為 20A2A0，沒參數則為 #EBEEFA
-                                borderRadius: 20,
-                                // borderColor: '#20A2A0',
-                                borderWidth: 0
-                            }
-                        },
-                        {
-                            value: 20,
-                            name: 'warningValue',
-                            itemStyle: {
-                                color: Warning, // 有參數則為 20A2A0，沒參數則為 #EBEEFA
-                                borderRadius: 20,
-                                // borderColor: '#20A2A0',
-                                borderWidth: 0
-                            }
-                        },
-                        {
-                            value: emptyValue(), // 未使用用電量
-                            name: 'empty',
-                            itemStyle: {
-                                color: '#EBEEFA',
-                                borderWidth: 0
-                            }
-                        }
-                    ],
+                    data: [...seriesData],
                     label: {
                         show: false
                     },
@@ -108,6 +105,12 @@ const PieChart = ({ type = '', value = 100.0, total = 200.0, compareValue = 0 })
 
     useEffect(() => {
         initChart();
+
+        generateGradientColors(list.length).map((color, index) => {
+            console.log(color);
+            list[index].color = color;
+        });
+        setList([...list]);
     }, []);
 
     return (
@@ -120,18 +123,21 @@ const PieChart = ({ type = '', value = 100.0, total = 200.0, compareValue = 0 })
                     <div className={cx('result')}>上週總用電量度數</div>
                     <div className={cx('chartNumber')}>
                         <span>{value}</span>
-                        {t("kwh")}
+                        {t('kwh')}
                     </div>
                 </div>
             </div>
             {/* 使用電器度數 */}
             <div className={cx('progress')}>
-                <BorderLinearProgress name={'電視'} value={20} />
-                <BorderLinearProgress name={'冰箱'} value={90} color="#ff6700" />
-                <BorderLinearProgress name={'冰箱'} value={90} color="#ff6700" />
-                <BorderLinearProgress name={'冰箱'} value={90} color="#ff6700" />
-                <BorderLinearProgress name={'冰箱'} value={90} color="#ff6700" />
-                <BorderLinearProgress name={'冰箱'} value={90} color="#ff6700" />
+                {list.map((item, index) => (
+                    <Progress
+                        title={item.electricName}
+                        kwh={item.value}
+                        percent={item.value}
+                        overPercent={0}
+                        bgColor={item.color}
+                    />
+                ))}
             </div>
         </div>
     );

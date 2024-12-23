@@ -5,6 +5,9 @@ import * as echarts from 'echarts';
 //翻譯
 import { useTranslation } from 'react-i18next';
 
+// default-passive-events
+import "default-passive-events"
+
 // css
 import classes from './style.module.scss';
 import classNames from 'classnames/bind';
@@ -15,6 +18,12 @@ const LineChart = ({ chartData = [] }) => {
     const chartDOM = useRef();
     const markPoints = [];
     const [options, setOptions] = useState({
+        dataZoom: [
+            {
+                type: 'inside', // 啟用內部縮放
+                disabled: true // 禁用滾動
+            }
+        ],
         legend: {
             data: ['2023', '2024'],
             // orient: 'vertical', // 垂直排列
@@ -122,13 +131,64 @@ const LineChart = ({ chartData = [] }) => {
         ]
     });
 
-    const initChart = () => {
-        const chartLine = echarts.init(chartDOM.current);
-        chartLine.clear();
-        options && chartLine.setOption(options);
-    };
+    // const initChart = () => {
+    //     // 檢查是否已經存在實例，存在則銷毀
+    //     if (echarts.getInstanceByDom(chartDOM.current)) {
+    //         echarts.dispose(chartDOM.current);
+    //     }
 
-    const resizeLineChart = () => {
+    //     const chartLine = echarts.init(chartDOM.current);
+    //     chartLine.clear();
+    //     options && chartLine.setOption(options);
+
+    //     // Add passive event listener for mousewheel
+    //     chartDOM.current.addEventListener(
+    //         'mousewheel',
+    //         event => {
+    //             event.preventDefault();
+    //         },
+    //         { passive: true }
+    //     );
+    // };
+
+    // const resizeLineChart = () => {
+    //     // 檢查是否已經存在實例，存在則銷毀
+    //     if (echarts.getInstanceByDom(chartDOM.current)) {
+    //         echarts.dispose(chartDOM.current);
+    //     }
+    //     const chartLine = echarts.init(chartDOM.current);
+    //     chartLine.setOption(options);
+
+    //     const handleResize = () => {
+    //         chartLine.resize();
+    //     };
+
+    //     window.addEventListener('resize', handleResize);
+
+    //     return () => {
+    //         // 當resize事件發生時會呼叫它chart.resize()
+    //         window.removeEventListener('resize', handleResize);
+    //         chartLine.dispose();
+    //     };
+    // };
+
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         initChart();
+    //     }, 100);
+    // }, []);
+
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         resizeLineChart();
+    //     }, 100);
+    // }, [chartData]);
+
+    const initAndResizeChart = () => {
+        if (echarts.getInstanceByDom(chartDOM.current)) {
+            echarts.dispose(chartDOM.current);
+        }
+
         const chartLine = echarts.init(chartDOM.current);
         chartLine.setOption(options);
 
@@ -139,22 +199,14 @@ const LineChart = ({ chartData = [] }) => {
         window.addEventListener('resize', handleResize);
 
         return () => {
-            // 當resize事件發生時會呼叫它chart.resize()
             window.removeEventListener('resize', handleResize);
             chartLine.dispose();
         };
     };
 
     useEffect(() => {
-        setTimeout(() => {
-            initChart();
-        }, 100);
-    }, []);
-
-    useEffect(() => {
-        setTimeout(() => {
-            resizeLineChart();
-        }, 100);
+        const cleanup = initAndResizeChart();
+        return cleanup;
     }, [chartData]);
 
     return <div id={cx('lineChart')} className={cx('lineChart')} ref={chartDOM} />;

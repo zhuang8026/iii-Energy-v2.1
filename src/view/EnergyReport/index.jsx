@@ -18,8 +18,6 @@ import RemoveRedEyeTwoToneIcon from '@mui/icons-material/RemoveRedEyeTwoTone';
 import Loading from '@/components/ui/Loading';
 // import PopUp from '@/components/global/PopUp';
 import WeekPicker from '@/components/ui/WeekPicker';
-// import PieChart from '@/components/ui/PieChart';
-// import BorderLinearProgress from '@/components/ui/BorderLinearProgress';
 import MonthCard from '@/components/ui/MonthCard';
 import NewsReport from '@/components/ui/NewsReport';
 
@@ -39,8 +37,14 @@ const EnergyReport = () => {
     const { openNewsReport } = NewsReport();
 
     // 開啟月報
-    const openWeeklyReport = month => {
+    const openMonthlyReport = month => {
         openNewsReport({ component: <Monthly /> });
+        document.body.style.overflow = 'hidden'; // 禁用捲動
+    };
+
+    // 開啟月報
+    const openWeeklyReport = week => {
+        openNewsReport({ component: <Weekly /> });
         document.body.style.overflow = 'hidden'; // 禁用捲動
     };
 
@@ -97,7 +101,7 @@ const EnergyReport = () => {
                 </div>
                 <div className={cx('block')}>
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item, index) => (
-                        <MonthCard data={item} key={index} onClick={month => openWeeklyReport(month)} />
+                        <MonthCard data={item} key={index} onClick={month => openMonthlyReport(month)} />
                     ))}
                 </div>
             </div>
@@ -106,59 +110,8 @@ const EnergyReport = () => {
                 <h3>{t('energyReport.week_report')}</h3>
                 <div className={cx('block', 'block_repeat')}>
                     <div className={cx('weekend_datePicker')}>
-                        <WeekPicker />
+                        <WeekPicker onClick={week => openWeeklyReport(week)} />
                     </div>
-
-                    {/* <div className={cx('weekend_chart')}>
-                        <div className={cx('user_comparison')}>
-                            <div className={cx('user_comparison_title')}>
-                                <h4>同儕用電比較</h4>
-                                <Button
-                                    variant="outlined"
-                                    size="small"
-                                    // color="inherit"
-                                    endIcon={<RemoveRedEyeTwoToneIcon />}
-                                    sx={{
-                                        borderColor: '#6f7883', // 使用自訂義背景顏色
-                                        color: '#6f7883' // 文字顏色
-                                        // '&:hover': {
-                                        //     backgroundColor: '#bf2055' // 滑鼠懸停時的背景顏色
-                                        // }
-                                    }}
-                                >
-                                    查看
-                                </Button>
-                            </div>
-                            <BorderLinearProgress name={'本戶'} value={20} />
-                            <BorderLinearProgress name={'近似用戶'} value={90} color="#ffcb01" />
-                            <BorderLinearProgress name={'低耗能用戶'} value={70} color="#ff6700" />
-                        </div>
-                        <div className={cx('power_comparison')}>
-                            <div className={cx('power_comparison_title')}>
-                                <h4>電器用電佔比</h4>
-                                <Button
-                                    variant="outlined"
-                                    size="small"
-                                    // color="inherit"
-                                    endIcon={<RemoveRedEyeTwoToneIcon />}
-                                    sx={{
-                                        borderColor: '#6f7883', // 使用自訂義背景顏色
-                                        color: '#6f7883' // 文字顏色
-                                        // '&:hover': {
-                                        //     backgroundColor: '#bf2055' // 滑鼠懸停時的背景顏色
-                                        // }
-                                    }}
-                                >
-                                    查看
-                                </Button>
-                            </div>
-
-                            <PieChart
-                                value={350.0} // 用電數度
-                                total={340.0} // 總用電數度
-                            />
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </div>

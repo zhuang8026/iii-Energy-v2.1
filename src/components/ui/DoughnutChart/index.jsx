@@ -20,7 +20,10 @@ const DoughnutChart = ({ type = '', value = 100.0, total = 200.0, compareValue =
         const Health = '#20A2A0'; // 未超標顏色
         const Warning = '#ff6700'; // 超標顏色
         const Danger = '#ff0000'; // 超標顏色
-        let chartLine = echarts.init(chartDOM.current);
+        const chartDom = chartDOM.current;
+        // 獲取或初始化圖表實例
+        let chartLine = echarts.getInstanceByDom(chartDom) || echarts.init(chartDom);
+
         chartLine.clear();
 
         // 未使用用電量
@@ -54,6 +57,10 @@ const DoughnutChart = ({ type = '', value = 100.0, total = 200.0, compareValue =
                 textStyle: {
                     fontSize: 16
                 }
+            },
+            dataZoom: {
+                type: 'slider', // 可選：禁用滾動
+                show: false // 隱藏滾動縮放
             },
             series: [
                 // 外圈 - 未過100%的部分
@@ -167,6 +174,11 @@ const DoughnutChart = ({ type = '', value = 100.0, total = 200.0, compareValue =
 
     useEffect(() => {
         initChart();
+
+        // Add passive event listener for mousewheel
+        chartDOM.current.addEventListener('mousewheel', (event) => {
+            event.preventDefault();
+        }, { passive: true });
     }, []);
 
     return (

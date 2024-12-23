@@ -24,11 +24,7 @@ import NoMatch from '@/components/global/NoMatch';
 
 // global
 import { FullWindowAnimateProvider, FullPopWindow, useFullWindowAnimate } from '@/components/global/FullWindow';
-import {
-    SlideUpWindowAnimateProvider,
-    SlideUpWindow,
-    useSlideUpWindowAnimate
-} from '@/components/global/SlideUp';
+import { SlideUpWindowAnimateProvider, SlideUpWindow, useSlideUpWindowAnimate } from '@/components/global/SlideUp';
 
 // css
 import classes from './style.module.scss';
@@ -210,7 +206,7 @@ function App() {
 
 function AppWrapper() {
     return (
-        <BrowserRouter>
+        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <FullWindowAnimateProvider>
                 <SlideUpWindowAnimateProvider>
                     <App />

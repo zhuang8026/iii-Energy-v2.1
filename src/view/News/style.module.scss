@@ -1,4 +1,5 @@
-.monthly {
+.monthly,
+.weekly {
     width: calc(100%);
     height: 85%;
     overflow-y: auto;
@@ -43,7 +44,7 @@
             line-height: var.$fs-50;
             text-align: center;
             background: var.$iii_color;
-            transition: 0.1s ease-in;
+            transition: 0.1s;
             @include svgIcon.svg_color(var.$white);
 
             &:hover {
@@ -77,6 +78,21 @@
         grid-template-areas:
             'A A B'
             'A A B';
+
+        @media screen and (max-width: 1365px) {
+            grid-template-columns: repeat(1, 1fr);
+            grid-template-areas: 'A' 'B';
+        } /* iPad */
+        @media screen and (max-width: 767px) {
+            grid-template-columns: repeat(1, 1fr);
+            grid-template-areas: 'A' 'B';
+        } /* iPad mini & iphone */
+    }
+    .content_weekly {
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-areas:
+            'A A A B B'
+            'A A A B B';
 
         @media screen and (max-width: 1365px) {
             grid-template-columns: repeat(1, 1fr);
@@ -169,6 +185,11 @@
                     }
                 }
             }
+        }
+
+        .weekly_block {
+            background: var.$bg_dialog;
+            color: var.$text;
         }
     }
 }

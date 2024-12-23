@@ -10,11 +10,10 @@ import LineChart from '@/components/ui/LineChart';
 import Button from '@mui/material/Button';
 
 // icon
-import VerticalAlignBottomTwoToneIcon from '@mui/icons-material/VerticalAlignBottomTwoTone';
 import EnergySavingsLeafTwoToneIcon from '@mui/icons-material/EnergySavingsLeafTwoTone';
-
+import LogoutTwoToneIcon from '@mui/icons-material/LogoutTwoTone';
 // css
-import classes from './style.module.scss';
+import classes from '../style.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(classes);
 
@@ -27,7 +26,7 @@ const Monthly = () => {
                     <h2>月報</h2>
                 </div>
                 <div className={cx('cancel')} onClick={() => closeNewsReport()}>
-                    <VerticalAlignBottomTwoToneIcon fontSize="medium" />
+                    <LogoutTwoToneIcon fontSize="medium" />
                 </div>
             </div>
 
