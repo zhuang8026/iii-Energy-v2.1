@@ -1,6 +1,7 @@
 import React, { useState, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
+import { VERSION } from '@/version';
 // css
 import classes from './style.module.scss';
 import classNames from 'classnames/bind';
@@ -15,7 +16,7 @@ const Footer = () => {
             </div>
             <div className={cx('right')}>
                 <p>隱私權及資訊宣告</p>
-                <p>beta-v3.0.2</p>
+                <p>{VERSION}</p>
             </div>
         </div>
     );
