@@ -1,12 +1,14 @@
-.pie {
+.pieUI {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    // grid-gap: var.$fs-16;
-    // gap: var.$fs-16;
+    grid-gap: var.$fs-16;
+    gap: var.$fs-16;
     @media screen and (max-width: 1365px) {
     } /* iPad */
     @media screen and (max-width: 767px) {
         grid-template-columns: repeat(1, 1fr);
+        grid-gap: 0;
+        gap: 0;
     } /* iPad mini & iphone */
     .pieBox {
         position: relative;
@@ -61,9 +63,12 @@
     .progress {
         // width: calc(100% - 250px);
         height: 100%;
-        max-height: 420px;
+        max-height: 330px;
         overflow-y: auto;
         overflow-x: hidden;
         padding-right: 10px;
+        @media screen and (max-width: 767px) {
+            max-height: 100%;
+        } /* iPad mini & iphone */
     }
 }

@@ -114,7 +114,7 @@ const PieChart = ({ type = '', value = 1000.0, total = 200.0, compareValue = 0 }
     }, []);
 
     return (
-        <div className={cx('pie')}>
+        <div className={cx('pieUI')}>
             <div className={cx('pieBox')}>
                 {/* 圓餅圖 */}
                 <div id={cx('pieChart')} ref={chartDOM} />
