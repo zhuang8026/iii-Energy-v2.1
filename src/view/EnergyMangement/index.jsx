@@ -13,181 +13,169 @@ import PowerSettingsNewTwoToneIcon from '@mui/icons-material/PowerSettingsNewTwo
 import WifiTwoToneIcon from '@mui/icons-material/WifiTwoTone';
 import LinkOffTwoToneIcon from '@mui/icons-material/LinkOffTwoTone';
 
+// electric icon
+import IconTV from '@/assets/images/icon-television.svg';
+import IconRefrigerator from '@/assets/images/icon-refrigerator.svg';
+import IconAirConditioner from '@/assets/images/icon-airConditioner.svg';
+import IconDrinkMachine from '@/assets/images/icon-drinkMachine.svg';
+import IconWashMachine from '@/assets/images/icon-washMachine.svg';
+import IconFan from '@/assets/images/icon-fan.svg';
+import IconComputer from '@/assets/images/icon-computer.svg';
+import IconPot from '@/assets/images/icon-electricPot.svg';
+import IconDehumidifier from '@/assets/images/icon-dehumidifier.svg';
+import IconOther from '@/assets/images/icon-other.svg';
+
 // css
 import classes from './style.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(classes);
 
 const EnergyMangement = () => {
+    const [electricList, setElectricList] = useState([
+        {
+            type: '電視',
+            icon: IconTV,
+            number: '4C11AEAF3338',
+            wifi_status: 'unconnected', // connected, unconnected
+            use_status: 'unconnected',
+            electric_checked: false,
+            power: '999',
+            schedule: '99'
+        },
+        {
+            type: '冰箱',
+            icon: IconRefrigerator,
+            number: '4C11AEAF3338',
+            wifi_status: 'connected', // connected, unconnected
+            use_status: 'connected',
+            electric_checked: true,
+            power: '999',
+            schedule: '99'
+        },
+        {
+            type: '冷氣',
+            icon: IconAirConditioner,
+            number: '4C11AEAF3338',
+            wifi_status: 'connected', // connected, unconnected
+            use_status: 'connected',
+            electric_checked: false,
+            power: '999',
+            schedule: '99'
+        },
+        {
+            type: '開飲機',
+            icon: IconDrinkMachine,
+            number: '4C11AEAF3338',
+            wifi_status: 'unconnected', // connected, unconnected
+            use_status: 'unconnected',
+            electric_checked: false,
+            power: '999',
+            schedule: '99'
+        },
+        {
+            type: '洗衣機',
+            icon: IconWashMachine,
+            number: '4C11AEAF3338',
+            wifi_status: 'unconnected', // connected, unconnected
+            use_status: 'unconnected',
+            electric_checked: false,
+            power: '999',
+            schedule: '99'
+        },
+        {
+            type: '電風扇',
+            icon: IconFan,
+            number: '4C11AEAF3338',
+            wifi_status: 'connected', // connected, unconnected
+            use_status: 'connected',
+            electric_checked: false,
+            power: '999',
+            schedule: '99'
+        },
+        {
+            type: '電腦',
+            icon: IconComputer,
+            number: '4C11AEAF3338',
+            wifi_status: 'connected', // connected, unconnected
+            use_status: 'connected',
+            electric_checked: true,
+            power: '999',
+            schedule: '99'
+        },
+        {
+            type: '電鍋',
+            icon: IconPot,
+            number: '4C11AEAF3338',
+            wifi_status: 'unconnected', // connected, unconnected
+            use_status: 'unconnected',
+            power: '999',
+            schedule: '99'
+        },
+        {
+            type: '除濕機',
+            icon: IconDehumidifier,
+            number: '4C11AEAF3338',
+            wifi_status: 'connected', // connected, unconnected
+            use_status: 'connected',
+            electric_checked: true,
+            power: '999',
+            schedule: '99'
+        },
+        {
+            type: '其他',
+            icon: IconOther,
+            number: '4C11AEAF3338',
+            wifi_status: 'connected', // connected, unconnected
+            use_status: 'connected',
+            electric_checked: true,
+            power: '999',
+            schedule: '99'
+        }
+    ]);
     return (
         <div className={cx('energy_mangement')}>
             <h3>雲端遙控</h3>
             <div className={cx('energy_item')}>
                 <div className={cx('energy_control')}>
-                    {/* demo unlinked wifi unconnected */}
-                    <div className={cx('block')}>
-                        <div className={cx('target_title')}>
-                            <>
-                                <div className={cx('type_name')}>電腦</div>
-                                <div className={cx('type_number')}>4C11AEAF3338</div>
-                            </>
-                            {/* <img src={ICON_COMPUTER} alt="target" /> */}
-                        </div>
-                        <div className={cx('target_box', 'target_info')}>
-                            <div className={cx('info_box')}>
-                                <div className={cx('status')}>
-                                    <WifiOffTwoToneIcon />
-                                    <p>斷線中</p>
-                                </div>
-                                <div className={cx('status')}>
-                                    <BoltTwoToneIcon />
-                                    <p>999W</p>
-                                </div>
-                                <div className={cx('status')}>
-                                    <AccessTimeTwoToneIcon />
-                                    <p>99項排程執行中</p>
-                                </div>
-                            </div>
-                            <div className={cx('icon')}>
-                                <LinkOffTwoToneIcon
-                                    fontSize="large"
-                                    sx={{
-                                        fontSize: '60px',
-                                        color: '#fc3a3a'
-                                    }}
-                                />
-                            </div>
-                        </div>
-                        <div className={cx('target_box', 'target_control', 'disable')}>
-                            <div className={cx('inner')}>
-                                <Button
-                                    variant="outlined"
-                                    disabled={true}
-                                    sx={{
-                                        borderRadius: '30px',
-                                        borderColor: '#6f7883', // 使用自訂義背景顏色
-                                        color: '#6f7883' // 文字顏色
-                                        // '&:hover': {
-                                        //     backgroundColor: '#bf2055' // 滑鼠懸停時的背景顏色
-                                        // }
-                                    }}
-                                >
-                                    排程管理
-                                </Button>
-                            </div>
-                            <div className={cx('inner')}>
-                                <Switch
-                                    inputProps={{ 'aria-label': 'Switch demo' }}
-                                    defaultChecked={false}
-                                    disabled={true}
-                                />
-                                關閉中
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* demo linked wifi connected */}
-                    <div className={cx('block')}>
-                        <div className={cx('target_title')}>
-                            <>
-                                <div className={cx('type_name')}>電腦</div>
-                                <div className={cx('type_number')}>4C11AEAF3338</div>
-                            </>
-                            {/* <img src={ICON_COMPUTER} alt="target" /> */}
-                        </div>
-                        <div className={cx('target_box', 'target_info')}>
-                            <div className={cx('info_box')}>
-                                <div className={cx('status')}>
-                                    <WifiTwoToneIcon />
-                                    <p>連線中</p>
-                                </div>
-                                <div className={cx('status')}>
-                                    <BoltTwoToneIcon />
-                                    <p>999W</p>
-                                </div>
-                                <div className={cx('status')}>
-                                    <AccessTimeTwoToneIcon />
-                                    <p>99項排程執行中</p>
-                                </div>
-                            </div>
-                            <div className={cx('icon')}>
-                                <PowerSettingsNewTwoToneIcon
-                                    fontSize="large"
-                                    sx={{
-                                        fontSize: '60px',
-                                        color: '#9193b4'
-                                    }}
-                                />
-                            </div>
-                        </div>
-                        <div className={cx('target_box', 'target_control')}>
-                            <div className={cx('inner')}>
-                                <Button
-                                    variant="outlined"
-                                    // size="small"
-                                    sx={{
-                                        borderRadius: '30px',
-                                        borderColor: '#6f7883', // 使用自訂義背景顏色
-                                        color: '#6f7883' // 文字顏色
-                                        // '&:hover': {
-                                        //     backgroundColor: '#bf2055' // 滑鼠懸停時的背景顏色
-                                        // }
-                                    }}
-                                >
-                                    排程管理
-                                </Button>
-                            </div>
-                            <div className={cx('inner')}>
-                                <Switch inputProps={{ 'aria-label': 'Switch demo' }} defaultChecked={false} />
-                                關閉中
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* demo linked */}
-                    {[1, 2, 3, 4].map(() => (
-                        <div className={cx('block')}>
+                    {electricList.map((item, index) => (
+                        <div
+                            className={cx('block', item.wifi_status === 'connected' ? 'connected' : 'unconnected')}
+                            key={index}
+                        >
                             <div className={cx('target_title')}>
                                 <>
-                                    <div className={cx('type_name')}>電鍋</div>
-                                    <div className={cx('type_number')}>4C11AEAF7104</div>
+                                    <div className={cx('type_name')}>{item.type}</div>
+                                    <div className={cx('type_number')}>{item.number}</div>
                                 </>
-                                {/* <img src={ICON_COMPUTER} alt="target" /> */}
                             </div>
                             <div className={cx('target_box', 'target_info')}>
                                 <div className={cx('info_box')}>
                                     <div className={cx('status')}>
-                                        <WifiTwoToneIcon />
-                                        <p>連線中</p>
+                                        <WifiOffTwoToneIcon />
+                                        <p>{item.use_status}</p>
                                     </div>
                                     <div className={cx('status')}>
                                         <BoltTwoToneIcon />
-                                        <p>999W</p>
+                                        <p>{item.power}W</p>
                                     </div>
                                     <div className={cx('status')}>
                                         <AccessTimeTwoToneIcon />
-                                        <p>99項排程執行中</p>
+                                        <p>{item.schedule}項排程執行中</p>
                                     </div>
                                 </div>
                                 <div className={cx('icon')}>
-                                    <PowerSettingsNewTwoToneIcon
-                                        fontSize="large"
-                                        sx={{
-                                            fontSize: '60px',
-                                            color: '#39b54a'
-                                        }}
-                                    />
+                                    <img src={item.icon} alt="target" />
                                 </div>
                             </div>
                             <div className={cx('target_box', 'target_control')}>
                                 <div className={cx('inner')}>
                                     <Button
                                         variant="outlined"
-                                        // size="small"
+                                        disabled={item.use_status === 'connected' ? false : true}
                                         sx={{
                                             borderRadius: '30px',
-                                            borderColor: '#6f7883', // 使用自訂義背景顏色
-                                            color: '#6f7883' // 文字顏色
+                                            borderColor: '#fff', // 使用自訂義背景顏色
+                                            color: '#fff' // 文字顏色
                                             // '&:hover': {
                                             //     backgroundColor: '#bf2055' // 滑鼠懸停時的背景顏色
                                             // }
@@ -197,8 +185,26 @@ const EnergyMangement = () => {
                                     </Button>
                                 </div>
                                 <div className={cx('inner')}>
-                                    <Switch inputProps={{ 'aria-label': 'Switch demo' }} defaultChecked={true} />
-                                    使用中
+                                    <Switch
+                                        inputProps={{ 'aria-label': 'Switch demo' }}
+                                        defaultChecked={item.electric_checked}
+                                        disabled={item.use_status === 'connected' ? false : true}
+                                        sx={{
+                                            '& .MuiSwitch-switchBase.Mui-checked': {
+                                                color: '#fde663', // 自訂打開時的顏色
+                                                '&:hover': {
+                                                    backgroundColor: 'rgba(255, 87, 34, 0.1)' // hover 狀態
+                                                }
+                                            },
+                                            '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                                                backgroundColor: '#fde663' // 自訂打開時的軌道顏色
+                                            },
+                                            '& .MuiSwitch-track': {
+                                                backgroundColor: '#9e9e9e' // 自訂關閉時的軌道顏色
+                                            }
+                                        }}
+                                    />
+                                    {item.electric_checked ? '開啟' : '關閉'}
                                 </div>
                             </div>
                         </div>

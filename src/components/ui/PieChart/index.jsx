@@ -107,7 +107,6 @@ const PieChart = ({ type = '', value = 1000.0, total = 200.0, compareValue = 0 }
         initChart();
 
         generateGradientColors(list.length).map((color, index) => {
-            console.log(color);
             list[index].color = color;
         });
         setList([...list]);
