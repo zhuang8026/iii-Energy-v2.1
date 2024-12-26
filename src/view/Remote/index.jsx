@@ -5,13 +5,13 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Switch from '@mui/material/Switch';
 import Button from '@mui/material/Button';
 
+// global
+import PopUp from '@/components/global/PopUp';
+
 // mui icon
 import WifiOffTwoToneIcon from '@mui/icons-material/WifiOffTwoTone';
 import BoltTwoToneIcon from '@mui/icons-material/BoltTwoTone';
 import AccessTimeTwoToneIcon from '@mui/icons-material/AccessTimeTwoTone';
-import PowerSettingsNewTwoToneIcon from '@mui/icons-material/PowerSettingsNewTwoTone';
-import WifiTwoToneIcon from '@mui/icons-material/WifiTwoTone';
-import LinkOffTwoToneIcon from '@mui/icons-material/LinkOffTwoTone';
 
 // electric icon
 import IconTV from '@/assets/images/icon-television.svg';
@@ -30,7 +30,8 @@ import classes from './style.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(classes);
 
-const EnergyMangement = () => {
+const Remote = () => {
+    const { openPopUp, closePopUp } = PopUp();
     const [electricList, setElectricList] = useState([
         {
             type: '電視',
@@ -132,6 +133,11 @@ const EnergyMangement = () => {
             schedule: '99'
         }
     ]);
+
+    const opensScheduleManagement = () => {
+        openPopUp({ component: <div onClick={() => closePopUp()}>雲端遙控</div> });
+    };
+
     return (
         <div className={cx('energy_mangement')}>
             <h3>雲端遙控</h3>
@@ -176,10 +182,8 @@ const EnergyMangement = () => {
                                             borderRadius: '30px',
                                             borderColor: '#fff', // 使用自訂義背景顏色
                                             color: '#fff' // 文字顏色
-                                            // '&:hover': {
-                                            //     backgroundColor: '#bf2055' // 滑鼠懸停時的背景顏色
-                                            // }
                                         }}
+                                        onClick={() => opensScheduleManagement()}
                                     >
                                         排程管理
                                     </Button>
@@ -215,4 +219,4 @@ const EnergyMangement = () => {
     );
 };
 
-export default EnergyMangement;
+export default Remote;

@@ -35,27 +35,31 @@ const PieChart = ({ type = '', value = 1000.0, total = 200.0, compareValue = 0 }
         { electricName: '其他', value: 40 }
     ]);
 
+    // 未使用用電量
+    const emptyValue = () => {
+        const targetNumber = total * (120 / 100); // 目標的120%
+        if (value >= targetNumber) return 0;
+        return targetNumber - value; // 目標的120% - 累積用電量
+    };
+
+    // 未使用用電量
+    const emptyDangerValue = () => {
+        const dangerVal = value - total;
+        if (dangerVal < 0) return 0;
+        return total - dangerVal; // 目標的120% - 累積用電量
+    };
+
+    // 繪製圖表
     const initChart = () => {
-        const Health = '#20A2A0'; // 未超標顏色
-        const Warning = '#ff6700'; // 超標顏色
-        const Danger = '#ff0000'; // 超標顏色
         let chartLine = echarts.init(chartDOM.current);
         chartLine.clear();
 
-        // 未使用用電量
-        const emptyValue = () => {
-            const targetNumber = total * (120 / 100); // 目標的120%
-            if (value >= targetNumber) return 0;
-            return targetNumber - value; // 目標的120% - 累積用電量
-        };
+        generateGradientColors(list.length).map((color, index) => {
+            list[index].color = color;
+        });
+        setList([...list]);
 
-        // 未使用用電量
-        const emptyDangerValue = () => {
-            const dangerVal = value - total;
-            if (dangerVal < 0) return 0;
-            return total - dangerVal; // 目標的120% - 累積用電量
-        };
-
+        // 繪製圖表資料
         const seriesData = list.map(item => {
             return {
                 value: item.value,
@@ -105,11 +109,6 @@ const PieChart = ({ type = '', value = 1000.0, total = 200.0, compareValue = 0 }
 
     useEffect(() => {
         initChart();
-
-        generateGradientColors(list.length).map((color, index) => {
-            list[index].color = color;
-        });
-        setList([...list]);
     }, []);
 
     return (

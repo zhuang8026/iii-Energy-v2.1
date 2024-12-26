@@ -30,9 +30,9 @@ const routes = [
     },
     {
         main: 'overall',
-        path: '/main/energy_mangement',
+        path: '/main/remote',
         title: 'energy_mangement',
-        component: lazy(() => import('@/view/EnergyMangement')),
+        component: lazy(() => import('@/view/Remote')),
         exact: true,
         authRequired: false,
         layouts: ['menu', 'footer', 'header']

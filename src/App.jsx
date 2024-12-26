@@ -58,7 +58,7 @@ function App() {
                 },
                 {
                     name: 'menu.energy_mangement',
-                    path: '/main/energy_mangement',
+                    path: '/main/remote',
                     icon: <LeaderboardTwoToneIcon />
                 }
             ]
