@@ -12,7 +12,7 @@ const Progress = ({ title = '', kwh = 0, percent = 0, overPercent = 0, bgColor =
     const { t, i18n } = useTranslation();
 
     return (
-        <>
+        <div>
             <div className={cx('target')}>
                 {title}
                 <div className={cx('progress-number')}>
@@ -33,7 +33,7 @@ const Progress = ({ title = '', kwh = 0, percent = 0, overPercent = 0, bgColor =
                     )}
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
