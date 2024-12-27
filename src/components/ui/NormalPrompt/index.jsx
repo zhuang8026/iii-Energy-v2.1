@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 // components
 import PopUp from '@/components/global/PopUp';
-import UIInput from '@/components/ui/UIInput';
+// import UIInput from '@/components/ui/UIInput';
 
 // @mui
 import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';

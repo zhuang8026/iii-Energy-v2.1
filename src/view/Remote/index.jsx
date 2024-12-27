@@ -8,6 +8,9 @@ import Button from '@mui/material/Button';
 // global
 import PopUp from '@/components/global/PopUp';
 
+// components
+import RemoteWindows from '@/components/ui/RemoteWindows';
+
 // mui icon
 import WifiOffTwoToneIcon from '@mui/icons-material/WifiOffTwoTone';
 import BoltTwoToneIcon from '@mui/icons-material/BoltTwoTone';
@@ -134,8 +137,8 @@ const Remote = () => {
         }
     ]);
 
-    const opensScheduleManagement = () => {
-        openPopUp({ component: <div onClick={() => closePopUp()}>雲端遙控</div> });
+    const opensScheduleManagement = title => {
+        openPopUp({ component: <RemoteWindows title={title} closePopUp={() => closePopUp()} /> });
     };
 
     return (
@@ -183,7 +186,7 @@ const Remote = () => {
                                             borderColor: '#fff', // 使用自訂義背景顏色
                                             color: '#fff' // 文字顏色
                                         }}
-                                        onClick={() => opensScheduleManagement()}
+                                        onClick={() => opensScheduleManagement(item.type)}
                                     >
                                         排程管理
                                     </Button>
@@ -206,6 +209,10 @@ const Remote = () => {
                                             '& .MuiSwitch-track': {
                                                 backgroundColor: '#9e9e9e' // 自訂關閉時的軌道顏色
                                             }
+                                        }}
+                                        onClick={() => {
+                                            item.electric_checked = !item.electric_checked;
+                                            setElectricList([...electricList]);
                                         }}
                                     />
                                     {item.electric_checked ? '開啟' : '關閉'}

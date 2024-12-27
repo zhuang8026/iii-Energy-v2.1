@@ -1,0 +1,19 @@
+.ui-table {
+    border-color: transparent;
+    background: var.$bg_win;
+    .ui-table-btns {
+        display: inline-flex;
+        vertical-align: middle;
+        cursor: pointer;
+        svg {
+            padding: 5px;
+            fill: var.$na;
+            &:hover {
+                fill: var.$green !important;
+            }
+            &:active {
+                transform: scale(0.9);
+            }
+        }
+    }
+}
