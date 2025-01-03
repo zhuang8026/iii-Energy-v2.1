@@ -36,18 +36,27 @@ const routes = [
         exact: true,
         authRequired: false,
         layouts: ['menu', 'footer', 'header']
+    },
+    {
+        main: 'member_management',
+        path: '/manage/bind_device',
+        title: 'bind_device',
+        component: lazy(() => import('@/view/BindElectric')),
+        exact: true,
+        authRequired: false,
+        layouts: ['menu', 'header']
+    },
+    {
+        main: 'member_management',
+        path: '/manage/survey',
+        title: 'data_modification',
+        component: lazy(() => import('@/view/Survey')),
+        exact: true,
+        authRequired: false,
+        layouts: ['menu', 'header']
     }
     // {
-    //     main: 'member_management',
-    //     path: '/member/bind_device',
-    //     title: 'bind_device',
-    //     component: BindDevice,
-    //     exact: true,
-    //     authRequired: false,
-    //     layouts: ['menu', 'footer', 'header']
-    // },
-    // {
-    //     main: 'member_management',
+    //     main: 'manage',
     //     path: '/member/data_modification',
     //     title: 'data_modification',
     //     component: PageA,
@@ -56,7 +65,7 @@ const routes = [
     //     layouts: ['menu', 'footer', 'header']
     // },
     // {
-    //     main: 'member_management',
+    //     main: 'manage',
     //     path: '/member/password_change',
     //     title: 'password_change',
     //     component: PageB,

@@ -62,5 +62,15 @@
         "10": "十月",
         "11": "十一月",
         "12": "十二月"
+    },
+    "survey": {
+        "surveyTitle": "問卷調查",
+        "surveySubtitle": "家戶組成與電器持有調查",
+        "surveyIntro": "初次登入請填寫本問卷，完成填寫才能使用平台，謝謝！",
+        "householdQuestion": {
+            "title": "一、您同住的家庭人口組成 (含自己)",
+            "singleMemberLabel": "{number}人",
+            "multiMemberLabel": "{number}人以上"
+        }
     }
 }

@@ -13,7 +13,7 @@
         "daily_usage_tracking": "Daily Electricity Consumption Monitoring",
         "energy_report": "Household Energy Report",
         "energy_mangement": "Manage electricity usage",
-        "bind_device": "Bind electrical appliances",
+        "bind_device": "Bind Electric",
         "member_management": "Membership Management",
         "data_modification": "User Profile Update",
         "password_change": "Use Password Update",
@@ -65,5 +65,15 @@
         "10": "Oct.",
         "11": "Nov.",
         "12": "Dec."
+    },
+    "survey": {
+        "surveyTitle": "Survey",
+        "surveySubtitle": "Household and Appliance Survey",
+        "surveyIntro": "Complete this survey to access the platform. Thank you!", 
+        "householdQuestion": {
+            "title": "1. Household members (including yourself)",
+            "singleMemberLabel": "{number} person",
+            "multiMemberLabel": "{number} or more people"
+        }
     }
 }

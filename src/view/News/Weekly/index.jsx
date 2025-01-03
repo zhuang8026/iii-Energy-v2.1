@@ -19,6 +19,9 @@ import classes from '../style.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(classes);
 
+const Healthy = '#20a2a0';
+const Warning = '#ff6700';
+
 const Weekly = () => {
     const { closeNewsReport } = NewsReport();
     return (
@@ -50,24 +53,24 @@ const Weekly = () => {
                         <h5>同儕用電比較</h5>
                         <Progress
                             title="本戶"
-                            kwh={289} //
+                            kwh={100} //
                             percent={40}
                             overPercent={0}
-                            bgColor="#478cd1"
+                            bgColor={Healthy}
                         />
                         <Progress
                             title="近似本戶"
-                            kwh={278} //
-                            percent={36}
+                            kwh={200} //
+                            percent={70}
                             overPercent={0}
-                            bgColor="#69c8be"
+                            bgColor={Healthy}
                         />
                         <Progress
                             title="低耗能本戶"
-                            kwh={228} //
-                            percent={28}
+                            kwh={300} //
+                            percent={90}
                             overPercent={0}
-                            bgColor="#26bbbb"
+                            bgColor={Warning}
                         />
                     </div>
                     <div className={cx('block', 'chart')}>

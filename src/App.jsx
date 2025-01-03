@@ -6,6 +6,8 @@ import ElectricalServicesTwoToneIcon from '@mui/icons-material/ElectricalService
 import LeaderboardTwoToneIcon from '@mui/icons-material/LeaderboardTwoTone';
 import BorderColorTwoToneIcon from '@mui/icons-material/BorderColorTwoTone';
 import VpnKeyTwoToneIcon from '@mui/icons-material/VpnKeyTwoTone';
+import ElectricBoltTwoToneIcon from '@mui/icons-material/ElectricBoltTwoTone';
+import PhonelinkTwoToneIcon from '@mui/icons-material/PhonelinkTwoTone';
 
 // 翻譯
 import { useTranslation } from 'react-i18next'; // 翻譯
@@ -59,7 +61,7 @@ function App() {
                 {
                     name: 'menu.energy_mangement',
                     path: '/main/remote',
-                    icon: <LeaderboardTwoToneIcon />
+                    icon: <ElectricBoltTwoToneIcon />
                 }
             ]
         },
@@ -68,12 +70,12 @@ function App() {
             children: [
                 {
                     name: 'menu.bind_device',
-                    path: '/member/bind_device',
-                    icon: <BorderColorTwoToneIcon />
+                    path: '/manage/bind_device',
+                    icon: <PhonelinkTwoToneIcon />
                 },
                 {
                     name: 'menu.data_modification',
-                    path: '/member/data_modification',
+                    path: '/manage/survey',
                     icon: <BorderColorTwoToneIcon />
                 },
                 {

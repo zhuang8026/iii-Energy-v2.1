@@ -1,0 +1,85 @@
+.bind {
+    width: 100%;
+    height: calc(100vh - 140px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // background: var.$bg_color;
+    // background-image: url('@/assets/images/bg-login.png');
+    // background-position: bottom;
+    // background-repeat: no-repeat;
+    // background-size: contain;
+
+    .bind_form {
+        z-index: 2;
+        max-width: 80%;
+        height: auto;
+        background-color: var.$white;
+        border-radius: var.$fs-40;
+        padding: var.$fs-26;
+
+        // border-top: 2px solid rgba(255, 255, 255, 0.3451);
+        // border-left: 2px solid rgba(255, 255, 255, 0.3451);
+        // border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        // border-right: 2px solid rgba(0, 0, 0, 0.1);
+        // box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+
+        h1 {
+            font-size: var.$fs-40;
+            margin-bottom: var.$fs-20;
+            // color: $white;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .bind_group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: var.$fs-16;
+            gap: var.$fs-16;
+
+            .form_group {
+                line-height: var.$fs-36;
+                margin-bottom: var.$fs-30;
+                text-align: center;
+
+                label {
+                    font-size: var.$fs-16;
+                    font-weight: 700;
+                }
+                input {
+                    width: 100%;
+                    // font-size: var.$fs-20;
+                    color: var.$black;
+                    background: var.$select_bg;
+                    border: 1px solid var.$select_border !important;
+                    border-radius: var.$fs-104;
+                    outline: none;
+                    padding: 10px 20px;
+                    transition: 0.1s linear;
+                    margin-bottom: var.$fs-16;
+                }
+                input:focus {
+                    border: 1px solid var.$select_action;
+                    background: var.$select_action;
+                    box-shadow: inset 0 0px 6px rgba(100, 100, 100, 0.4);
+                }
+                p {
+                    color: var.$green;
+                }
+            }
+
+            .form_select {
+                .select {
+                    margin-bottom: var.$fs-20;
+                    font-size: var.$fs-20;
+                }
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            max-width: 100%;
+        } /* iPad mini & iphone */
+    }
+}
