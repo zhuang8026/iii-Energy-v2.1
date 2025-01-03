@@ -24,6 +24,10 @@ import Header from '@/components/global/Header';
 import Footer from '@/components/global/Footer';
 import NoMatch from '@/components/global/NoMatch';
 
+// components
+import PopUp from '@/components/global/PopUp';
+import Survey from '@/view/Survey';
+
 // global
 import { FullWindowAnimateProvider, FullPopWindow, useFullWindowAnimate } from '@/components/global/FullWindow';
 import { SlideUpWindowAnimateProvider, SlideUpWindow, useSlideUpWindowAnimate } from '@/components/global/SlideUp';
@@ -36,6 +40,8 @@ const cx = classNames.bind(classes);
 function App() {
     const navigate = useNavigate(); // Properly define navigate here
     const location = useLocation(); // This gives the current location
+
+    const { openPopUp, closePopUp } = PopUp();
 
     const { t, i18n } = useTranslation(); // t: 用來翻譯
     // i18n: 翻譯管理，可轉換語系
@@ -89,6 +95,9 @@ function App() {
 
     const { pathname } = useLocation(); // Move useLocation here
 
+    const openEditPopUp = () => {
+        openPopUp({ component: <Survey closePopUp={closePopUp} /> });
+    };
     // menu (layout & url)
     const getLayouts = () => {
         console.log(`畫面區塊異動中, auth:${auth}, path-name:${pathname}`);
@@ -121,6 +130,10 @@ function App() {
             />
         ));
     };
+
+    // useEffect(() => {
+    //     openEditPopUp();
+    // }, []);
 
     useEffect(() => {
         if (auth) {

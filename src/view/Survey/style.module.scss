@@ -10,67 +10,73 @@
     // background-image: url('@/assets/images/survey.png');
     // background-image: linear-gradient(135deg, #fff, #20a2a0, #478cd1);
 
-    .survey_form {
+    .survey_content {
         max-width: 80%;
         width: 650px;
         height: auto;
-        background-color: var.$white_op7;
-        box-shadow: rgba(255, 255, 255, 0.3) 0rem 0rem 0.0625rem 0.0625rem inset,
-            rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;
-        backdrop-filter: saturate(200%) blur(1.875rem);
+        background-color: var.$white;
+        // box-shadow: rgba(255, 255, 255, 0.3) 0rem 0rem 0.0625rem 0.0625rem inset,
+        //     rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;
+        // backdrop-filter: saturate(200%) blur(1.875rem);
         border-radius: var.$fs-40;
-        padding: var.$fs-40 var.$fs-32;
-        margin: var.$fs-20 0;
-        h1 {
-            font-size: var.$fs-40;
-            margin-bottom: var.$fs-20;
-            // color: $white;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            letter-spacing: 1px;
-            text-align: center;
-        }
-        .survey_group {
-            .survey_question {
-                font-weight: bold;
-                line-height: var.$fs-36;
-                margin: var.$fs-30 0;
-                .options {
-                    width: 188px;
-                    // margin-right: -14px;
-                    margin-left: auto;
+        padding: var.$fs-32;
+        // margin: var.$fs-20 0;
+        .survey_form {
+            height: 75vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: var.$fs-8;
+            h1 {
+                font-size: var.$fs-40;
+                margin-bottom: var.$fs-20;
+                // color: $white;
+                text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                letter-spacing: 1px;
+                text-align: center;
+            }
+            .survey_group {
+                .survey_question {
+                    font-weight: bold;
+                    line-height: var.$fs-36;
+                    margin: var.$fs-30 0;
+                    .options {
+                        width: 188px;
+                        // margin-right: -14px;
+                        margin-left: auto;
 
-                    ul {
-                        display: flex;
-                        justify-content: space-between;
-                        white-space: nowrap;
-                        list-style: none;
-                    }
-                }
-                .radio_items {
-                    li {
-                        display: flex;
-                        justify-content: space-between;
-
-                        .radio_group_label {
+                        ul {
+                            display: flex;
+                            justify-content: space-between;
+                            white-space: nowrap;
+                            list-style: none;
                         }
                     }
-                }
-                .radio_row {
-                    display: flex;
-                }
-                .error_message {
-                    color: var.$danger;
-                    font-weight: normal;
-                }
-            }
-        }
+                    .radio_items {
+                        li {
+                            display: flex;
+                            justify-content: space-between;
 
-        @media screen and (max-width: 767px) {
-            max-width: 100%;
-            width: 100%;
-            .radio_group_label {
-                width: 40%;
+                            .radio_group_label {
+                            }
+                        }
+                    }
+                    .radio_row {
+                        display: flex;
+                    }
+                    .error_message {
+                        color: var.$danger;
+                        font-weight: normal;
+                    }
+                }
             }
-        } /* iPad mini & iphone */
+
+            @media screen and (max-width: 767px) {
+                max-width: 100%;
+                width: 100%;
+                .radio_group_label {
+                    width: 40%;
+                }
+            } /* iPad mini & iphone */
+        }
     }
 }

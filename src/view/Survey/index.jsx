@@ -165,28 +165,64 @@ const Survey = () => {
 
     return (
         <div className={cx('survey')}>
-            <div className={cx('survey_form')}>
-                <h1>家戶組成與電器持有調查</h1>
-                <p>初次登入請填寫本問卷，完成填寫才能使用平台，謝謝！</p>
-                <div className={cx('survey_group')}>
-                    {/* Question 1 */}
-                    <div className={cx('survey_question')}>
-                        <>
-                            一、您同住的家庭人口組成 (含自己) <span className={cx('mark')}>*</span>
-                        </>
-                        <div>
-                            <div className={cx('options')}>
-                                <ul>
-                                    <li>0人</li>
-                                    <li>1人</li>
-                                    <li>2人</li>
-                                    <li>3人以上</li>
+            <div className={cx('survey_content')}>
+                <div className={cx('survey_form')}>
+                    <h1>家戶組成與電器持有調查</h1>
+                    <p>初次登入請填寫本問卷，完成填寫才能使用平台，謝謝！</p>
+                    <div className={cx('survey_group')}>
+                        {/* Question 1 */}
+                        <div className={cx('survey_question')}>
+                            <>
+                                一、您同住的家庭人口組成 (含自己) <span className={cx('mark')}>*</span>
+                            </>
+                            <div>
+                                <div className={cx('options')}>
+                                    <ul>
+                                        <li>0人</li>
+                                        <li>1人</li>
+                                        <li>2人</li>
+                                        <li>3人以上</li>
+                                    </ul>
+                                </div>
+                                <ul className={cx('radio_items')}>
+                                    {from.question.q1.map((item, index) => (
+                                        <li key={item.id}>
+                                            <div className={cx('radio_group_label')}>{item.option}</div>
+                                            <div className={cx('radio_group')}>
+                                                <FormControl>
+                                                    {/* <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel> */}
+                                                    <RadioGroup
+                                                        row
+                                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                                        name="row-radio-buttons-group"
+                                                    >
+                                                        <FormControlLabel value="0" control={<Radio />} label="" />
+                                                        <FormControlLabel value="1" control={<Radio />} label="" />
+                                                        <FormControlLabel value="2" control={<Radio />} label="" />
+                                                        <FormControlLabel value="3" control={<Radio />} label="" />
+                                                    </RadioGroup>
+                                                </FormControl>
+                                            </div>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
-                            <ul className={cx('radio_items')}>
-                                {from.question.q1.map((item, index) => (
-                                    <li key={item.id}>
-                                        <div className={cx('radio_group_label')}>{item.option}</div>
+                            <span className={cx('error_message')}>請選擇家庭人口組成</span>
+                        </div>
+                        {/* Question 2 */}
+                        <div className={cx('survey_question')}>
+                            <>
+                                二、家中電器持有調查與使用習慣 <span className={cx('mark')}>*</span>
+                            </>
+
+                            {/* 2-1 */}
+                            <div>
+                                <>
+                                    1、家中冰箱數量為 <span className={cx('mark')}>*</span>
+                                </>
+                                <ul className={cx('radio_items', 'radio_row')}>
+                                    <li>
+                                        {/* <div className={cx('radio_group_label')}>{item.option}</div> */}
                                         <div className={cx('radio_group')}>
                                             <FormControl>
                                                 {/* <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel> */}
@@ -195,374 +231,340 @@ const Survey = () => {
                                                     aria-labelledby="demo-row-radio-buttons-group-label"
                                                     name="row-radio-buttons-group"
                                                 >
-                                                    <FormControlLabel value="0" control={<Radio />} label="" />
-                                                    <FormControlLabel value="1" control={<Radio />} label="" />
-                                                    <FormControlLabel value="2" control={<Radio />} label="" />
-                                                    <FormControlLabel value="3" control={<Radio />} label="" />
+                                                    {from.question.q2_1.map((item, index) => (
+                                                        <FormControlLabel
+                                                            value={item.option}
+                                                            control={<Radio />}
+                                                            label={item.option}
+                                                        />
+                                                    ))}
                                                 </RadioGroup>
                                             </FormControl>
                                         </div>
                                     </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <span className={cx('error_message')}>請選擇家庭人口組成</span>
-                    </div>
-                    {/* Question 2 */}
-                    <div className={cx('survey_question')}>
-                        <>
-                            二、家中電器持有調查與使用習慣 <span className={cx('mark')}>*</span>
-                        </>
-
-                        {/* 2-1 */}
-                        <div>
-                            <>
-                                1、家中冰箱數量為 <span className={cx('mark')}>*</span>
-                            </>
-                            <ul className={cx('radio_items', 'radio_row')}>
-                                <li>
-                                    {/* <div className={cx('radio_group_label')}>{item.option}</div> */}
-                                    <div className={cx('radio_group')}>
-                                        <FormControl>
-                                            {/* <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel> */}
-                                            <RadioGroup
-                                                row
-                                                aria-labelledby="demo-row-radio-buttons-group-label"
-                                                name="row-radio-buttons-group"
-                                            >
-                                                {from.question.q2_1.map((item, index) => (
-                                                    <FormControlLabel
-                                                        value={item.option}
-                                                        control={<Radio />}
-                                                        label={item.option}
-                                                    />
-                                                ))}
-                                            </RadioGroup>
-                                        </FormControl>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <span className={cx('error_message')}>請選擇一項</span>
-
-                        {/* 2-2 */}
-                        <div>
-                            <>
-                                2.家中冷氣數量(以室內機計算)為 <span className={cx('mark')}>*</span>
-                            </>
-                            <ul className={cx('radio_items', 'radio_row')}>
-                                <li>
-                                    <div className={cx('radio_group')}>
-                                        <FormControl>
-                                            <RadioGroup
-                                                row
-                                                aria-labelledby="demo-row-radio-buttons-group-label"
-                                                name="row-radio-buttons-group"
-                                            >
-                                                {from.question.q2_2.map((item, index) => (
-                                                    <FormControlLabel
-                                                        value={item.option}
-                                                        control={<Radio />}
-                                                        label={item.option}
-                                                    />
-                                                ))}
-                                            </RadioGroup>
-                                        </FormControl>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <span className={cx('error_message')}>請選擇一項</span>
-
-                        {/* 2-3 */}
-                        <div>
-                            <>
-                                3.冷氣經常設定溫度為 <span className={cx('mark')}>*</span>
-                            </>
-                            <div>介於 16~30 之間</div>
-                            <div>
-                                <Slider
-                                    aria-label="Average marks"
-                                    defaultValue={50} // 设置滑块的初始位置 (可以是任意的 value)
-                                    valueLabelDisplay="auto"
-                                    sx={{ color: '#20a2a0', height: '8px' }}
-                                    marks={marks}
-                                    step={null} // 仅允许停留在生成的 marks 上
-                                    valueLabelFormat={value => {
-                                        const mark = marks.find(mark => mark.value === value);
-                                        return mark ? mark.label : value;
-                                    }}
-                                />
+                                </ul>
                             </div>
-                        </div>
-                        <span className={cx('error_message')}>請選擇一項</span>
+                            <span className={cx('error_message')}>請選擇一項</span>
 
-                        {/* 2-4 */}
-                        <div>
-                            <>
-                                4.家中電熱水瓶/飲水機數量為 <span className={cx('mark')}>*</span>
-                            </>
-                            <ul className={cx('radio_items', 'radio_row')}>
-                                <li>
-                                    <div className={cx('radio_group')}>
-                                        <FormControl>
-                                            <RadioGroup
-                                                row
-                                                aria-labelledby="demo-row-radio-buttons-group-label"
-                                                name="row-radio-buttons-group"
-                                            >
-                                                {from.question.q2_4.map((item, index) => (
-                                                    <FormControlLabel
-                                                        value={item.option}
-                                                        control={<Radio />}
-                                                        label={item.option}
-                                                    />
-                                                ))}
-                                            </RadioGroup>
-                                        </FormControl>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <span className={cx('error_message')}>請選擇一項</span>
-
-                        {/* 2-5 */}
-                        <div>
-                            <>
-                                5.一週當中, 有幾天會觀看電視 <span className={cx('mark')}>*</span>
-                            </>
-                            <ul className={cx('radio_items', 'radio_row')}>
-                                <li>
-                                    <div className={cx('radio_group')}>
-                                        <FormControl>
-                                            <RadioGroup
-                                                row
-                                                aria-labelledby="demo-row-radio-buttons-group-label"
-                                                name="row-radio-buttons-group"
-                                            >
-                                                {from.question.q2_5.map((item, index) => (
-                                                    <FormControlLabel
-                                                        value={item.option}
-                                                        control={<Radio />}
-                                                        label={item.option}
-                                                    />
-                                                ))}
-                                            </RadioGroup>
-                                        </FormControl>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <span className={cx('error_message')}>請選擇一項</span>
-
-                        {/* 2-6 */}
-                        <div>
-                            <>
-                                6. 電視經常觀看時段為(可複選) <span className={cx('mark')}>*</span>
-                            </>
-                            <ul className={cx('radio_items', 'radio_row')}>
-                                {from.question.q2_6.map((item, index) => (
-                                    <li key={item.id}>
+                            {/* 2-2 */}
+                            <div>
+                                <>
+                                    2.家中冷氣數量(以室內機計算)為 <span className={cx('mark')}>*</span>
+                                </>
+                                <ul className={cx('radio_items', 'radio_row')}>
+                                    <li>
                                         <div className={cx('radio_group')}>
-                                            <FormControlLabel
-                                                control={<Checkbox defaultChecked />}
-                                                label={item.option}
-                                            />
+                                            <FormControl>
+                                                <RadioGroup
+                                                    row
+                                                    aria-labelledby="demo-row-radio-buttons-group-label"
+                                                    name="row-radio-buttons-group"
+                                                >
+                                                    {from.question.q2_2.map((item, index) => (
+                                                        <FormControlLabel
+                                                            value={item.option}
+                                                            control={<Radio />}
+                                                            label={item.option}
+                                                        />
+                                                    ))}
+                                                </RadioGroup>
+                                            </FormControl>
                                         </div>
                                     </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <span className={cx('error_message')}>請選擇一項</span>
+                                </ul>
+                            </div>
+                            <span className={cx('error_message')}>請選擇一項</span>
 
-                        {/* 2-7 */}
-                        <div>
-                            <>
-                                7.一週當中, 有幾天會使用電腦 <span className={cx('mark')}>*</span>
-                            </>
-                            <ul className={cx('radio_items', 'radio_row')}>
-                                <li>
-                                    <div className={cx('radio_group')}>
-                                        <FormControl>
-                                            <RadioGroup
-                                                row
-                                                aria-labelledby="demo-row-radio-buttons-group-label"
-                                                name="row-radio-buttons-group"
-                                            >
-                                                {from.question.q2_7.map((item, index) => (
-                                                    <FormControlLabel
-                                                        value={item.option}
-                                                        control={<Radio />}
-                                                        label={item.option}
-                                                    />
-                                                ))}
-                                            </RadioGroup>
-                                        </FormControl>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <span className={cx('error_message')}>請選擇一項</span>
+                            {/* 2-3 */}
+                            <div>
+                                <>
+                                    3.冷氣經常設定溫度為 <span className={cx('mark')}>*</span>
+                                </>
+                                <div>介於 16~30 之間</div>
+                                <div>
+                                    <Slider
+                                        aria-label="Average marks"
+                                        defaultValue={50} // 设置滑块的初始位置 (可以是任意的 value)
+                                        valueLabelDisplay="auto"
+                                        sx={{ color: '#20a2a0', height: '8px' }}
+                                        marks={marks}
+                                        step={null} // 仅允许停留在生成的 marks 上
+                                        valueLabelFormat={value => {
+                                            const mark = marks.find(mark => mark.value === value);
+                                            return mark ? mark.label : value;
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                            <span className={cx('error_message')}>請選擇一項</span>
 
-                        {/* 2-8 */}
-                        <div>
-                            <>
-                                8.電腦經常使用時段為(可複選) <span className={cx('mark')}>*</span>
-                            </>
-                            <ul className={cx('radio_items', 'radio_row')}>
-                                <li>
-                                    <div className={cx('radio_group')}>
-                                        <FormControl>
-                                            <RadioGroup
-                                                aria-labelledby="demo-row-radio-buttons-group-label"
-                                                name="row-radio-buttons-group"
-                                            >
-                                                {from.question.q2_8.map((item, index) => (
-                                                    <FormControlLabel
-                                                        value={item.option}
-                                                        control={<Radio />}
-                                                        label={item.option}
-                                                    />
-                                                ))}
-                                            </RadioGroup>
-                                        </FormControl>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <span className={cx('error_message')}>請選擇一項</span>
+                            {/* 2-4 */}
+                            <div>
+                                <>
+                                    4.家中電熱水瓶/飲水機數量為 <span className={cx('mark')}>*</span>
+                                </>
+                                <ul className={cx('radio_items', 'radio_row')}>
+                                    <li>
+                                        <div className={cx('radio_group')}>
+                                            <FormControl>
+                                                <RadioGroup
+                                                    row
+                                                    aria-labelledby="demo-row-radio-buttons-group-label"
+                                                    name="row-radio-buttons-group"
+                                                >
+                                                    {from.question.q2_4.map((item, index) => (
+                                                        <FormControlLabel
+                                                            value={item.option}
+                                                            control={<Radio />}
+                                                            label={item.option}
+                                                        />
+                                                    ))}
+                                                </RadioGroup>
+                                            </FormControl>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <span className={cx('error_message')}>請選擇一項</span>
 
-                        {/* 2-9 */}
-                        <div>
-                            <>
-                                9.一週當中, 有幾天會使用電鍋 <span className={cx('mark')}>*</span>
-                            </>
-                            <ul className={cx('radio_items', 'radio_row')}>
-                                <li>
-                                    <div className={cx('radio_group')}>
-                                        <FormControl>
-                                            <RadioGroup
-                                                row
-                                                aria-labelledby="demo-row-radio-buttons-group-label"
-                                                name="row-radio-buttons-group"
-                                            >
-                                                {from.question.q2_9.map((item, index) => (
-                                                    <FormControlLabel
-                                                        value={item.option}
-                                                        control={<Radio />}
-                                                        label={item.option}
-                                                    />
-                                                ))}
-                                            </RadioGroup>
-                                        </FormControl>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <span className={cx('error_message')}>請選擇一項</span>
+                            {/* 2-5 */}
+                            <div>
+                                <>
+                                    5.一週當中, 有幾天會觀看電視 <span className={cx('mark')}>*</span>
+                                </>
+                                <ul className={cx('radio_items', 'radio_row')}>
+                                    <li>
+                                        <div className={cx('radio_group')}>
+                                            <FormControl>
+                                                <RadioGroup
+                                                    row
+                                                    aria-labelledby="demo-row-radio-buttons-group-label"
+                                                    name="row-radio-buttons-group"
+                                                >
+                                                    {from.question.q2_5.map((item, index) => (
+                                                        <FormControlLabel
+                                                            value={item.option}
+                                                            control={<Radio />}
+                                                            label={item.option}
+                                                        />
+                                                    ))}
+                                                </RadioGroup>
+                                            </FormControl>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <span className={cx('error_message')}>請選擇一項</span>
 
-                        {/* 2-10 */}
-                        <div>
-                            <>
-                                10.電鍋經常使用時段為(可複選) <span className={cx('mark')}>*</span>
-                            </>
-                            <ul className={cx('radio_items', 'radio_row')}>
-                                <li>
-                                    <div className={cx('radio_group')}>
-                                        <FormControl>
-                                            <RadioGroup
-                                                row
-                                                aria-labelledby="demo-row-radio-buttons-group-label"
-                                                name="row-radio-buttons-group"
-                                            >
-                                                {from.question.q2_10.map((item, index) => (
-                                                    <FormControlLabel
-                                                        value={item.option}
-                                                        control={<Radio />}
-                                                        label={item.option}
-                                                    />
-                                                ))}
-                                            </RadioGroup>
-                                        </FormControl>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <span className={cx('error_message')}>請選擇一項</span>
+                            {/* 2-6 */}
+                            <div>
+                                <>
+                                    6. 電視經常觀看時段為(可複選) <span className={cx('mark')}>*</span>
+                                </>
+                                <ul className={cx('radio_items', 'radio_row')}>
+                                    {from.question.q2_6.map((item, index) => (
+                                        <li key={item.id}>
+                                            <div className={cx('radio_group')}>
+                                                <FormControlLabel
+                                                    control={<Checkbox defaultChecked />}
+                                                    label={item.option}
+                                                />
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <span className={cx('error_message')}>請選擇一項</span>
 
-                        {/* 2-11 */}
-                        <div>
-                            <>
-                                11.一週當中, 有幾天會使用洗衣機 <span className={cx('mark')}>*</span>
-                            </>
-                            <ul className={cx('radio_items', 'radio_row')}>
-                                <li>
-                                    <div className={cx('radio_group')}>
-                                        <FormControl>
-                                            <RadioGroup
-                                                row
-                                                aria-labelledby="demo-row-radio-buttons-group-label"
-                                                name="row-radio-buttons-group"
-                                            >
-                                                {from.question.q2_11.map((item, index) => (
-                                                    <FormControlLabel
-                                                        value={item.option}
-                                                        control={<Radio />}
-                                                        label={item.option}
-                                                    />
-                                                ))}
-                                            </RadioGroup>
-                                        </FormControl>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <span className={cx('error_message')}>請選擇一項</span>
+                            {/* 2-7 */}
+                            <div>
+                                <>
+                                    7.一週當中, 有幾天會使用電腦 <span className={cx('mark')}>*</span>
+                                </>
+                                <ul className={cx('radio_items', 'radio_row')}>
+                                    <li>
+                                        <div className={cx('radio_group')}>
+                                            <FormControl>
+                                                <RadioGroup
+                                                    row
+                                                    aria-labelledby="demo-row-radio-buttons-group-label"
+                                                    name="row-radio-buttons-group"
+                                                >
+                                                    {from.question.q2_7.map((item, index) => (
+                                                        <FormControlLabel
+                                                            value={item.option}
+                                                            control={<Radio />}
+                                                            label={item.option}
+                                                        />
+                                                    ))}
+                                                </RadioGroup>
+                                            </FormControl>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <span className={cx('error_message')}>請選擇一項</span>
 
-                        {/* 2-12 */}
-                        <div>
-                            <>
-                                12.一週當中, 有幾天會使用除濕機 <span className={cx('mark')}>*</span>
-                            </>
-                            <ul className={cx('radio_items', 'radio_row')}>
-                                <li>
-                                    <div className={cx('radio_group')}>
-                                        <FormControl>
-                                            <RadioGroup
-                                                row
-                                                aria-labelledby="demo-row-radio-buttons-group-label"
-                                                name="row-radio-buttons-group"
-                                            >
-                                                {from.question.q2_12.map((item, index) => (
-                                                    <FormControlLabel
-                                                        value={item.option}
-                                                        control={<Radio />}
-                                                        label={item.option}
-                                                    />
-                                                ))}
-                                            </RadioGroup>
-                                        </FormControl>
-                                    </div>
-                                </li>
-                            </ul>
+                            {/* 2-8 */}
+                            <div>
+                                <>
+                                    8.電腦經常使用時段為(可複選) <span className={cx('mark')}>*</span>
+                                </>
+                                <ul className={cx('radio_items', 'radio_row')}>
+                                    <li>
+                                        <div className={cx('radio_group')}>
+                                            <FormControl>
+                                                <RadioGroup
+                                                    aria-labelledby="demo-row-radio-buttons-group-label"
+                                                    name="row-radio-buttons-group"
+                                                >
+                                                    {from.question.q2_8.map((item, index) => (
+                                                        <FormControlLabel
+                                                            value={item.option}
+                                                            control={<Radio />}
+                                                            label={item.option}
+                                                        />
+                                                    ))}
+                                                </RadioGroup>
+                                            </FormControl>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <span className={cx('error_message')}>請選擇一項</span>
+
+                            {/* 2-9 */}
+                            <div>
+                                <>
+                                    9.一週當中, 有幾天會使用電鍋 <span className={cx('mark')}>*</span>
+                                </>
+                                <ul className={cx('radio_items', 'radio_row')}>
+                                    <li>
+                                        <div className={cx('radio_group')}>
+                                            <FormControl>
+                                                <RadioGroup
+                                                    row
+                                                    aria-labelledby="demo-row-radio-buttons-group-label"
+                                                    name="row-radio-buttons-group"
+                                                >
+                                                    {from.question.q2_9.map((item, index) => (
+                                                        <FormControlLabel
+                                                            value={item.option}
+                                                            control={<Radio />}
+                                                            label={item.option}
+                                                        />
+                                                    ))}
+                                                </RadioGroup>
+                                            </FormControl>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <span className={cx('error_message')}>請選擇一項</span>
+
+                            {/* 2-10 */}
+                            <div>
+                                <>
+                                    10.電鍋經常使用時段為(可複選) <span className={cx('mark')}>*</span>
+                                </>
+                                <ul className={cx('radio_items', 'radio_row')}>
+                                    <li>
+                                        <div className={cx('radio_group')}>
+                                            <FormControl>
+                                                <RadioGroup
+                                                    row
+                                                    aria-labelledby="demo-row-radio-buttons-group-label"
+                                                    name="row-radio-buttons-group"
+                                                >
+                                                    {from.question.q2_10.map((item, index) => (
+                                                        <FormControlLabel
+                                                            value={item.option}
+                                                            control={<Radio />}
+                                                            label={item.option}
+                                                        />
+                                                    ))}
+                                                </RadioGroup>
+                                            </FormControl>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <span className={cx('error_message')}>請選擇一項</span>
+
+                            {/* 2-11 */}
+                            <div>
+                                <>
+                                    11.一週當中, 有幾天會使用洗衣機 <span className={cx('mark')}>*</span>
+                                </>
+                                <ul className={cx('radio_items', 'radio_row')}>
+                                    <li>
+                                        <div className={cx('radio_group')}>
+                                            <FormControl>
+                                                <RadioGroup
+                                                    row
+                                                    aria-labelledby="demo-row-radio-buttons-group-label"
+                                                    name="row-radio-buttons-group"
+                                                >
+                                                    {from.question.q2_11.map((item, index) => (
+                                                        <FormControlLabel
+                                                            value={item.option}
+                                                            control={<Radio />}
+                                                            label={item.option}
+                                                        />
+                                                    ))}
+                                                </RadioGroup>
+                                            </FormControl>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <span className={cx('error_message')}>請選擇一項</span>
+
+                            {/* 2-12 */}
+                            <div>
+                                <>
+                                    12.一週當中, 有幾天會使用除濕機 <span className={cx('mark')}>*</span>
+                                </>
+                                <ul className={cx('radio_items', 'radio_row')}>
+                                    <li>
+                                        <div className={cx('radio_group')}>
+                                            <FormControl>
+                                                <RadioGroup
+                                                    row
+                                                    aria-labelledby="demo-row-radio-buttons-group-label"
+                                                    name="row-radio-buttons-group"
+                                                >
+                                                    {from.question.q2_12.map((item, index) => (
+                                                        <FormControlLabel
+                                                            value={item.option}
+                                                            control={<Radio />}
+                                                            label={item.option}
+                                                        />
+                                                    ))}
+                                                </RadioGroup>
+                                            </FormControl>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <span className={cx('error_message')}>請選擇一項</span>
                         </div>
-                        <span className={cx('error_message')}>請選擇一項</span>
                     </div>
+                    <Button
+                        variant="contained"
+                        sx={{
+                            width: '100%',
+                            fontSize: '20px',
+                            backgroundColor: '#20a2a0',
+                            borderRadius: '100px',
+                            padding: '14px 0'
+                        }}
+                        // disabled={!canClick}
+                        // onClick={() => canClick && handleLogin()}
+                    >
+                        確認
+                    </Button>
                 </div>
-                <Button
-                    variant="contained"
-                    sx={{
-                        width: '100%',
-                        fontSize: '20px',
-                        backgroundColor: '#20a2a0',
-                        borderRadius: '100px',
-                        padding: '14px 0'
-                    }}
-                    // disabled={!canClick}
-                    // onClick={() => canClick && handleLogin()}
-                >
-                    確認
-                </Button>
             </div>
         </div>
     );
