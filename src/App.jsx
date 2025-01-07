@@ -86,7 +86,7 @@ function App() {
                 },
                 {
                     name: 'menu.password_change',
-                    path: '/member/password_change',
+                    path: '/member/password',
                     icon: <VpnKeyTwoToneIcon />
                 }
             ]
@@ -96,7 +96,13 @@ function App() {
     const { pathname } = useLocation(); // Move useLocation here
 
     const openEditPopUp = () => {
-        openPopUp({ component: <Survey closePopUp={closePopUp} /> });
+        openPopUp({
+            component: (
+                <div>
+                    <Survey closePopUp={closePopUp} />
+                </div>
+            )
+        });
     };
     // menu (layout & url)
     const getLayouts = () => {
@@ -131,9 +137,9 @@ function App() {
         ));
     };
 
-    // useEffect(() => {
-    //     openEditPopUp();
-    // }, []);
+    useEffect(() => {
+        // openEditPopUp();
+    }, []);
 
     useEffect(() => {
         if (auth) {

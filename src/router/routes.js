@@ -54,7 +54,17 @@ const routes = [
         exact: true,
         authRequired: false,
         layouts: ['menu', 'header']
+    },
+    {
+        main: 'member_management',
+        path: '/member/password',
+        title: 'password_change',
+        component: lazy(() => import('@/view/User/SetPassword')),
+        exact: true,
+        authRequired: false,
+        layouts: ['menu', 'header']
     }
+
     // {
     //     main: 'manage',
     //     path: '/member/data_modification',

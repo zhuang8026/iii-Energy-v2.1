@@ -1,0 +1,61 @@
+.set_password {
+    position: relative;
+    overflow: hidden;
+
+    width: 100%;
+    height: calc(100vh - 140px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .password_content {
+        z-index: 1;
+        max-width: 100%;
+        width: 650px;
+        height: auto;
+        background-color: var.$white;
+        border-radius: var.$fs-40;
+        padding: var.$fs-32;
+
+        .password_form {
+            padding: var.$fs-8;
+            h1 {
+                font-size: var.$fs-40;
+                margin-bottom: var.$fs-20;
+                // color: $white;
+                text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                letter-spacing: 1px;
+                text-align: center;
+            }
+            p span {
+                color: var.$danger;
+            }
+            .password_group {
+                line-height: var.$fs-40;
+                margin: var.$fs-10 0;
+
+                label {
+                    font-size: var.$fs-16;
+                    font-weight: 700;
+
+                    span {
+                        color: var.$danger;
+                    }
+                }
+                .pwd_input {
+                    position: relative;
+                }
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            max-width: 100%;
+            width: 100%;
+            padding: var.$fs-10;
+            border-radius: var.$fs-20;
+            .radio_group_label {
+                width: 40%;
+            }
+        } /* iPad mini & iphone */
+    }
+}

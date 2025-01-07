@@ -1,4 +1,7 @@
 .survey {
+    position: relative;
+    overflow: hidden;
+
     width: 100%;
     height: 100%;
     // height: calc(100vh - 140px);
@@ -11,20 +14,18 @@
     // background-image: linear-gradient(135deg, #fff, #20a2a0, #478cd1);
 
     .survey_content {
-        max-width: 80%;
+        z-index: 1;
+        max-width: 100%;
         width: 650px;
         height: auto;
         background-color: var.$white;
-        // box-shadow: rgba(255, 255, 255, 0.3) 0rem 0rem 0.0625rem 0.0625rem inset,
-        //     rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;
-        // backdrop-filter: saturate(200%) blur(1.875rem);
         border-radius: var.$fs-40;
         padding: var.$fs-32;
         // margin: var.$fs-20 0;
         .survey_form {
-            height: 75vh;
-            overflow-y: auto;
-            overflow-x: hidden;
+            // height: 75vh;
+            // overflow-y: auto;
+            // overflow-x: hidden;
             padding: var.$fs-8;
             h1 {
                 font-size: var.$fs-40;
@@ -69,14 +70,16 @@
                     }
                 }
             }
-
-            @media screen and (max-width: 767px) {
-                max-width: 100%;
-                width: 100%;
-                .radio_group_label {
-                    width: 40%;
-                }
-            } /* iPad mini & iphone */
         }
+
+        @media screen and (max-width: 767px) {
+            max-width: 100%;
+            width: 100%;
+            padding: var.$fs-10;
+            border-radius: var.$fs-20;
+            .radio_group_label {
+                width: 40%;
+            }
+        } /* iPad mini & iphone */
     }
 }

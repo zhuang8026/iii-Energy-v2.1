@@ -6,7 +6,9 @@ export default defineConfig({
     base: `./`,
     plugins: [react()],
     resolve: {
-        alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }]
+        alias: { '@': path.resolve(__dirname, './src') },
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'], // 添加支持的擴展名
+        // alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }]
         // alias: {
         //     '@': path.resolve(__dirname, 'src') // 將 '@' 映射到 'src' 目錄
         // }

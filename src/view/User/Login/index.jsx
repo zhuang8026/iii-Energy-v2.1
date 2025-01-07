@@ -96,12 +96,12 @@ const Login = () => {
                 <div>
                     <div className={cx('form-group')}>
                         <label htmlFor="account">帳號</label>
-                        <input
+                        <UIInput
                             type="text"
                             name="account"
                             id="account"
                             placeholder="請輸入用戶名稱"
-                            required="required"
+                            required
                             onChange={e => setUserInfo({ ...userInfo, account: e.target.value })}
                         />
                     </div>
@@ -113,13 +113,12 @@ const Login = () => {
                             </p>
                         </div>
                         <div className={cx('form-group-password')}>
-                            <input
+                            <UIInput
                                 type={showPassword ? 'text' : 'password'}
                                 name="password"
                                 id="password"
-                                className={cx('password')}
                                 placeholder="請輸入用戶密碼"
-                                required="required"
+                                required
                                 onChange={e => setUserInfo({ ...userInfo, password: e.target.value })}
                             />
                             <RemoveRedEyeTwoToneIcon

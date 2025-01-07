@@ -1,11 +1,12 @@
-import React, { useState, Suspense, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
 // components
 import Loading from '@/components/ui/Loading';
 import PopUp from '@/components/global/PopUp';
-import InputPrompt from '@/components/ui/InputPrompt';
-import UIInput from '@/components/ui/UIInput';
+import Roles from '@/components/ui/Roles';
+// import InputPrompt from '@/components/ui/InputPrompt';
+// import UIInput from '@/components/ui/UIInput';
 
 // mui components
 import MenuItem from '@mui/material/MenuItem';
@@ -28,6 +29,7 @@ import { borderRadius } from '@mui/system';
 const cx = classNames.bind(classes);
 
 const BindElectric = () => {
+    const containerRef = useRef(null); // 用於引用容器
     const dispatch = useDispatch();
     const navigate = useNavigate(); // Properly define navigate here
     const location = useLocation(); // This gives the current location
@@ -40,7 +42,11 @@ const BindElectric = () => {
         password: ''
     });
     return (
-        <div className={cx('bind')}>
+        <div
+            className={cx('bind')}
+            ref={containerRef} // 綁定容器
+        >
+            <Roles containerRef={containerRef} number={30} />
             <div className={cx('bind_form')}>
                 <h1>綁定電器</h1>
                 <div className={cx('bind_group')}>

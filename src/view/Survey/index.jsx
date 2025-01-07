@@ -1,18 +1,19 @@
-import React, { useState, Suspense, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
+// import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
 // components
 import Loading from '@/components/ui/Loading';
-import PopUp from '@/components/global/PopUp';
-import InputPrompt from '@/components/ui/InputPrompt';
-import UIInput from '@/components/ui/UIInput';
+import Roles from '@/components/ui/Roles';
+// import PopUp from '@/components/global/PopUp';
+// import InputPrompt from '@/components/ui/InputPrompt';
+// import UIInput from '@/components/ui/UIInput';
 
 // mui components
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+// import FormLabel from '@mui/material/FormLabel';
 import Slider from '@mui/material/Slider';
 import Checkbox from '@mui/material/Checkbox';
 
@@ -23,8 +24,8 @@ import Button from '@mui/material/Button';
 // import { getCookie, setCookie } from '@/utils/cookie';
 
 // redux
-import { useDispatch } from 'react-redux';
-import { login } from '@/store/userSlice';
+// import { useDispatch } from 'react-redux';
+// import { login } from '@/store/userSlice';
 
 // css
 import classes from './style.module.scss';
@@ -32,6 +33,8 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(classes);
 
 const Survey = () => {
+    const containerRef = useRef(null); // 用於引用容器
+
     const [from, setFrom] = useState({
         question: {
             q1: [
@@ -144,7 +147,7 @@ const Survey = () => {
     });
 
     const { openLoading, closeLoading } = Loading();
-    const { openPopUp, closePopUp } = PopUp();
+    // const { openPopUp, closePopUp } = PopUp();
 
     // 起始值和结束值的配置
     const minValue = 16; // 起始标签
@@ -160,11 +163,14 @@ const Survey = () => {
             return { value, label: label.toString() };
         });
     };
-
     const marks = generateMarks(minValue, maxValue, steps);
 
     return (
-        <div className={cx('survey')}>
+        <div
+            className={cx('survey')}
+            ref={containerRef} // 綁定容器
+        >
+            <Roles containerRef={containerRef} count={50} />
             <div className={cx('survey_content')}>
                 <div className={cx('survey_form')}>
                     <h1>家戶組成與電器持有調查</h1>
