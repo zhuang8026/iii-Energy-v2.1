@@ -19,11 +19,19 @@ const NormalPrompt = ({
     subtitle = '', // 副標題
     constent = [], // 內容
     value = '', // 預設值
-    onClick = () => {} // 確定按鈕
+    onClick = null // 確定按鈕
 }) => {
     const { closePopUp } = PopUp();
     const [val, setVal] = useState(value); // 輸入的值
 
+    const handleClick = () => {
+        console.log(typeof onClick === 'function');
+        if (typeof onClick === 'function') {
+            onClick(val); // 調用 onClick 傳遞輸入值
+        } else {
+            closePopUp(); // 如果需要在任何情況下關閉彈窗，可以保留
+        }
+    };
     return (
         <div className={cx('windows')}>
             <div className={cx('close-btn')} onClick={() => closePopUp()}>
@@ -52,10 +60,7 @@ const NormalPrompt = ({
                 <Button
                     variant="contained"
                     sx={{ width: '50%', height: '100%', borderRadius: '100px' }}
-                    onClick={() => {
-                        onClick(val);
-                        closePopUp();
-                    }}
+                    onClick={() => handleClick()}
                 >
                     是
                 </Button>

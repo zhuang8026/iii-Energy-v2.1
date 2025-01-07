@@ -11,7 +11,9 @@ import { getCookie, setCookie, eraseCookie } from '@/utils/cookie';
 import ExitToAppTwoToneIcon from '@mui/icons-material/ExitToAppTwoTone';
 
 // components
+import NormalPrompt from '@/components/ui/NormalPrompt';
 import Loading from '@/components/ui/Loading';
+import PopUp from '@/components/global/PopUp';
 
 // redux
 import { useDispatch } from 'react-redux';
@@ -29,6 +31,7 @@ const Menu = ({ menuList, openMenu, onToggleMenu }) => {
     const navigate = useNavigate(); // Properly define navigate here
     const location = useLocation(); // This gives the current location
     const { openLoading, closeLoading } = Loading();
+    const { openPopUp, closePopUp } = PopUp();
 
     const [currentPath, setCurrentPath] = useState('/main');
 
@@ -54,13 +57,22 @@ const Menu = ({ menuList, openMenu, onToggleMenu }) => {
     };
 
     const handleLogout = () => {
-        openLoading('logout...');
-
-        setTimeout(() => {
-            dispatch(logout()); // 觸發登出動作
-            closeLoading();
-            navigate('/login');
-        }, 1000);
+        openPopUp({
+            component: (
+                <NormalPrompt
+                    title="登出提醒"
+                    constent={['您確定要登出嗎？']}
+                    onClick={() => {
+                        openLoading('logout...');
+                        setTimeout(() => {
+                            dispatch(logout()); // 觸發登出動作
+                            closeLoading();
+                            navigate('/login');
+                        }, 1000);
+                    }}
+                />
+            )
+        });
     };
 
     useEffect(() => {

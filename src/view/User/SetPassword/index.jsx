@@ -94,7 +94,9 @@ const SetPassword = () => {
         }
 
         if (fieldName === 'confirmPassword') {
-            if (value !== formValues.newPassword) {
+            if (value.length < 8) {
+                error = '密碼至少需要 8 個字元。';
+            } else if (value !== formValues.newPassword) {
                 error = '新密碼與確認密碼不一致。';
             }
         }
@@ -116,6 +118,7 @@ const SetPassword = () => {
     useEffect(() => {
         const allFieldsFilled = Object.values(formValues).every(value => value.trim() !== '');
         const noErrors = Object.values(errors).every(error => error === '');
+
         setIsButtonEnabled(allFieldsFilled && noErrors);
     }, [formValues, errors]);
 
