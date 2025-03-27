@@ -47,14 +47,14 @@ const InputPrompt = ({
             <div className={cx('windows-btn')}>
                 <Button
                     variant="contained"
-                    sx={{ width: '50%', height: '100%', backgroundColor: '#20a2a0', borderRadius: '100px' }}
+                    sx={{ width: '50%', height: '100%', borderRadius: '100px' }}
                     onClick={() => closePopUp()}
                 >
                     取消
                 </Button>
                 <Button
                     variant="contained"
-                    sx={{ width: '50%', height: '100%', borderRadius: '100px' }}
+                    sx={{ width: '50%', height: '100%', backgroundColor: '#20a2a0', borderRadius: '100px' }}
                     onClick={() => onClick(inputVal)}
                     disabled={component && !inputVal}
                 >

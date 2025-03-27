@@ -18,8 +18,8 @@ import Button from '@mui/material/Button';
 import Logo from '@/assets/images/icon-logo.svg';
 
 // redux
-import { useDispatch } from 'react-redux';
-import { login } from '@/store/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAsync } from '@/store/userSlice';
 
 // css
 import classes from './style.module.scss';
@@ -32,6 +32,7 @@ const Login = () => {
     const location = useLocation(); // This gives the current location
     const { openLoading, closeLoading } = Loading();
     const { openPopUp, closePopUp } = PopUp();
+
     const [canClick, setCanClick] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('template@gmail.com'); // 默認值
@@ -63,19 +64,21 @@ const Login = () => {
         }, 1000);
     };
 
-    const handleLogin = () => {
-        console.log('login:', userInfo);
-        openLoading('login...');
+    const handleLogin = async () => {
+        openLoading('登入中...');
 
-        // call API
-        dispatch(login({ name: 'Admin', role: 'Administrator' })); // 傳入用戶資料
-        setTimeout(() => {
-            navigate({
-                ...location,
-                pathname: `/main`
-            });
-            closeLoading();
-        }, 1000);
+        try {
+            // dispatch 登入操作
+            const result = await dispatch(loginAsync(userInfo));
+            // 確保登入成功後，關閉 loading 並導航
+            if (result.type === 'user/login/fulfilled') {
+                closeLoading(); // 關閉 loading
+                navigate('/main'); // 導向到 /main
+            }
+        } catch (error) {
+            closeLoading(); // 出錯時也要關閉 loading
+            console.error('登入錯誤:', error);
+        }
     };
 
     useEffect(() => {

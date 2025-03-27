@@ -150,7 +150,8 @@ function App() {
     }, [auth, pathname]); // 合并更新 layouts 的逻辑
 
     useEffect(() => {
-        const token = getCookie('iii_token');
+        // const token = getCookie('iii_token');
+        const token = localStorage.getItem('ENERGY');
         const isAuthenticated = !!token;
         setAuth(isAuthenticated);
         setAuthInitialized(true); // 初始化完成

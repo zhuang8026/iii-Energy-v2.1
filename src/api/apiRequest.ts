@@ -1,104 +1,71 @@
-// framework
-// import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
-// import { useGlobalStore } from '@/store/index';
 
-// enum 映射
-import { COOKIE_NAME, ENV } from '@/assets/enum/enum';
+const apiConfig = {
+    SERVER_JAVA: 'https://www.energy-active.org.tw/api',
+    SERVER_PYTHON: 'https://poc.energy-active.org.tw'
+};
 
-// utils 工具
-import { getCookie } from '@/utils/cookie';
-// import { axionInit } from '@/api/axionInit.ts';
-// import { filterQueyrHandle } from '@/utils/globalUtils';
-
-// component
-// import uiLoading from '@/components/ui/Loading/index';
-
-export const apiRequest = async (method, url, auth, params = null) => {
-    // 地端API
-    // let hostAppURL: string = '';
-
+/**
+ * desc: 設定 call API 前期作業 (setting token)
+ * method: GET, POST, PATCH, PULL
+ * url: '/main/login'
+ * params: payload data
+ * contentType: application/json
+ * auth: has token ?
+ * isPythonVersion: java server or python server
+ * */
+export const apiRequest = async (
+    method, // GET, POST, PUT, DELETE
+    url, // link
+    params, // basic
+    contentType, // 類型
+    auth = false, // token
+    isPythonVersion = 'python' // api 版本
+) => {
     // API初始化設定
-    let apiEnv = import.meta.env.VITE_ENV; //現在環境
+    let apiClient: any = axios.create({}); // axios 初始化
+    // const apiEnv = process.env.VITE_NODE_ENV; // 當前環境
+    // const apiBaseUrl = process.env.VITE_API_BASE_URL; // API 根網址
 
-    let hostURL: string = '';
-    let hostName: string = '';
-    let apiURL: string = 'api/';
-    let headers = {
-        // 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
-        // 'Content-Type': 'application/json',
+    // console.log('當前環境:', apiEnv);
+    // console.log('API Base URL:', apiBaseUrl);
+
+    const headers = {};
+    const HeaderseType = {
+        UTF8_Type: 'application/x-www-form-urlencoded;charset=utf-8',
+        Json_Type: 'application/json'
     };
-
-    let globalApiURL: any = axios.create({});
-
-    // // 設定URL
-    // let apiURLDevice = 'device/';
-    // let apiURLDiagnostic = 'diagnostics';
-    // let apiURLSystem = 'system/';
-    // let apiURLAccount = 'account/';
-
-    console.log('hostURL', apiEnv, hostURL);
-
-    // 地端APP
-    // let appApiReq = {};
-    // let store = useGlobalStore();
-
-    switch (apiEnv) {
-        case ENV.MOCK:
-            hostName = `${window.location.origin}/`;
-            hostURL = `./mock/`;
-            // hostAppURL = './mock/';
-            break;
-        case ENV.DEV:
-            // hostName = 'http://192.168.0.102/'  // for ADC Server
-            // hostName = 'http://192.168.50.40/'  // for BE Alan
-            // hostName = 'http://192.168.50.222/'  // for BE Vic
-            hostName = 'http://220.133.47.197/'; // for ais public server
-            hostURL = `${hostName}${apiURL}`; // for Lynn testing
-            // hostAppURL = 'http://127.0.0.1:35900/';
-            break;
-        case ENV.STSGING:
-        case ENV.PROD:
-            hostName = `${window.location.origin}/`;
-            hostURL = `${hostName}${apiURL}`;
-            // hostAppURL = 'http://127.0.0.1:35900/';
-            break;
-        default:
-            hostURL = './mock';
-        // hostAppURL = './mock/';
-    } //end: switch
-
-    // await axionInit(globalApiURL, hostURL);
-
+    headers['Content-Type'] = HeaderseType[contentType];
     if (auth) {
-        // const token = `Token rHRIlM54Is/wO3/WCxlacg==`; // mock
-        const token = getCookie(COOKIE_NAME.TOKEN);
-        headers['Authorization'] = `Token ${token}`;
+        headers['Authorization'] = `Bearer ${localStorage.getItem('ENERGY')}`;
     }
 
     try {
-        globalApiURL = await axios({
+        apiClient = await axios({
             headers,
             method,
-            url: hostURL + url,
+            url: (isPythonVersion == 'python' ? apiConfig.SERVER_PYTHON : apiConfig.SERVER_JAVA) + url,
+            // url: (isPythonVersion ? apiConfig.SERVER_PYTHON : apiConfig.SERVER_JAVA) + url,
             data: params
         });
 
-        const { status, data } = globalApiURL;
+        const { status, data } = apiClient;
 
         if (status === 200) {
             return {
-                code: status,
-                data: data
+                code: data.code,
+                data: data.data
             };
         } else {
             console.log(`API ERROR: ${data.message}`);
         }
     } catch (error: any) {
         console.log(`API ERROR:`, error);
-        return {
-            code: error.response.status,
-            data: error.message
+
+        let status = {
+            code: error.response.status, // API ERROR
+            data: error.message // API ERROR Data
         };
+        return status;
     }
 };

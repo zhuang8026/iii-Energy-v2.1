@@ -1,0 +1,23 @@
+{
+    "code": 200,
+    "message": "操作成功 (Operation successfully.)",
+    "data": {
+        "token": "NQnMWSdhMOtjPWWrLabFIr7G9mvMFO1Zwpxe9EMYLaeZAhEaMNfArXiEG0JbOngtE4moxBHIBJHeHgZn3DzQ2MSGL5mB251eJavU8dAkI2madZ6z0ZzphU77S4x0llyYU6nSKV2TH1ei2K0g8ybuJEIQuyH5SWTfebJnSHxTUaRumZxoye26IBe6WClhXeLY38Mf3x5lxr4eUdHxU5L679qbLTh0OiUEjl5oBeCjSe5pKlj13Cf4mK8ZfE9iOnIGE8GpWgUxwnDoCVYrxPPGt6BJDKKvFzjfCFrfRKpw2mOW2sSCIEU4lwpfAsMOEUAxJiYto29jzQt9htocofX1yaxsSChyV9reZCoItgXMUnv80ZzvbDqCgeNYbfXNyrZcb8Xjo9VD3tJoew0EPBsyUfFHW8o",
+        "personInfo": true,
+        "doSurvey": false,
+        "phones": "",
+        "userInfo": {
+            "user_id": "billdavid50814@gmail.com",
+            "user_name": "",
+            "principal": "",
+            "email": "billdavid50814@gmail.com",
+            "apsystem": "",
+            "enable_status": "",
+            "pipn_edition": "",
+            "locale_code": "zh-TW"
+        },
+        "redirectUrl": "",
+        "identity": 4,
+        "pwdCheck": true
+    }
+}
