@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-ro
 import Loading from '@/components/ui/Loading';
 import PopUp from '@/components/global/PopUp';
 import InputPrompt from '@/components/ui/InputPrompt';
+import NormalPrompt from '@/components/ui/NormalPrompt';
 import UIInput from '@/components/ui/UIInput';
 
 // @mui
@@ -21,6 +22,8 @@ import Logo from '@/assets/images/icon-logo.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAsync } from '@/store/userSlice';
 
+// api
+import { passwordForget } from '@/api/api';
 // css
 import classes from './style.module.scss';
 import classNames from 'classnames/bind';
@@ -41,6 +44,12 @@ const Login = () => {
         password: ''
     });
 
+    const openErrorHint = (title, constent) => {
+        openPopUp({
+            component: <NormalPrompt title={title} subtitle="" constent={[`${constent}`]} />
+        });
+    };
+
     const openForgetPopUp = () => {
         openPopUp({
             component: (
@@ -55,13 +64,13 @@ const Login = () => {
         });
     };
 
-    const resetPassword = val => {
+    const resetPassword = async val => {
         console.log('send email:', val);
         // call API
         openLoading('login...');
-        setTimeout(() => {
-            closeLoading();
-        }, 1000);
+        const res = await passwordForget(val);
+        alert(`status: ${res.code}`);
+        closeLoading();
     };
 
     const handleLogin = async () => {
@@ -77,7 +86,8 @@ const Login = () => {
             }
         } catch (error) {
             closeLoading(); // 出錯時也要關閉 loading
-            console.error('登入錯誤:', error);
+            console.log('登入錯誤:', error);
+            openErrorHint('登入問題', error);
         }
     };
 

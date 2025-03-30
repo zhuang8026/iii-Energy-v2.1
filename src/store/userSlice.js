@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { userLogin, userLogout } from '@/api/api';
 
+// localstrage 初始化
 const user = {
     token: '',
     identity: '', // 前台使用者身分 相關說明參考readme.md
@@ -15,7 +16,7 @@ const loginAsync = createAsyncThunk('user/login', async data => {
         userId: data.account,
         userPwd: data.password
     });
-    return response.data; // 返回 API 回傳的資料
+    return response; // 返回 API 回傳的資料
 });
 
 const userSlice = createSlice({
@@ -40,17 +41,24 @@ const userSlice = createSlice({
                 state.error = null;
             })
             .addCase(loginAsync.fulfilled, (state, action) => {
+                console.log('loginAsync:', action.payload);
+                let code = action.payload.code;
                 state.loading = false;
-                state.userInfo = action.payload; // 保存登入成功的資料
-                console.log('state.userInfo:', state.userInfo);
-                const { token, phones, identity, userInfo } = state.userInfo;
 
-                user.token = token;
-                user.phones = phones;
-                user.identity = identity;
-                user.userInfo = { ...userInfo }; // 物件解構賦值 (淺拷貝)
+                if (code == 200) {
+                    state.userInfo = action.payload.data; // 保存登入成功的資料
+                    console.log('state.userInfo:', state.userInfo);
+                    const { token, phones, identity, userInfo } = state.userInfo;
 
-                localStorage.setItem('ENERGY', JSON.stringify(user)); // 儲存物件（先轉換成 JSON 字串）
+                    user.token = token;
+                    user.phones = phones;
+                    user.identity = identity;
+                    user.userInfo = { ...userInfo }; // 物件解構賦值 (淺拷貝)
+
+                    localStorage.setItem('ENERGY', JSON.stringify(user)); // 儲存物件（先轉換成 JSON 字串）
+                } else {
+
+                }
             })
             .addCase(loginAsync.rejected, (state, action) => {
                 state.loading = false;

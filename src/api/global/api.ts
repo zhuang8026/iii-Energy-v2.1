@@ -21,7 +21,7 @@ const userLogin = async payload => {
  */
 const userLogout = async () => {
     const url = apiEnv === ENV.MOCK ? `apiLogout.json` : `/main/logout`;
-    const res = await apiRequest('GET', url, {}, 'UTF8_Type', false, 'python');
+    const res = await apiRequest('GET', url, {}, 'UTF8_Type', false, 'java');
     return res;
 };
 

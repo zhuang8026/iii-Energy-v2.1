@@ -18,7 +18,7 @@ import Button from '@mui/material/Button';
 
 // redux
 // import { useDispatch } from 'react-redux';
-// import { login } from '@/store/userSlice';
+// import { loginAsync } from '@/store/userSlice';
 
 // css
 import classes from './style.module.scss';

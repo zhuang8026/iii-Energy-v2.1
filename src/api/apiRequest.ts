@@ -54,7 +54,8 @@ export const apiRequest = async (
         if (status === 200) {
             return {
                 code: data.code,
-                data: data.data
+                data: data.data,
+                message: data.message || ''
             };
         } else {
             console.log(`API ERROR: ${data.message}`);
