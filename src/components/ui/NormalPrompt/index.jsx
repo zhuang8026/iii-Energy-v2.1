@@ -19,7 +19,9 @@ const NormalPrompt = ({
     subtitle = '', // 副標題
     constent = [], // 內容
     value = '', // 預設值
-    onClick = null // 確定按鈕
+    closebtn = false,
+    onClick = null, // 確定按鈕
+    onCloseClick = null // 取消按鈕
 }) => {
     const { closePopUp } = PopUp();
     const [val, setVal] = useState(value); // 輸入的值
@@ -28,10 +30,18 @@ const NormalPrompt = ({
         console.log(typeof onClick === 'function');
         if (typeof onClick === 'function') {
             onClick(val); // 調用 onClick 傳遞輸入值
-        } else {
-            closePopUp(); // 如果需要在任何情況下關閉彈窗，可以保留
         }
+        closePopUp(); // 如果需要在任何情況下關閉彈窗，可以保留
     };
+
+    const handleCloseClick = () => {
+        console.log(typeof onCloseClick === 'function');
+        if (typeof onCloseClick === 'function') {
+            onCloseClick(val); // 調用 onClick 傳遞輸入值
+        }
+        closePopUp(); // 如果需要在任何情況下關閉彈窗，可以保留
+    };
+
     return (
         <div className={cx('windows')}>
             <div className={cx('close-btn')} onClick={() => closePopUp()}>
@@ -49,21 +59,33 @@ const NormalPrompt = ({
                         </p>
                     ))}
             </div>
-            <div className={cx('windows-btn')}>
-                <Button
-                    variant="contained"
-                    sx={{ width: '50%', height: '100%', backgroundColor: '#20a2a0', borderRadius: '100px' }}
-                    onClick={() => closePopUp()}
-                >
-                    否
-                </Button>
-                <Button
-                    variant="contained"
-                    sx={{ width: '50%', height: '100%', borderRadius: '100px' }}
-                    onClick={() => handleClick()}
-                >
-                    是
-                </Button>
+            <div className={cx('windows-btn', closebtn && 'windows-close')}>
+                {closebtn ? (
+                    <Button
+                        variant="contained"
+                        sx={{ width: '100%', height: '100%', borderRadius: '100px' }}
+                        onClick={() => closePopUp()}
+                    >
+                        已回覆
+                    </Button>
+                ) : (
+                    <>
+                        <Button
+                            variant="contained"
+                            sx={{ width: '50%', height: '100%', backgroundColor: '#20a2a0', borderRadius: '100px' }}
+                            onClick={() => handleCloseClick()}
+                        >
+                            否
+                        </Button>
+                        <Button
+                            variant="contained"
+                            sx={{ width: '50%', height: '100%', borderRadius: '100px' }}
+                            onClick={() => handleClick()}
+                        >
+                            是
+                        </Button>
+                    </>
+                )}
             </div>
         </div>
     );

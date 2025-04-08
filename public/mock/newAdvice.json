@@ -1,0 +1,10 @@
+{
+    "code": 200,
+    "message": "操作成功 (Operation successfully.)",
+    "data": {
+        "advice": "依照需求調整開飲機裝水量，不必每次都裝滿。",
+        "advice2": "none",
+        "performance": "非常棒!您上週比低耗能用戶少用了71% 的電量，請繼續保持。",
+        "startDate": "2025-03-31"
+    }
+}

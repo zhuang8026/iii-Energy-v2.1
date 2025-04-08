@@ -23,7 +23,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginAsync } from '@/store/userSlice';
 
 // api
-import { passwordForget } from '@/api/api';
+import { userPasswordForget } from '@/api/api';
+
 // css
 import classes from './style.module.scss';
 import classNames from 'classnames/bind';
@@ -68,7 +69,7 @@ const Login = () => {
         console.log('send email:', val);
         // call API
         openLoading('login...');
-        const res = await passwordForget(val);
+        const res = await userPasswordForget(val);
         alert(`status: ${res.code}`);
         closeLoading();
     };

@@ -1,4 +1,4 @@
-import React, { useState, Suspense, useEffect } from 'react';
+import React, { useState, Suspense, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 //翻譯
@@ -21,27 +21,17 @@ import EditTrack from '@/components/ui/EditTrack';
 import NormalPrompt from '@/components/ui/NormalPrompt';
 import Progress from '@/components/ui/Progress';
 
-// images
-import IconTV from '@/assets/images/icon-television.svg';
-import BgTV from '@/assets/images/icon_bg/tv.svg'; // no use
-import IconRefrigerator from '@/assets/images/icon-refrigerator.svg';
-import BgRefrigerator from '@/assets/images/icon_bg/dehumidifier.svg'; // no use
-import IconAirConditioner from '@/assets/images/icon-airConditioner.svg';
-import BgAC from '@/assets/images/icon_bg/ac.svg'; // no use
-import IconDrinkMachine from '@/assets/images/icon-drinkMachine.svg';
-import BgDrinkMachine from '@/assets/images/icon_bg/drinkMachine.svg'; // no use
-import IconWashMachine from '@/assets/images/icon-washMachine.svg';
-import BgWashMachine from '@/assets/images/icon_bg/washMachine.svg'; // no use
-import IconFan from '@/assets/images/icon-fan.svg';
-import BgFan from '@/assets/images/icon_bg/Fan.svg'; // no use
-import IconComputer from '@/assets/images/icon-computer.svg';
-import BgPC from '@/assets/images/icon_bg/computer.svg'; // no use
-import IconPot from '@/assets/images/icon-electricPot.svg';
-import BgPot from '@/assets/images/icon_bg/electricPot.svg'; // no use
-import IconDehumidifier from '@/assets/images/icon-dehumidifier.svg';
-import BgDehumidifier from '@/assets/images/icon_bg/dehumidifier.svg'; // no use
-import IconOther from '@/assets/images/icon-other.svg';
-import BgOther from '@/assets/images/icon_bg/other.svg'; // no use
+import { iconMap } from './private-module';
+
+// api
+import {
+    broadcastNewAdvice,
+    dailyTraceAppliance2,
+    getAdvWar,
+    postAdvWar,
+    Nilm09APIGetAdvWar,
+    Nilm09APIPostAdvWar
+} from '@/api/api';
 
 // css
 import classes from './style.module.scss';
@@ -54,6 +44,8 @@ const Home = ({}) => {
     const { openLoading, closeLoading } = Loading();
     const [electricItems, setElectricItems] = useState([]);
 
+    const isFirstRender = useRef(true); // 👈 用來避免多次呼叫
+
     const openEditPopUp = () => {
         openPopUp({ component: <EditTrack closePopUp={closePopUp} /> });
     };
@@ -62,112 +54,178 @@ const Home = ({}) => {
         openPopUp({ component: <LineChartWindows closePopUp={closePopUp} /> });
     };
 
-    const openMondayPrompt = (title, constent) => {
+    // 節電建議
+    const openMondayPrompt = constent => {
+        openPopUp({
+            component: <NormalPrompt title="節電建議" constent={constent} />
+        });
+    };
+
+    // 節電小秘訣
+    const openElectricPrompt = async constent => {
+        let closebtn = await getAdvWarAPI(constent.advice); // 判斷是否已經送出資料
         openPopUp({
             component: (
                 <NormalPrompt
-                    title="節電建議"
-                    constent={[
-                        '1. 非常棒!您上週比低耗能用戶少用了54% 的電量，請繼續保持。',
-                        '2. 冰箱背面、左右兩側離牆至少10公分以上距離，頂部須留有30 公分以上，以保持良好通風散熱。'
-                    ]}
+                    title="用電提醒" // ex: "用電提醒"
+                    subtitle={constent.advice} // ex: "電視昨天用電較過往高"
+                    constent={['節電小秘訣', constent.advice2]} // ex: '電視不使用時拔除插頭，完全關閉電源，減少待機電力消耗。'
+                    closebtn={closebtn}
+                    onClick={() => postAdvWarAPI('1', constent.advice)}
+                    onCloseClick={() => postAdvWarAPI('0', constent.advice)}
                 />
             )
         });
     };
 
-    const openElectricPrompt = (title, constent) => {
+    // 設備狀態
+    const openElectricStatusPrompt = constent => {
         openPopUp({
-            component: (
-                <NormalPrompt
-                    title="用電提醒"
-                    subtitle="電視昨天用電較過往高"
-                    constent={['節電小秘訣', '電視不使用時拔除插頭，完全關閉電源，減少待機電力消耗。']}
-                />
-            )
+            component: <NormalPrompt title="設備狀態" constent={constent} />
         });
     };
 
-    // api block
-    const getElectricItemsAPI = () => {
-        let res = [
-            {
-                name: 'television',
-                icon: IconTV,
-                background: BgTV, // no use
-                value: 61
-            },
-            {
-                name: 'refrigerator',
-                icon: IconRefrigerator,
-                background: BgRefrigerator, // no use
-                value: 19
-            },
-            {
-                name: 'airConditioner',
-                icon: IconAirConditioner,
-                background: BgAC, // no use
-                value: 78
-            },
-            {
-                name: 'drinkMachine',
-                icon: IconDrinkMachine,
-                background: BgDrinkMachine, // no use
-                value: 97
-            },
-            {
-                name: 'washMachine',
-                icon: IconWashMachine,
-                background: BgWashMachine, // no use
-                value: 34
-            },
-            {
-                name: 'fan',
-                icon: IconFan,
-                background: BgFan, // no use
-                value: 76
-            },
-            {
-                name: 'computer',
-                icon: IconComputer,
-                background: BgPC, // no use
-                value: 83
-            },
-            {
-                name: 'electricPot',
-                icon: IconPot,
-                background: BgPot, // no use
-                value: 5
-            },
-            {
-                name: 'dehumidifier',
-                icon: IconDehumidifier,
-                background: BgDehumidifier, // no use
-                value: 82
-            },
-            {
-                name: 'otherMachine',
-                icon: IconOther,
-                background: BgOther, // no use
-                value: 99
+    // 自訂判斷 warning 的布林邏輯
+    const isValidWarning = warning => {
+        return ![0, '0', null, 'null', undefined].includes(warning);
+    };
+
+    // ----------- API -----------
+    // 「取得」用電異常
+    const getAdvWarAPI = async advice => {
+        const store = JSON.parse(localStorage.getItem('ENERGY') || '{}');
+        const userId = store.userInfo.user_id;
+        if (!userId) {
+            console.warn('User ID 不存在，無法取得異常資訊');
+            return;
+        }
+
+        // 判斷：If the version2 API connection fails, we will connect to the version1 API
+        try {
+            let res = await Nilm09APIGetAdvWar(userId, advice); // version 2
+            if (res.code !== 200) {
+                console.warn('Version2 API 失敗，嘗試使用 Version1');
+                res = await getAdvWar(userId, advice); // version 1
             }
-        ];
-        setElectricItems([...res]);
+
+            if (res.code === 200) {
+                // 處理資料
+                console.log('異常資料:', res.data);
+                let val = isValidWarning(res.data.response);
+                return val;
+            } else {
+                console.warn('兩個 API 都失敗');
+            }
+        } catch (error) {
+            console.error('取得異常資料失敗:', error);
+        }
+    };
+
+    // 「送出」用電異常
+    const postAdvWarAPI = async (tick, advice) => {
+        const store = JSON.parse(localStorage.getItem('ENERGY') || '{}');
+        const userId = store.userInfo.user_id;
+        if (!userId) {
+            console.warn('User ID 不存在，無法取得異常資訊');
+            return;
+        }
+
+        const data = {
+            userId,
+            advice,
+            tick
+        };
+
+        // 判斷：If the version2 API connection fails, we will connect to the version1 API
+        try {
+            let res = await Nilm09APIPostAdvWar(data); // Version2 API
+            if (res.code !== 200) {
+                console.warn('Version2 API 失敗，嘗試 Version1');
+                res = await postAdvWar(data); // Version1 API
+            }
+
+            if (res.code === 200) {
+                console.log('用電異常送出成功:', res);
+            } else {
+                console.warn('兩個 API 都失敗:', res);
+            }
+        } catch (error) {
+            console.error('送出異常資訊時發生錯誤:', error);
+        }
+    };
+
+    // 取得設備資料
+    const getElectricItemsAPI = async () => {
+        try {
+            const { code, data } = await dailyTraceAppliance2();
+            if (code === 200 && data?.result) {
+                const electrics = data.result.map(item => {
+                    const { name: itemName, value, warning, advice, advice2 } = item;
+                    const { name, icon, background } = iconMap[itemName] || {};
+
+                    return {
+                        name: name || itemName,
+                        icon: icon || null,
+                        background: background || null,
+                        value,
+                        warning: isValidWarning(warning),
+                        warningContent: {
+                            advice: advice || '',
+                            advice2: advice2 || ''
+                        }
+                    };
+                });
+                setElectricItems(electrics);
+            }
+        } catch (error) {
+            console.error('Error fetching electric items:', error);
+        }
+    };
+
+    // 取得節電建議（每週一次）
+    const getBroadcastNewAdviceAPI = async () => {
+        try {
+            const { code, data: apiData } = await broadcastNewAdvice();
+            if (code === 200) {
+                const result = [apiData.advice, apiData.advice2, apiData.performance]
+                    .filter(advice => advice && advice !== 'none')
+                    .map((msg, index) => `${index + 1}. ${msg}`);
+
+                if (result.length) {
+                    openMondayPrompt(result);
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching broadcast advice:', error);
+        }
+    };
+
+    const loadingAPIList = async () => {
+        openLoading('loading...');
+        try {
+            await getBroadcastNewAdviceAPI();
+            await getElectricItemsAPI();
+        } finally {
+            closeLoading();
+        }
     };
 
     useEffect(() => {
-        getElectricItemsAPI();
-        openLoading('loading...');
-        setTimeout(() => {
-            closeLoading();
-            openMondayPrompt();
-        }, 1500);
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            loadingAPIList();
+        }
 
         // 添加 passive 事件監聽器
-        document.addEventListener('mousewheel', function(event) {
-            // 你的事件處理器代碼
-        }, { passive: true });
-        
+        const wheelHandler = event => {
+            // event handler code...
+        };
+
+        document.addEventListener('mousewheel', wheelHandler, { passive: true });
+
+        return () => {
+            document.removeEventListener('mousewheel', wheelHandler);
+        };
     }, []);
 
     return (
@@ -244,7 +302,7 @@ const Home = ({}) => {
             <div className={cx('block')}>
                 {electricItems.map((item, index) => (
                     <div
-                        className={cx('target-box', 'machine_card', { machine_card_useless: index % 2 !== 0 })}
+                        className={cx('target-box', 'machine_card', { machine_card_useless: item.value <= 0 })}
                         key={index}
                     >
                         <div className={cx('icon')}>
@@ -255,18 +313,24 @@ const Home = ({}) => {
                                 {t(`machine.${item.name}`)}
                                 <>
                                     <button type="button">
-                                        {index % 2 !== 0 ? (
+                                        {item.value <= 0 ? (
                                             // 未連結
-                                            <LinkOffTwoToneIcon style={{ fill: '#a5a5a5' }} />
-                                        ) : index === 0 ? (
+                                            <LinkOffTwoToneIcon
+                                                style={{ fill: '#a5a5a5' }}
+                                                onClick={() => openElectricStatusPrompt(['設備未連結'])}
+                                            />
+                                        ) : item.warning ? (
                                             // 有異常
                                             <ErrorOutlineTwoToneIcon
                                                 style={{ fill: '#ff6700' }}
-                                                onClick={() => openElectricPrompt()}
+                                                onClick={() => openElectricPrompt(item.warningContent)}
                                             />
                                         ) : (
                                             // 健康
-                                            <GppGoodTwoToneIcon style={{ fill: '#20a2a0' }} />
+                                            <GppGoodTwoToneIcon
+                                                style={{ fill: '#20a2a0' }}
+                                                onClick={() => openElectricStatusPrompt(['用電流向正常'])}
+                                            />
                                         )}
                                     </button>
                                     <div className={cx('target')}>

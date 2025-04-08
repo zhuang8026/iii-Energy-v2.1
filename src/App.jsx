@@ -151,7 +151,8 @@ function App() {
 
     useEffect(() => {
         // const token = getCookie('iii_token');
-        const token = localStorage.getItem('ENERGY');
+        const energyData = JSON.parse(localStorage.getItem('ENERGY') || '{}');
+        const token = energyData.token || '';
         const isAuthenticated = !!token;
         setAuth(isAuthenticated);
         setAuthInitialized(true); // 初始化完成

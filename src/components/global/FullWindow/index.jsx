@@ -1,23 +1,29 @@
 import React, { createContext, useState, useContext } from 'react';
 import classes from './styles.module.scss';
 
-// Context
 const FullWindowAnimateContext = createContext();
 
-// Provider Component using Hooks
+// Provider
 export const FullWindowAnimateProvider = ({ children }) => {
-    const [animateObj, setAnimateObj] = useState(null);
+    const [animateStack, setAnimateStack] = useState([]);
 
-    const openAnimate = obj => {
-        setAnimateObj(obj);
+    const openAnimate = ({ id, component }) => {
+        setAnimateStack(prev => {
+            // 若有相同 ID，先移除再加進來（避免重複）
+            const filtered = prev.filter(item => item.id !== id);
+            return [...filtered, { id, component }];
+        });
     };
 
-    const closeAnimate = () => {
-        setAnimateObj(null);
+    const closeAnimate = (id = null) => {
+        setAnimateStack(prev => {
+            if (!id) return prev.slice(0, -1); // 若沒給 id，移除最後一個
+            return prev.filter(item => item.id !== id); // 否則移除指定 id
+        });
     };
 
     const fullWindowData = {
-        animateObj,
+        animateStack,
         openAnimate,
         closeAnimate
     };
@@ -25,7 +31,7 @@ export const FullWindowAnimateProvider = ({ children }) => {
     return <FullWindowAnimateContext.Provider value={fullWindowData}>{children}</FullWindowAnimateContext.Provider>;
 };
 
-// Custom Hook for accessing the context
+// Hook
 export const useFullWindowAnimate = () => {
     const context = useContext(FullWindowAnimateContext);
     if (!context) {
@@ -34,13 +40,13 @@ export const useFullWindowAnimate = () => {
     return context;
 };
 
-// Pop Window Component
+// UI Component (可以只渲染最上層一個，也可以改為全部)
 export const FullPopWindow = () => {
-    const { animateObj } = useFullWindowAnimate();
+    const { animateStack } = useFullWindowAnimate();
 
-    if (animateObj) {
-        return <div className={classes.popAnimateContainer}>{animateObj.component}</div>;
-    }
+    if (animateStack.length === 0) return null;
 
-    return null;
+    const top = animateStack[animateStack.length - 1];
+
+    return <div className={classes.popAnimateContainer}>{top.component}</div>;
 };

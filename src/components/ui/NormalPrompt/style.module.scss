@@ -65,6 +65,10 @@
         }
     }
 
+    .windows-close {
+        display: flex;
+    }
+
     @media screen and (max-width: 767px) {
         width: 80%;
         padding: var.$fs-16;

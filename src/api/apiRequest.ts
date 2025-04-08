@@ -1,8 +1,13 @@
 import axios from 'axios';
+import { ENV } from '@/assets/enum/enum';
+
+// API初始化設定
+const apiEnv = import.meta.env.VITE_NODE_ENV; // 當前環境
 
 const apiConfig = {
-    SERVER_JAVA: 'https://www.energy-active.org.tw/api',
-    SERVER_PYTHON: 'https://poc.energy-active.org.tw'
+    SERVER_JAVA: 'https://www.energy-active.org.tw/api/',
+    SERVER_PYTHON: 'https://poc.energy-active.org.tw/',
+    SERVER_MOCK: `${window.location.origin}/mock/`
 };
 
 /**
@@ -37,14 +42,19 @@ export const apiRequest = async (
     };
     headers['Content-Type'] = HeaderseType[contentType];
     if (auth) {
-        headers['Authorization'] = `Bearer ${localStorage.getItem('ENERGY')}`;
+        const energyData = JSON.parse(localStorage.getItem('ENERGY') || '{}');
+        headers['Authorization'] = `Bearer ${energyData.token || ''}`;
     }
 
     try {
         apiClient = await axios({
             headers,
             method,
-            url: (isPythonVersion == 'python' ? apiConfig.SERVER_PYTHON : apiConfig.SERVER_JAVA) + url,
+            url:
+                (apiEnv === ENV.MOCK
+                    ? apiConfig.SERVER_MOCK : isPythonVersion == 'python'
+                    ? apiConfig.SERVER_PYTHON : apiConfig.SERVER_JAVA) 
+                    + url,
             // url: (isPythonVersion ? apiConfig.SERVER_PYTHON : apiConfig.SERVER_JAVA) + url,
             data: params
         });

@@ -10,13 +10,15 @@ import { useFullWindowAnimate } from '@/components/global/FullWindow';
 
 const PopUp = () => {
     const { openAnimate, closeAnimate } = useFullWindowAnimate();
+    const popupId = 'normal-popup';
+
     const openPopUp = ({ component = null }) => {
-        openAnimate({ component: component });
+        openAnimate({ id: popupId, component: component });
         document.body.style.overflow = 'hidden'; // 禁用捲動
     };
 
     const closePopUp = () => {
-        closeAnimate();
+        closeAnimate(popupId); // 只關掉 popup，不會動 loading
         document.body.style.overflow = ''; // 恢復捲動
     };
 

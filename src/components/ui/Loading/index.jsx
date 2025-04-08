@@ -53,13 +53,14 @@ C22.32,8.481,24.301,9.057,26.013,10.047z"
 );
 const Loading = () => {
     const { openAnimate, closeAnimate } = useFullWindowAnimate();
+    const loadingId = 'global-loading';
     const openLoading = text => {
-        openAnimate({ component: <LoadingSVG text={text} /> });
+        openAnimate({ id: loadingId, component: <LoadingSVG text={text} /> });
         document.body.style.overflow = 'hidden'; // 禁用捲動
     };
 
     const closeLoading = () => {
-        closeAnimate();
+        closeAnimate(loadingId);
         document.body.style.overflow = ''; // 恢復捲動
     };
 

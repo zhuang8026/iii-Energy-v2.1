@@ -1,0 +1,108 @@
+{
+    "code": 200,
+    "message": "操作成功 (Operation successfully.)",
+    "data": {
+        "result": [
+            {
+                "value": 2.0,
+                "name": "tv",
+                "warning": 0.0,
+                "attention": "0",
+                "advice": "none",
+                "advice2": "none",
+                "altered": "false",
+                "cnName": "\u96fb\u8996"
+            },
+            {
+                "value": 4.0,
+                "name": "fridge",
+                "warning": 1,
+                "attention": "0",
+                "advice": "冰箱昨天用電較過往高",
+                "advice2": "冰箱不使用時拔除插頭，完全關閉電源，減少待機電力消耗。",
+                "altered": "false",
+                "cnName": "\u51b0\u7bb1"
+            },
+            {
+                "value": 1.0,
+                "name": "ac",
+                "warning": 0.0,
+                "attention": "0",
+                "advice": " none",
+                "advice2": " none",
+                "altered": "false",
+                "cnName": "\u51b7\u6c23"
+            },
+            {
+                "value": 1.0,
+                "name": "water_boiler",
+                "warning": 0.0,
+                "attention": "0",
+                "advice": " none",
+                "advice2": " none",
+                "altered": "false",
+                "cnName": "\u958b\u98f2\u6a5f"
+            },
+            {
+                "value": 0.0,
+                "name": "washing_machine",
+                "warning": 0.0,
+                "attention": "0",
+                "advice": " none",
+                "advice2": " none",
+                "altered": "false",
+                "cnName": "\u6d17\u8863\u6a5f"
+            },
+            {
+                "value": 0.0,
+                "name": "electric_fan",
+                "warning": "0",
+                "attention": "0",
+                "advice": "null",
+                "advice2": "null",
+                "altered": "false",
+                "cnName": "\u96fb\u98a8\u6247"
+            },
+            {
+                "value": 0.0,
+                "name": "computer",
+                "warning": "0",
+                "attention": "0",
+                "advice": "null",
+                "advice2": "null",
+                "altered": "false",
+                "cnName": "\u96fb\u8166"
+            },
+            {
+                "value": 0.0,
+                "name": "electric_pot",
+                "warning": "0",
+                "attention": "0",
+                "advice": "null",
+                "advice2": "null",
+                "altered": "false",
+                "cnName": "\u96fb\u934b"
+            },
+            {
+                "value": 0.0,
+                "name": "dehumidifier",
+                "warning": "0",
+                "attention": "0",
+                "advice": "null",
+                "advice2": "null",
+                "altered": "false",
+                "cnName": "\u9664\u6fd5\u6a5f"
+            },
+            {
+                "value": 12.0,
+                "name": "other",
+                "warning": "null",
+                "attention": "null",
+                "advice": "null",
+                "advice2": "null",
+                "altered": "true",
+                "cnName": "\u5176\u4ed6"
+            }
+        ]
+    }
+}

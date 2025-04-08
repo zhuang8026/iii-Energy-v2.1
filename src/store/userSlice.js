@@ -57,7 +57,6 @@ const userSlice = createSlice({
 
                     localStorage.setItem('ENERGY', JSON.stringify(user)); // 儲存物件（先轉換成 JSON 字串）
                 } else {
-
                 }
             })
             .addCase(loginAsync.rejected, (state, action) => {
