@@ -11,7 +11,8 @@ const apiEnv = import.meta.env.VITE_NODE_ENV; // 當前環境
  */
 const userLogin = async payload => {
     const url = apiEnv === ENV.MOCK ? `apiLogin.json` : `main/login`;
-    const res = await apiRequest('POST', url, payload, 'UTF8_Type', false, 'java');
+    const auth = false;
+    const res = await apiRequest('POST', url, payload, 'UTF8_Type', auth, 'java');
     return res;
 };
 
@@ -21,7 +22,8 @@ const userLogin = async payload => {
  */
 const userLogout = async () => {
     const url = apiEnv === ENV.MOCK ? `apiLogout.json` : `main/logout`;
-    const res = await apiRequest('GET', url, {}, 'UTF8_Type', false, 'java');
+    const auth = false;
+    const res = await apiRequest('GET', url, {}, 'UTF8_Type', auth, 'java');
     return res;
 };
 
@@ -34,7 +36,8 @@ const userPasswordForget = async userId => {
         userId: userId
     };
     const url = apiEnv === ENV.MOCK ? `passwordForget.json` : `main/password-forget`;
-    const res = await apiRequest('POST', url, payload, 'UTF8_Type', false, 'java');
+    const auth = false;
+    const res = await apiRequest('POST', url, payload, 'UTF8_Type', auth, 'java');
     return res;
 };
 

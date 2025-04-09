@@ -1,0 +1,11 @@
+{
+    "code": 200,
+    "message": "操作成功 (Operation successfully.)",
+    "data": {
+        "user_id": "u0955318835@gmail.com",
+        "report_time": "2025-04-09 00:00:00",
+        "yesterday": 9,
+        "before_yesterday": 11,
+        "previous_year_date": -2
+    }
+}

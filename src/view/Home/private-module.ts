@@ -1,24 +1,24 @@
 // images
-import IconTV from '@/assets/images/icon-television.svg';
-import BgTV from '@/assets/images/icon_bg/tv.svg'; // no use
-import IconRefrigerator from '@/assets/images/icon-refrigerator.svg';
-import BgRefrigerator from '@/assets/images/icon_bg/dehumidifier.svg'; // no use
-import IconAirConditioner from '@/assets/images/icon-airConditioner.svg';
-import BgAC from '@/assets/images/icon_bg/ac.svg'; // no use
-import IconDrinkMachine from '@/assets/images/icon-drinkMachine.svg';
-import BgDrinkMachine from '@/assets/images/icon_bg/drinkMachine.svg'; // no use
-import IconWashMachine from '@/assets/images/icon-washMachine.svg';
-import BgWashMachine from '@/assets/images/icon_bg/washMachine.svg'; // no use
-import IconFan from '@/assets/images/icon-fan.svg';
-import BgFan from '@/assets/images/icon_bg/Fan.svg'; // no use
-import IconComputer from '@/assets/images/icon-computer.svg';
-import BgPC from '@/assets/images/icon_bg/computer.svg'; // no use
-import IconPot from '@/assets/images/icon-electricPot.svg';
-import BgPot from '@/assets/images/icon_bg/electricPot.svg'; // no use
-import IconDehumidifier from '@/assets/images/icon-dehumidifier.svg';
-import BgDehumidifier from '@/assets/images/icon_bg/dehumidifier.svg'; // no use
-import IconOther from '@/assets/images/icon-other.svg';
-import BgOther from '@/assets/images/icon_bg/other.svg'; // no use
+import IconTV from '@/assets/images/icon-television.svg'; // use
+import BgTV from '@/assets/images/icon_bg/tv.svg'; // use
+import IconRefrigerator from '@/assets/images/icon-refrigerator.svg'; // use
+import BgRefrigerator from '@/assets/images/icon_bg/dehumidifier.svg'; // use
+import IconAirConditioner from '@/assets/images/icon-airConditioner.svg'; // use
+import BgAC from '@/assets/images/icon_bg/ac.svg'; // use
+import IconDrinkMachine from '@/assets/images/icon-drinkMachine.svg'; // use
+import BgDrinkMachine from '@/assets/images/icon_bg/drinkMachine.svg'; // use
+import IconWashMachine from '@/assets/images/icon-washMachine.svg'; // use
+import BgWashMachine from '@/assets/images/icon_bg/washMachine.svg'; // use
+import IconFan from '@/assets/images/icon-fan.svg'; // use
+import BgFan from '@/assets/images/icon_bg/Fan.svg'; // use
+import IconComputer from '@/assets/images/icon-computer.svg'; // use
+import BgPC from '@/assets/images/icon_bg/computer.svg'; // use
+import IconPot from '@/assets/images/icon-electricPot.svg'; // use
+import BgPot from '@/assets/images/icon_bg/electricPot.svg'; // use
+import IconDehumidifier from '@/assets/images/icon-dehumidifier.svg'; // use
+import BgDehumidifier from '@/assets/images/icon_bg/dehumidifier.svg'; // use
+import IconOther from '@/assets/images/icon-other.svg'; // use
+import BgOther from '@/assets/images/icon_bg/other.svg'; // use
 
 // Icon map
 const iconMap = {

@@ -1,5 +1,8 @@
-import React, { useState, Suspense, useEffect } from 'react';
+import React, { useState, Suspense, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+
+// uuid 唯一碼生成
+import { v4 as uuidv4 } from 'uuid';
 
 import { useFullWindowAnimate } from '@/components/global/FullWindow';
 
@@ -8,9 +11,12 @@ import { useFullWindowAnimate } from '@/components/global/FullWindow';
 // import classNames from 'classnames/bind';
 // const cx = classNames.bind(classes);
 
-const PopUp = () => {
+const usePopUp = () => {
     const { openAnimate, closeAnimate } = useFullWindowAnimate();
-    const popupId = 'normal-popup';
+
+    const popupIdRef = useRef(uuidv4()); // ✅ UUID 只生成一次
+    // const popupId = popupIdRef.current;
+    const popupId = 'normal-popup'; // 生成唯一 ID
 
     const openPopUp = ({ component = null }) => {
         openAnimate({ id: popupId, component: component });
@@ -22,9 +28,9 @@ const PopUp = () => {
         document.body.style.overflow = ''; // 恢復捲動
     };
 
-    return { openPopUp, closePopUp };
+    return { openPopUp, closePopUp, popupId };
 
     // return <div className={cx('popUp')}>{component}</div>;
 };
 
-export default PopUp;
+export default usePopUp;

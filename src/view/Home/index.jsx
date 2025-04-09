@@ -16,7 +16,7 @@ import Loading from '@/components/ui/Loading';
 import DoughnutChart from '@/components/ui/DoughnutChart';
 import LineChart from '@/components/ui/LineChart';
 import LineChartWindows from '@/components/ui/LineChartWindows';
-import PopUp from '@/components/global/PopUp';
+import usePopUp from '@/components/global/PopUp';
 import EditTrack from '@/components/ui/EditTrack';
 import NormalPrompt from '@/components/ui/NormalPrompt';
 import Progress from '@/components/ui/Progress';
@@ -25,12 +25,15 @@ import { iconMap } from './private-module';
 
 // api
 import {
-    broadcastNewAdvice,
-    dailyTraceAppliance2,
+    getAdvice,
+    getAPINilm09Appliance,
     getAdvWar,
     postAdvWar,
     Nilm09APIGetAdvWar,
-    Nilm09APIPostAdvWar
+    Nilm09APIPostAdvWar,
+    getCurrentMon,
+    Nilm09APIGetBeyesterday,
+    Nilm09APIGetttlWar
 } from '@/api/api';
 
 // css
@@ -40,14 +43,21 @@ const cx = classNames.bind(classes);
 
 const Home = ({}) => {
     const { t, i18n } = useTranslation();
-    const { openPopUp, closePopUp } = PopUp();
+    const { openPopUp, closePopUp } = usePopUp();
     const { openLoading, closeLoading } = Loading();
-    const [electricItems, setElectricItems] = useState([]);
+
+    const [isLoading, setIsLoading] = useState(false); // api 加載
+    const [electricItems, setElectricItems] = useState([]); //
+    const [target, setTarget] = useState(0); // 總用電數度
+    const [accumKwh, setAccumKwh] = useState(0); // 本月累積
+    const [preYearKwh, setPreYearKwh] = useState(0); // 較去年同月比較度數
+    const [yesterday, setyesterday] = useState(0); // 昨日用電量
+    const [beforeYesterday, setBeforeYesterday] = useState(0); // 前日用電量
 
     const isFirstRender = useRef(true); // 👈 用來避免多次呼叫
 
-    const openEditPopUp = () => {
-        openPopUp({ component: <EditTrack closePopUp={closePopUp} /> });
+    const openEditPopUp = target => {
+        openPopUp({ component: <EditTrack target={target} closePopUp={closePopUp} /> });
     };
 
     const openLineChartPopUp = () => {
@@ -110,14 +120,14 @@ const Home = ({}) => {
 
             if (res.code === 200) {
                 // 處理資料
-                console.log('異常資料:', res.data);
+                console.log('✅ API Nilm09APIGetAdvWar connect ok');
                 let val = isValidWarning(res.data.response);
                 return val;
             } else {
-                console.warn('兩個 API 都失敗');
+                console.warn('⚠️ API warning fetching:', res);
             }
         } catch (error) {
-            console.error('取得異常資料失敗:', error);
+            console.error('❌ API error fetching:', error);
         }
     };
 
@@ -145,24 +155,24 @@ const Home = ({}) => {
             }
 
             if (res.code === 200) {
-                console.log('用電異常送出成功:', res);
+                console.log('✅ API Nilm09APIPostAdvWar connect ok');
             } else {
-                console.warn('兩個 API 都失敗:', res);
+                console.warn('⚠️ API warning fetching:', res);
             }
         } catch (error) {
-            console.error('送出異常資訊時發生錯誤:', error);
+            console.error('❌ API error fetching:', error);
         }
     };
 
     // 取得設備資料
     const getElectricItemsAPI = async () => {
         try {
-            const { code, data } = await dailyTraceAppliance2();
-            if (code === 200 && data?.result) {
-                const electrics = data.result.map(item => {
+            const { code, data: apiData } = await getAPINilm09Appliance();
+            if (code === 200) {
+                console.log('✅ API getAPINilm09Appliance connect ok');
+                const electrics = apiData.data.result.map(item => {
                     const { name: itemName, value, warning, advice, advice2 } = item;
                     const { name, icon, background } = iconMap[itemName] || {};
-
                     return {
                         name: name || itemName,
                         icon: icon || null,
@@ -175,6 +185,7 @@ const Home = ({}) => {
                         }
                     };
                 });
+
                 setElectricItems(electrics);
             }
         } catch (error) {
@@ -183,11 +194,12 @@ const Home = ({}) => {
     };
 
     // 取得節電建議（每週一次）
-    const getBroadcastNewAdviceAPI = async () => {
+    const getAdviceAPI = async () => {
         try {
-            const { code, data: apiData } = await broadcastNewAdvice();
+            const { code, data: apiData } = await getAdvice();
             if (code === 200) {
-                const result = [apiData.advice, apiData.advice2, apiData.performance]
+                let val = apiData.data;
+                const result = [val.advice, val.advice2, val.performance]
                     .filter(advice => advice && advice !== 'none')
                     .map((msg, index) => `${index + 1}. ${msg}`);
 
@@ -196,17 +208,83 @@ const Home = ({}) => {
                 }
             }
         } catch (error) {
-            console.error('Error fetching broadcast advice:', error);
+            console.error('❌ API error fetching:', error);
+        }
+    };
+
+    // 取得本月 (用電目標 & 預測 & 累積)
+    const getCurrentMonAPI = async () => {
+        const store = JSON.parse(localStorage.getItem('ENERGY') || '{}');
+        const userId = store.userInfo.user_id;
+        if (!userId) {
+            console.warn('User ID 不存在，無法取得異常資訊');
+            return;
+        }
+        try {
+            const { code, data: apiData } = await getCurrentMon(userId);
+            if (code === 200) {
+                console.log('✅ API getCurrentMonAPI connect ok');
+                let val = apiData.data;
+                setTarget(val.target);
+                setAccumKwh(val.accumKwh);
+            }
+        } catch (error) {
+            console.error('❌ API error fetching:', error);
+        }
+    };
+
+    // 取得本月 (用電目標 & 預測 & 累積)
+    const getNilm09APIGetBeyesterdayAPI = async () => {
+        const store = JSON.parse(localStorage.getItem('ENERGY') || '{}');
+        const userId = store.userInfo.user_id;
+        if (!userId) {
+            console.warn('User ID 不存在，無法取得異常資訊');
+            return;
+        }
+        try {
+            const { code, data: apiData } = await Nilm09APIGetBeyesterday(userId);
+            if (code === 200) {
+                console.log('✅ API getNilm09APIGetBeyesterdayAPI connect ok');
+                let val = apiData.data;
+                setPreYearKwh(val.previous_year_date); // 較去年同月比較度數
+                setyesterday(val.yesterday); // 昨日用電量
+                setBeforeYesterday(val.before_yesterday); // 前日用電量
+                console.log('getNilm09APIGetBeyesterdayAPI', val);
+            }
+        } catch (error) {
+            console.error('❌ API error fetching:', error);
+        }
+    };
+
+    // 取得本月 (用電目標 & 預測 & 累積)
+    const getNilm09APIGetttlWarAPI = async () => {
+        const store = JSON.parse(localStorage.getItem('ENERGY') || '{}');
+        const userId = store.userInfo.user_id;
+        if (!userId) {
+            console.warn('User ID 不存在，無法取得異常資訊');
+            return;
+        }
+        try {
+            const { code, data: apiData } = await Nilm09APIGetttlWar(userId);
+            if (code === 200) {
+                console.log('✅ API getNilm09APIGetttlWarAPI connect ok');
+                console.log('getNilm09APIGetttlWarAPI', apiData);
+            }
+        } catch (error) {
+            console.error('❌ API error fetching:', error);
         }
     };
 
     const loadingAPIList = async () => {
-        openLoading('loading...');
+        setIsLoading(true);
         try {
-            await getBroadcastNewAdviceAPI();
+            await getAdviceAPI();
             await getElectricItemsAPI();
+            await getCurrentMonAPI();
+            await getNilm09APIGetBeyesterdayAPI();
+            await getNilm09APIGetttlWarAPI();
         } finally {
-            closeLoading();
+            setIsLoading(false);
         }
     };
 
@@ -228,6 +306,16 @@ const Home = ({}) => {
         };
     }, []);
 
+    useEffect(() => {
+        if (isLoading) {
+            openLoading('loading...');
+        } else {
+            closeLoading();
+        }
+    }, [isLoading]);
+
+    if (isLoading) return <div>Loading...</div>;
+
     return (
         <div className={cx('home')}>
             <h3>{t('home.power_usage_tracking')}</h3>
@@ -239,12 +327,12 @@ const Home = ({}) => {
                         {t('home.set_goals')}
                         <div className={cx('target')}>
                             <div className={cx('target-item-number')}>
-                                <span>1,000</span> {t('kwh')}
+                                <span>{target}</span> {t('kwh')}
                                 {/* 1KWH = 1000W = 1度電 */}
                             </div>
                         </div>
                         <span>* {t('home.public_electricity_desc')} *</span>
-                        <button type="button" onClick={() => openEditPopUp()}>
+                        <button type="button" onClick={() => openEditPopUp(target)}>
                             <BorderColorTwoToneIcon style={{ fill: '#fff' }} />
                         </button>
                     </div>
@@ -265,9 +353,9 @@ const Home = ({}) => {
                     <div className={cx('target')}>
                         <DoughnutChart
                             type="month"
-                            value={419.0} // 用電數度
-                            total={340.0} // 總用電數度
-                            compareValue={-2.0} // 比較數度
+                            value={accumKwh} // 本月累積用電數度
+                            total={target} // 總用電數度
+                            compareValue={preYearKwh} // 比較數度
                         />
                     </div>
                     <button type="button">
@@ -277,23 +365,26 @@ const Home = ({}) => {
                 {/* 用電量累計 */}
                 <div className={cx('target-box')}>
                     {t('home.electricity_records')}
+                    {/* 昨日用電量 */}
                     <Progress
                         title={t('home.yesterday_electricity')}
-                        kwh={15} //
-                        percent={10}
-                        overPercent={0}
+                        kwh={yesterday}
+                        percent={Math.min((yesterday / target) * 100, 100).toFixed(1)}
+                        overPercent={yesterday > target ? ((yesterday - target) / target) * 100 : 0}
                     />
+                    {/* 前日用電量 */}
                     <Progress
                         title={t('home.before_yesterday_electricity')}
-                        kwh={22} //
-                        percent={15}
-                        overPercent={0}
+                        kwh={beforeYesterday}
+                        percent={Math.min((beforeYesterday / target) * 100, 100).toFixed(1)}
+                        overPercent={beforeYesterday > target ? ((beforeYesterday - target) / target) * 100 : 0}
                     />
+                    {/* 本月累積 */}
                     <Progress
                         title={t('home.all_month_electricity')}
-                        kwh={479} //
-                        percent={100}
-                        overPercent={20}
+                        kwh={accumKwh}
+                        percent={Math.min((accumKwh / target) * 100, 100).toFixed(1)}
+                        overPercent={accumKwh > target ? ((accumKwh - target) / target) * 100 : 0}
                     />
                 </div>
             </div>

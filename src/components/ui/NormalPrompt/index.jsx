@@ -27,7 +27,7 @@ const NormalPrompt = ({
     const [val, setVal] = useState(value); // 輸入的值
 
     const handleClick = () => {
-        console.log(typeof onClick === 'function');
+        // console.log(typeof onClick === 'function');
         if (typeof onClick === 'function') {
             onClick(val); // 調用 onClick 傳遞輸入值
         }
@@ -35,7 +35,7 @@ const NormalPrompt = ({
     };
 
     const handleCloseClick = () => {
-        console.log(typeof onCloseClick === 'function');
+        // console.log(typeof onCloseClick === 'function');
         if (typeof onCloseClick === 'function') {
             onCloseClick(val); // 調用 onClick 傳遞輸入值
         }

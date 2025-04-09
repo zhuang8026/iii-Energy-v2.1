@@ -60,11 +60,10 @@ export const apiRequest = async (
         });
 
         const { status, data } = apiClient;
-
         if (status === 200) {
             return {
                 code: data.code,
-                data: data.data,
+                data: data,
                 message: data.message || ''
             };
         } else {

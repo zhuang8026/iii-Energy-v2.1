@@ -1,0 +1,10 @@
+{
+    "code": 200,
+    "message": "操作成功 (Operation successfully.)",
+    "data": {
+        "predResult": "超過目標",
+        "target": 300,
+        "accumKwh": 78.0,
+        "accumDollars": 127
+    }
+}

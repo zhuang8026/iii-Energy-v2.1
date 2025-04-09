@@ -5,25 +5,31 @@ import {
 } from '@/api/main/user';
 
 import {
-    broadcastNewAdvice // mock, uat
+    getAdvice // mock, uat
 } from '@/api/main/broadcast';
 
 import {
-    dailyTraceAppliance2, // mock, uat
+    getAPINilm09Appliance, // mock, uat
     Nilm09APIGetAdvWar, // mock, uat
     Nilm09APIPostAdvWar, // mock, uat
     getAdvWar, // mock, uat
-    postAdvWar // mock, uat
+    postAdvWar, // mock, uat
+    getCurrentMon, // mock, uat
+    Nilm09APIGetBeyesterday, // mock, uat
+    Nilm09APIGetttlWar // mock, uat
 } from '@/api/main/dailyTracking';
 
 export {
     userLogin,
     userLogout,
     userPasswordForget,
-    broadcastNewAdvice,
-    dailyTraceAppliance2,
+    getAdvice,
+    getAPINilm09Appliance,
     getAdvWar,
     postAdvWar,
     Nilm09APIGetAdvWar,
-    Nilm09APIPostAdvWar
+    Nilm09APIPostAdvWar,
+    getCurrentMon,
+    Nilm09APIGetBeyesterday,
+    Nilm09APIGetttlWar
 };

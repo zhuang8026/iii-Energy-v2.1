@@ -13,7 +13,7 @@ import classes from './style.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(classes);
 
-const EditTrack = ({ closePopUp }) => {
+const EditTrack = ({ target, closePopUp }) => {
     return (
         <div className={cx('edit-popUp')}>
             <h3>本月用電目標額度設定</h3>
@@ -25,7 +25,7 @@ const EditTrack = ({ closePopUp }) => {
                         type="number"
                         label="Helper text"
                         variant="standard"
-                        defaultValue="1000"
+                        defaultValue={target}
                         endAdornment={<InputAdornment position="end">KWH</InputAdornment>}
                         aria-describedby="outlined-weight-helper-text"
                         inputProps={{

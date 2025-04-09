@@ -46,7 +46,7 @@ const userSlice = createSlice({
                 state.loading = false;
 
                 if (code == 200) {
-                    state.userInfo = action.payload.data; // 保存登入成功的資料
+                    state.userInfo = action.payload.data.data; // 保存登入成功的資料
                     console.log('state.userInfo:', state.userInfo);
                     const { token, phones, identity, userInfo } = state.userInfo;
 
